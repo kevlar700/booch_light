@@ -228,49 +228,49 @@ package body Booch_Light.Calendar_Utilities is
       end if;
    end Period_Of;
 
-   function Time_Of
-     (The_Time : in Time)
-      return Ada.Calendar.Time
-   is
-   begin
-      return Ada.Calendar.Time_Of
-          (Year    => Ada.Calendar.Year_Number (The_Time.The_Year),
-           Month   => Ada.Calendar.Month_Number (The_Time.The_Month),
-           Day     => Ada.Calendar.Day_Number (The_Time.The_Day),
-           Seconds =>
-             Ada.Calendar.Day_Duration (The_Time.The_Hour) * Seconds_Per_Hour +
-             Ada.Calendar.Day_Duration (The_Time.The_Minute) *
-               Seconds_Per_Minute +
-             Ada.Calendar.Day_Duration (The_Time.The_Second) +
-             Ada.Calendar.Day_Duration (The_Time.The_Millisecond) /
-               Milliseconds_Per_Second);
-   end Time_Of;
-
-   function Time_Of
-     (The_Time : in Ada.Calendar.Time)
-      return Time
-   is
-      Result         : Time;
-      Total_Duration : Ada.Calendar.Day_Duration;
-      Seconds        : Natural;
-   begin
-      Ada.Calendar.Split
-        (The_Time,
-         Year    => Ada.Calendar.Year_Number (Result.The_Year),
-         Month   => Ada.Calendar.Month_Number (Result.The_Month),
-         Day     => Ada.Calendar.Day_Number (Result.The_Day),
-         Seconds => Total_Duration);
-      Seconds                := Duration_Utilities.Floor (Total_Duration);
-      Result.The_Hour        := Hour (Seconds / Seconds_Per_Hour);
-      Seconds                := Seconds mod Seconds_Per_Hour;
-      Result.The_Minute      := Minute (Seconds / Seconds_Per_Minute);
-      Result.The_Second      := Second (Seconds mod Seconds_Per_Minute);
-      Result.The_Millisecond :=
-        Millisecond
-          (Duration_Utilities.Real_Part (Total_Duration) *
-           Milliseconds_Per_Second);
-      return Result;
-   end Time_Of;
+   --  function Time_Of
+   --    (The_Time : in Time)
+   --     return Ada.Calendar.Time
+   --  is
+   --  begin
+   --     return Ada.Calendar.Time_Of
+   --         (Year    => Ada.Calendar.Year_Number (The_Time.The_Year),
+   --          Month   => Ada.Calendar.Month_Number (The_Time.The_Month),
+   --          Day     => Ada.Calendar.Day_Number (The_Time.The_Day),
+   --          Seconds =>
+   --            Ada.Calendar.Day_Duration (The_Time.The_Hour) * Seconds_Per_Hour +
+   --            Ada.Calendar.Day_Duration (The_Time.The_Minute) *
+   --              Seconds_Per_Minute +
+   --            Ada.Calendar.Day_Duration (The_Time.The_Second) +
+   --            Ada.Calendar.Day_Duration (The_Time.The_Millisecond) /
+   --              Milliseconds_Per_Second);
+   --  end Time_Of;
+   --
+   --  function Time_Of
+   --    (The_Time : in Ada.Calendar.Time)
+   --     return Time
+   --  is
+   --     Result         : Time;
+   --     Total_Duration : Ada.Calendar.Day_Duration;
+   --     Seconds        : Natural;
+   --  begin
+   --     Ada.Calendar.Split
+   --       (The_Time,
+   --        Year    => Ada.Calendar.Year_Number (Result.The_Year),
+   --        Month   => Ada.Calendar.Month_Number (Result.The_Month),
+   --        Day     => Ada.Calendar.Day_Number (Result.The_Day),
+   --        Seconds => Total_Duration);
+   --     Seconds                := Duration_Utilities.Floor (Total_Duration);
+   --     Result.The_Hour        := Hour (Seconds / Seconds_Per_Hour);
+   --     Seconds                := Seconds mod Seconds_Per_Hour;
+   --     Result.The_Minute      := Minute (Seconds / Seconds_Per_Minute);
+   --     Result.The_Second      := Second (Seconds mod Seconds_Per_Minute);
+   --     Result.The_Millisecond :=
+   --       Millisecond
+   --         (Duration_Utilities.Real_Part (Total_Duration) *
+   --          Milliseconds_Per_Second);
+   --     return Result;
+   --  end Time_Of;
 
    function Time_Image_Of
      (The_Time  : in Time;
