@@ -1,0 +1,40 @@
+with "config/booch_light_config.gpr";
+project Booch_Light is
+
+   for Library_Name use "Booch_Light";
+   for Library_Version use Project'Library_Name & ".so." & Booch_Light_Config.Crate_Version;
+
+   for Languages use ("Ada");
+   for Source_Dirs use ("src/", "config/");
+   for Object_Dir use "obj/" & Booch_Light_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Library_Dir use "lib";
+
+   type Library_Type_Type is ("relocatable", "static", "static-pic");
+   Library_Type : Library_Type_Type :=
+     external ("BOOCH_LIGHT_LIBRARY_TYPE", external ("LIBRARY_TYPE", "static"));
+   for Library_Kind use Library_Type;
+
+   package Compiler is
+      --  The generic Packages Such As Booch_Light-List_Utilities_Double Instantiate
+      --  A List Component. This Seems To Confuse The Warning for in out and
+      --  Whether They Are Modified. Usually The Compiler ends up being Correct
+      --  But in This case I Am Skeptical As the procedure Split seems like it
+      --  Must Modify Both in out Parameters?
+      for Default_Switches ("Ada") use Booch_Light_Config.Ada_Compiler_Switches & ("-gnat2022", "-gnaty-Ix", "-gnaty+ABdOSu", "-gnatwa.b.f.kl.o.st.wfy.ac.X.c_cgi.r.qq.ppo.mmv.vwxz.z.tkJ");
+      for Local_Configuration_Pragmas use "gnat.adc";
+   end Compiler;
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("--call-threshold=1", "--par-threshold=1", "--vertical-enum-types", "--vertical-named-aggregates", "-W8", "-c5", "-c4");
+   end Pretty_Printer;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end Booch_Light;

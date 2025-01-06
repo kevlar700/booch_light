@@ -1,0 +1,16 @@
+name = "booch_light"
+description = "Booch components compatible with any runtime"
+version = "0.1.0-dev"
+
+authors = ["Kevin Chadwick"]
+maintainers = ["Kevin Chadwick <kc-ada@elansys.co>"]
+maintainers-logins = ["kevlar700"]
+licenses = "MIT"
+website = "https://github.com/kevlar700/booch_light"
+tags = ["embedded", "zfp", "light", "container"]
+
+[gpr-externals]
+LIBRARY_TYPE = ["relocatable", "static"]
+
+[[depends-on]]
+elogs = "^1.2.0"
