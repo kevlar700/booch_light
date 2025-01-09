@@ -39,8 +39,8 @@ package Booch_Light.List_Double_Bounded_Managed is
           Static_Predicate =>
            Construct in New_Item | Exception_Overflow | Not_At_Head | OK;
 
-      subtype swap_tail is Status_Code with
-          Static_Predicate => swap_tail in List_Is_Null | Not_At_Head | OK;
+      subtype Swap_Tail is Status_Code with
+          Static_Predicate => Swap_Tail in List_Is_Null | Not_At_Head | OK;
 
    end Locus;
 
@@ -64,7 +64,7 @@ package Booch_Light.List_Double_Bounded_Managed is
    procedure Swap_Tail
      (Of_The_List  : in out List;
       And_The_List : in out List;
-      Booch_Status :    out Locus.swap_tail);
+      Booch_Status :    out Locus.Swap_Tail);
 
    procedure Head_Of
      (The_List     : in     List;

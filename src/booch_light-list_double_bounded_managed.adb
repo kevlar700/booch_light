@@ -216,7 +216,7 @@ package body Booch_Light.List_Double_Bounded_Managed is
    procedure Swap_Tail
      (Of_The_List  : in out List;
       And_The_List : in out List;
-      Booch_Status :    out Locus.swap_tail)
+      Booch_Status :    out Locus.Swap_Tail)
    is
       Temporary_Node : List;
    begin
