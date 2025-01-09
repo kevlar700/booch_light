@@ -54,7 +54,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
       if In_The_Ring.The_Back = In_The_Ring.The_Size then
          Alterable_Log.Log
            (Log_ID  => "3A6FE56A5F9E48A8",
-            Message => "Exception_Overflow: Insert failed");
+            Message => "Exception_Overflow: Insert failed due to full ring");
          Booch_Status := Exception_Overflow;
          return;
       elsif In_The_Ring.The_Back = 0 then
