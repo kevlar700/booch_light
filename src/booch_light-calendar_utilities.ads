@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
---with Ada.Calendar;
+--  with Ada.Calendar;
 package Booch_Light.Calendar_Utilities is
 
    package Locus is
@@ -19,8 +19,8 @@ package Booch_Light.Calendar_Utilities is
 
    end Locus;
 
-   -- type Year is new Ada.Calendar.Year_Number;
-   type Year is new Integer range 1901 .. 2399;
+   --  type Year is new Ada.Calendar.Year_Number;
+   type Year is new Integer range 1_901 .. 2_399;
    type Month is range 1 .. 12;
    type Day is range 1 .. 31;
    type Hour is range 0 .. 23;
@@ -142,12 +142,12 @@ package Booch_Light.Calendar_Utilities is
       return String;
 
    procedure Value_Of
-     (The_Date      : in     String;
-      The_Time      : in     String;
-      Date_Form     : in     Date_Format := Full;
-      Time_Form     : in     Time_Format := Full;
-      Result :    out Time;
-      Booch_Status  :    out Locus.Value_Of);
+     (The_Date     : in     String;
+      The_Time     : in     String;
+      Date_Form    : in     Date_Format := Full;
+      Time_Form    : in     Time_Format := Full;
+      Result       :    out Time;
+      Booch_Status :    out Locus.Value_Of);
 
    function Duration_Of
      (The_Interval : in Interval)
