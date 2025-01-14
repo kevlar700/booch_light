@@ -178,13 +178,13 @@ package body Booch_Light.Calendar_Utilities is
       Booch_Status :    out Locus.Time_Of)
    is
       No_Time : constant Time :=
-        (The_Year        => Year'Invalid_Value,
-         The_Month       => Month'Invalid_Value,
-         The_Day         => Day'Invalid_Value,
-         The_Hour        => Hour'Invalid_Value,
-         The_Minute      => Minute'Invalid_Value,
-         The_Second      => Second'Invalid_Value,
-         The_Millisecond => Millisecond'Invalid_Value);
+        (The_Year        => Year'Last,
+         The_Month       => Month'Last,
+         The_Day         => Day'Last,
+         The_Hour        => Hour'Last,
+         The_Minute      => Minute'Last,
+         The_Second      => Second'Last,
+         The_Millisecond => Millisecond'Last);
       Tmp_Day : Year_Day      := The_Day;
    begin
       for Index in Month'First .. Month'Last loop
@@ -333,13 +333,13 @@ package body Booch_Light.Calendar_Utilities is
       Booch_Status :    out Locus.Value_Of)
    is
       No_Time     : constant Time :=
-        (The_Year        => Year'Invalid_Value,
-         The_Month       => Month'Invalid_Value,
-         The_Day         => Day'Invalid_Value,
-         The_Hour        => Hour'Invalid_Value,
-         The_Minute      => Minute'Invalid_Value,
-         The_Second      => Second'Invalid_Value,
-         The_Millisecond => Millisecond'Invalid_Value);
+        (The_Year        => Year'Last,
+         The_Month       => Month'Last,
+         The_Day         => Day'Last,
+         The_Hour        => Hour'Last,
+         The_Minute      => Minute'Last,
+         The_Second      => Second'Last,
+         The_Millisecond => Millisecond'Last);
       Left_Index  : Positive;
       Right_Index : Positive;
       Tmp_Status  : Natural_Utilities.Locus.Value_Of;
@@ -665,11 +665,11 @@ package body Booch_Light.Calendar_Utilities is
       Booch_Status :    out Locus.Value_Of)
    is
       No_Interval : constant Interval :=
-        (Elapsed_Days         => Natural'Invalid_Value,
-         Elapsed_Hours        => Hour'Invalid_Value,
-         Elapsed_Minutes      => Minute'Invalid_Value,
-         Elapsed_Seconds      => Second'Invalid_Value,
-         Elapsed_Milliseconds => Millisecond'Invalid_Value);
+        (Elapsed_Days         => Natural'Last,
+         Elapsed_Hours        => Hour'Last,
+         Elapsed_Minutes      => Minute'Last,
+         Elapsed_Seconds      => Second'Last,
+         Elapsed_Milliseconds => Millisecond'Last);
       Left_Index  : Positive;
       Right_Index : Positive;
       Tmp_Status  : Natural_Utilities.Locus.Value_Of;

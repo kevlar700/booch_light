@@ -273,7 +273,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                  (Log_ID  => "24496C6D790919C4",
                   Message => "Illegal_Pattern: Is_Match failed");
                Nested_Status := Illegal_Pattern;
-               Result        := Boolean'Invalid_Value;
+               Result        := Boolean'Last;
                return;
          end case;
       end Is_Match;
@@ -410,7 +410,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                  (Log_ID  => "4941C825FA1C88D5",
                   Message => "Illegal_Pattern: Location_Of failed");
                Booch_Status := Preprocess_Status;
-               Result := Index'Invalid_Value;
+               Result := Index'Last;
                return;
 
             when OK =>

@@ -222,7 +222,7 @@ package body Booch_Light.Floating_Point_Utilities is
       case Tmp_Status is
          when Lexical_Error =>
             Booch_Status := Tmp_Status;
-            Result       := Number'Invalid_Value;
+            Result       := Number'Last;
             Alterable_Log.Log
               (Log_ID  => "B7040B7522D02BC5",
                Message => "Lexical_Error: Value_Of failed");
@@ -234,7 +234,7 @@ package body Booch_Light.Floating_Point_Utilities is
 
       if Result > Number (With_The_Base) then
          Booch_Status := Lexical_Error;
-         Result       := Number'Invalid_Value;
+         Result       := Number'Last;
          Alterable_Log.Log
            (Log_ID  => "850DD8955C4CB08D",
             Message => "Lexical_Error: Value_Of failed");
@@ -260,7 +260,7 @@ package body Booch_Light.Floating_Point_Utilities is
 
       if Radix_Point = 0 then
          Booch_Status := Lexical_Error;
-         Result       := Number'Invalid_Value;
+         Result       := Number'Last;
          Alterable_Log.Log
            (Log_ID  => "E616847CF2F52C4D",
             Message => "Lexical_Error: Value_Of failed");
@@ -269,7 +269,7 @@ package body Booch_Light.Floating_Point_Utilities is
          The_Power := Radix_Point - The_Image'Length;
          if The_Power = 0 then
             Booch_Status := Lexical_Error;
-            Result       := Number'Invalid_Value;
+            Result       := Number'Last;
             Alterable_Log.Log
               (Log_ID  => "2186D3A3A0FFEFB4",
                Message => "Lexical_Error: Value_Of failed");
@@ -287,7 +287,7 @@ package body Booch_Light.Floating_Point_Utilities is
 
                case Booch_Status is
                   when Lexical_Error =>
-                     Result := Number'Invalid_Value;
+                     Result := Number'Last;
                      Alterable_Log.Log
                        (Log_ID  => "BCBF5C05B8C41092",
                         Message => "Lexical_Error: Value_Of failed");
@@ -315,7 +315,7 @@ package body Booch_Light.Floating_Point_Utilities is
 
                case Booch_Status is
                   when Lexical_Error =>
-                     Result := Number'Invalid_Value;
+                     Result := Number'Last;
                      Alterable_Log.Log
                        (Log_ID  => "592A37B4387C83D3",
                         Message => "Lexical_Error: Value_Of failed");
@@ -350,7 +350,7 @@ package body Booch_Light.Floating_Point_Utilities is
 
                case Booch_Status is
                   when Lexical_Error =>
-                     Result := Number'Invalid_Value;
+                     Result := Number'Last;
                      Alterable_Log.Log
                        (Log_ID  => "73B4C549B7259974",
                         Message => "Lexical_Error: Value_Of failed");

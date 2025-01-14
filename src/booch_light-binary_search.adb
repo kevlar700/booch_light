@@ -33,7 +33,7 @@ package body Booch_Light.Binary_Search is
          end if;
       end loop;
 
-      The_Location := Index'Invalid_Value;
+      The_Location := Index'Last;
       Booch_Status := Item_Not_Found;
       Alterable_Log.Log
         (Log_ID  => "C4215680AF21A1F7",

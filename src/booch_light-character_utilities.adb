@@ -136,13 +136,14 @@ package body Booch_Light.Character_Utilities is
       Result        :    out Digit;
       Booch_Status  :    out Locus.Value_Of)
    is
+      Invalid_Value : constant Integer := Digit'Last + 1;
    begin
       if The_Character in Digit_Character then
          Result := (Character'Pos (The_Character) - Character'Pos ('0'));
       elsif The_Character in 'A' .. 'F' then
          Result := (Character'Pos (The_Character) - Character'Pos ('A') + 10);
       else
-         Result       := Digit'Invalid_Value;
+         Result       := Invalid_Value;
          Booch_Status := Lexical_Error;
          Alterable_Log.Log
            (Log_ID  => "B092967AD2885D4E",
@@ -177,7 +178,7 @@ package body Booch_Light.Character_Utilities is
       elsif The_Character in Lowercase_Character then
          Result := (Character'Pos (The_Character) - Character'Pos ('a') + 1);
       else
-         Result       := Letter'Invalid_Value;
+         Result       := Letter'Last;
          Booch_Status := Lexical_Error;
          Alterable_Log.Log
            (Log_ID  => "7ADD317BA5D91AEA",

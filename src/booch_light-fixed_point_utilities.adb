@@ -223,7 +223,7 @@ package body Booch_Light.Fixed_Point_Utilities is
               (Log_ID  => "B00CB334B3C02ECC",
                Message => "Lexical_Error: Fixed point Value_Of failed");
             Booch_Status := Tmp_Status;
-            Result       := Number'Invalid_Value;
+            Result       := Number'Last;
             return;
 
          when OK =>
@@ -236,7 +236,7 @@ package body Booch_Light.Fixed_Point_Utilities is
            (Log_ID  => "59EF5270194ABE46",
             Message => "Lexical_Error: Result larger than With_The_Base");
          Booch_Status := Lexical_Error;
-         Result       := Number'Invalid_Value;
+         Result       := Number'Last;
          return;
       end if;
 
@@ -263,7 +263,7 @@ package body Booch_Light.Fixed_Point_Utilities is
            (Log_ID  => "E37B57B38F7F46D7",
             Message => "Lexical_Error: Radix_Point was 0");
          Booch_Status := Lexical_Error;
-         Result       := Number'Invalid_Value;
+         Result       := Number'Last;
          return;
       else
          The_Power := Radix_Point - The_Image'Length;
@@ -273,7 +273,7 @@ package body Booch_Light.Fixed_Point_Utilities is
 
                Message => "Lexical_Error: The_Power was 0");
             Booch_Status := Lexical_Error;
-            Result       := Number'Invalid_Value;
+            Result       := Number'Last;
             return;
          else
 
@@ -291,7 +291,7 @@ package body Booch_Light.Fixed_Point_Utilities is
                        (Log_ID  => "65DF24B5CE1F3A9F",
                         Message =>
                           "Lexical_Error: Fixed point Value_Of failed");
-                     Result := Number'Invalid_Value;
+                     Result := Number'Last;
                      return;
 
                   when OK =>
@@ -321,7 +321,7 @@ package body Booch_Light.Fixed_Point_Utilities is
                        (Log_ID  => "AD284DE7057244D0",
                         Message =>
                           "Lexical_Error: Fixed point Value_Of failed");
-                     Result := Number'Invalid_Value;
+                     Result := Number'Last;
                      return;
 
                   when OK =>
@@ -357,7 +357,7 @@ package body Booch_Light.Fixed_Point_Utilities is
                        (Log_ID  => "BC4814296AEED708",
                         Message =>
                           "Lexical_Error: Fixed point Value_Of failed");
-                     Result := Number'Invalid_Value;
+                     Result := Number'Last;
                      return;
 
                   when OK =>

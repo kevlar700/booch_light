@@ -56,7 +56,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
          Alterable_Log.Log
            (Log_ID  => "20D5A00297F03441",
             Message => "Tree_Is_Root: Child_Name_Of failed");
-         Result := Positive'Invalid_Value;
+         Result := Positive'Last;
          return;
       else
          for Index in 1 .. Number_Of_Children_In (Parent_Of (The_Tree)) loop
@@ -82,7 +82,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
          Alterable_Log.Log
            (Log_ID  => "99F89694B6FF0A72",
             Message => "Tree_Is_Root: Number_Of_Siblings_Of failed");
-         Result := Natural'Invalid_Value;
+         Result := Natural'Last;
          return;
       end if;
 

@@ -142,7 +142,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
            (Log_ID  => "05F5ED2BFD976EAB",
             Message => "Item_Is_Not_In_Bag: Number_Of failed");
          Booch_Status  := Item_Is_Not_In_Bag;
-         The_Number_Of := Positive'Invalid_Value;
+         The_Number_Of := Positive'Last;
          return;
       else
          The_Number_Of := In_The_Bag.The_Items (The_Item);

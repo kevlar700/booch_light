@@ -51,7 +51,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
          Alterable_Log.Log
            (Log_ID  => "7ABF61A6F35189FF",
             Message => "Tree_Is_Root: Child_Name_Of failed");
-         Result := Child'Invalid_Value;
+         Result := Child'Last;
          return;
 
       elsif Child_Of (Parent_Of (The_Tree), Left_Child) = The_Tree then

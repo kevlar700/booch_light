@@ -148,7 +148,7 @@ package body Booch_Light.Polyphase_Sort is
          end loop;
          Close (The_File);
          Booch_Status := File_Is_Empty;
-         Sorted_File  := Positive'Invalid_Value;
+         Sorted_File  := Positive'Last;
                   Alterable_Log.Log
            (Log_ID  => "98A32881831DE00C",
             Message => "File_Is_Empty: Polyphase Sort failed");

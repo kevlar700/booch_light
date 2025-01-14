@@ -31,7 +31,7 @@ package body Booch_Light.Pattern_Match_Simple is
       Alterable_Log.Log
         (Log_ID  => "74B44A77A93DCB1A",
          Message => "Pattern_Not_Found: Location_Of failed");
-      Result       := Index'Invalid_Value;
+      Result       := Index'Last;
       Booch_Status := Pattern_Not_Found;
       return;
 

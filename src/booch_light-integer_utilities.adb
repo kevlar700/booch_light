@@ -168,7 +168,7 @@ package body Booch_Light.Integer_Utilities is
             Alterable_Log.Log
               (Log_ID  => "900C85F5E131FD1A",
                Message => "Lexical_Error: Value_Of failed");
-            Result       := Number'Invalid_Value;
+            Result       := Number'Last;
             Booch_Status := Tmp_Status;
             return;
 
@@ -183,7 +183,7 @@ package body Booch_Light.Integer_Utilities is
            (Log_ID  => "23D8EF5BE3C01633",
             Message => "Lexical_Error: Value_Of failed");
          Booch_Status := Lexical_Error;
-         Result       := Number'Invalid_Value;
+         Result       := Number'Last;
          return;
       end if;
 
@@ -214,7 +214,7 @@ package body Booch_Light.Integer_Utilities is
                Alterable_Log.Log
                  (Log_ID  => "472F0CBDE7A53CEC",
                   Message => "Lexical_Error: Value_Of failed");
-               Result := Number'Invalid_Value;
+               Result := Number'Last;
                return;
 
             when OK =>
@@ -247,7 +247,7 @@ package body Booch_Light.Integer_Utilities is
                Alterable_Log.Log
                  (Log_ID  => "0FA76E3385517BCB",
                   Message => "Lexical_Error: Value_Of failed");
-               Result := Number'Invalid_Value;
+               Result := Number'Last;
 
             when OK =>
                Value  := Value * (Number (With_The_Base)**The_Power);
