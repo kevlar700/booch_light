@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
 
@@ -17,7 +17,7 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    is
    begin
       if From_The_Stack.The_Top > To_The_Stack.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID => "C6368FE9EC9FBE11",
 
             Message => "Exception_Overflow: Copy failed");
@@ -47,7 +47,7 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    exception
       when Constraint_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "F2AC932489A5DFEB",
             Message => "Constraint_Error: Push failed");
          return;
@@ -63,7 +63,7 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    exception
       when Constraint_Error =>
          Booch_Status := Exception_Underflow;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "90424FAB264A5700",
             Message => "Constraint_Error: Pop failed");
          return;
@@ -114,7 +114,7 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    exception
       when Constraint_Error =>
          Booch_Status := Exception_Underflow;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "B6CE3EF111B8DE92",
             Message => "Constraint_Error: Top_Of failed");
          return;

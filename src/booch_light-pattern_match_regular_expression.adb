@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Pattern_Match_Regular_Expression is
 
@@ -69,7 +69,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                         Last_Pattern              := Full_Index;
                         Full_Index                := Full_Index + 1;
                      else
-                        Alterable_Log.Log
+                        Alogs.Log
                           (Log_ID  => "5E95CE44668D6FFC",
                            Message => "Illegal_Pattern: Preprocess failed");
                         Booch_Status := Illegal_Pattern;
@@ -82,7 +82,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                      if Full_Pattern (Full_Index).True_Pattern then
                         Full_Pattern (Full_Index).True_Pattern := False;
                      else
-                        Alterable_Log.Log
+                        Alogs.Log
                           (Log_ID  => "03C1D69BCE6A0EFD",
                            Message => "Illegal_Pattern: Preprocess failed");
                         Booch_Status := Illegal_Pattern;
@@ -93,7 +93,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                      if not Full_Pattern (Last_Pattern).Has_Closure then
                         Full_Pattern (Last_Pattern).Has_Closure := True;
                      else
-                        Alterable_Log.Log
+                        Alogs.Log
                           (Log_ID  => "9A9F379927C3BF9A",
                            Message => "Illegal_Pattern: Preprocess failed");
                         Booch_Status := Illegal_Pattern;
@@ -112,7 +112,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                      Full_Index                := Full_Index + 1;
                      The_State                 := Building_Class;
                   elsif Is_Equal (The_Pattern (Pattern_Index), Stop_Class) then
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "033AFC90B03DA0C2",
                         Message => "Illegal_Pattern: Preprocess failed");
                      Booch_Status := Illegal_Pattern;
@@ -128,7 +128,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                   end if;
                when Building_Class =>
                   if Is_Equal (The_Pattern (Pattern_Index), Any_Item) then
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "BED689DCA789D0F2",
                         Message => "Illegal_Pattern: Preprocess failed");
                      Booch_Status := Illegal_Pattern;
@@ -137,21 +137,21 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                   then
                      The_State := Building_Escape_Class;
                   elsif Is_Equal (The_Pattern (Pattern_Index), Not_Item) then
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "7FE0D72EF3599611",
                         Message => "Illegal_Pattern: Preprocess failed");
                      Booch_Status := Illegal_Pattern;
                      return;
                   elsif Is_Equal (The_Pattern (Pattern_Index), Closure_Item)
                   then
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "DD94EAF685B514AA",
                         Message => "Illegal_Pattern: Preprocess failed");
                      Booch_Status := Illegal_Pattern;
                      return;
                   elsif Is_Equal (The_Pattern (Pattern_Index), Start_Class)
                   then
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "47A71011CE3E0011",
                         Message => "Illegal_Pattern: Preprocess failed");
                      Booch_Status := Illegal_Pattern;
@@ -160,7 +160,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                      if Full_Pattern (Last_Pattern).Number_Of_Items > 0 then
                         The_State := Building_Pattern;
                      else
-                        Alterable_Log.Log
+                        Alogs.Log
                           (Log_ID  => "A4A1B8F876CAFA61",
                            Message => "Illegal_Pattern: Preprocess failed");
                         Booch_Status := Illegal_Pattern;
@@ -201,7 +201,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                   Booch_Status              := OK;
                   return;
                else
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "04453A84889FBB9F",
                      Message => "Illegal_Pattern: Preprocess failed");
                   Booch_Status := Illegal_Pattern;
@@ -213,7 +213,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
          end loop;
       exception
          when Constraint_Error =>
-            Alterable_Log.Status_Exception
+            Alogs.Status_Exception
               (Log_ID  => "5BAD581EDCE92B23",
                Message =>
                  "Constraint_Error: Illegal_Pattern: Preprocess failed");
@@ -269,7 +269,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                return;
 
             when others =>
-               Alterable_Log.Status_Exception
+               Alogs.Status_Exception
                  (Log_ID  => "24496C6D790919C4",
                   Message => "Illegal_Pattern: Is_Match failed");
                Nested_Status := Illegal_Pattern;
@@ -307,7 +307,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
                   case Is_Match_Status is
                      when Illegal_Pattern =>
-                        Alterable_Log.Log
+                        Alogs.Log
                           (Log_ID  => "2E8FD2C437406BA4",
                            Message => "Illegal_Pattern: Location_Of failed");
                         Booch_Status := Is_Match_Status;
@@ -340,7 +340,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
                   case Booch_Status is
                      when Illegal_Pattern =>
-                        Alterable_Log.Log
+                        Alogs.Log
                           (Log_ID  => "FD7F690F56828247",
                            Message =>
                              "Illegal_Pattern: Recursive Location_Of failed");
@@ -366,7 +366,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
             case Is_Match_Status is
                when Illegal_Pattern =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "A39564A08A0178D7",
                      Message => "Illegal_Pattern: Location_Of failed");
                   Booch_Status := Is_Match_Status;
@@ -388,7 +388,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
       exception
          when Constraint_Error =>
-            Alterable_Log.Status_Exception
+            Alogs.Status_Exception
               (Log_ID  => "10DFEF66791A5B95",
                Message =>
                  "Constraint_Error: Pattern_Not_Found: Location_Of failed");
@@ -406,7 +406,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
          case Preprocess_Status is
             when Illegal_Pattern =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "4941C825FA1C88D5",
                   Message => "Illegal_Pattern: Location_Of failed");
                Booch_Status := Preprocess_Status;
@@ -425,7 +425,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
             case Booch_Status is
                when Illegal_Pattern =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "A72231E83628645C",
                      Message => "Illegal_Pattern: Location_Of failed");
                   return;

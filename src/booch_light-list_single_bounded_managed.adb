@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.List_Single_Bounded_Managed is
 
@@ -38,7 +38,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    begin
       if Free_List = Null_List then
          Booch_Status := No_Storage_Available;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "95FAF582E22FF7C2",
             Message => "No_Storage_Available: New_Item failed");
          return;
@@ -72,7 +72,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
          case New_Item_Status is
             when No_Storage_Available =>
                Booch_Status := New_Item_Status;
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "7CBFE8DF93C34F17",
                   Message => "No_Storage_Available: Copy failed");
                return;
@@ -94,7 +94,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
             case New_Item_Status is
                when No_Storage_Available =>
                   Booch_Status := New_Item_Status;
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "9D6AF7BE2839F959",
                      Message => "No_Storage_Available: Copy failed");
                   return;
@@ -116,7 +116,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "C206C4FC169A7F33",
             Message => "Exception_Overflow: Copy failed");
          return;
@@ -143,7 +143,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
       case New_Item_Status is
          when No_Storage_Available =>
             Booch_Status := New_Item_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "F0D233B082F2F188",
                Message => "No_Storage_Available: Construct failed");
             return;
@@ -161,7 +161,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B56965EBEE4FA56F",
             Message => "Exception_Overflow: Construct failed");
          return;
@@ -180,7 +180,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    exception
       when Constraint_Error =>
          Booch_Status := List_Is_Null;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "7442F77D8E77B8F7",
             Message => "List_Is_Null: Set_Head failed");
          return;
@@ -203,7 +203,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    exception
       when Constraint_Error =>
          Booch_Status := List_Is_Null;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "9713C8E3C100008E",
             Message => "List_Is_Null: Swap_Tail failed");
          return;
@@ -271,7 +271,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
       when Constraint_Error =>
          Booch_Status := List_Is_Null;
          Booch_Status := List_Is_Null;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "5DB77EC0850A1464",
             Message => "Head_Of: Head_Of failed");
          return;
@@ -290,7 +290,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    exception
       when Constraint_Error =>
          Booch_Status := List_Is_Null;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "3BE6BB963081D031",
             Message => "List_Is_Null: Tail_Of failed");
          return;

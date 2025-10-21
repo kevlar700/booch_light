@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.List_Utilities_Single is
 
@@ -19,7 +19,7 @@ package body Booch_Light.List_Utilities_Single is
       Index : List;
    begin
       if Is_Null (In_The_List) then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "AC22C41320430FF5",
             Message => "Position_Error: Location_Of failed");
          Booch_Status := Position_Error;
@@ -29,7 +29,7 @@ package body Booch_Light.List_Utilities_Single is
          for Count in 2 .. The_Position loop
             Index := Tail_Of (Index);
             if Is_Null (Index) then
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "2E8DB4C90163A999",
                   Message => "Position_Error: Location_Of failed");
                Booch_Status := Position_Error;
@@ -81,7 +81,7 @@ package body Booch_Light.List_Utilities_Single is
       case Tmp_Status is
          when Position_Error =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "6DAD21766E8350C1",
                Message => "Split: Position_Error failed");
             return;
@@ -97,7 +97,7 @@ package body Booch_Light.List_Utilities_Single is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "12CA9E30D200F793",
             Message => "Position_Error: Split failed");
          Booch_Status := Position_Error;
@@ -122,7 +122,7 @@ package body Booch_Light.List_Utilities_Single is
       case Tmp_Status is
          when Position_Error =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "C26FF4FD0C8E3AC0",
                Message => "Position_Error: Insert failed");
             return;
@@ -167,7 +167,7 @@ package body Booch_Light.List_Utilities_Single is
       case Tmp_Status is
          when Position_Error =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "454488EE11E85F92",
                Message => "Position_Error: Insert failed");
             return;
@@ -232,7 +232,7 @@ package body Booch_Light.List_Utilities_Single is
 
       case Tmp_Status is
          when Position_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "F29CE5E4BDE7414E",
                Message => "Position_Error: Remove_Item failed");
             Booch_Status := Tmp_Status;
@@ -261,7 +261,7 @@ package body Booch_Light.List_Utilities_Single is
 
          case Tmp_Status is
             when Position_Error =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "8303B81FC0E31469",
                   Message => "Position_Error: Remove_Item failed");
                Booch_Status := Tmp_Status;

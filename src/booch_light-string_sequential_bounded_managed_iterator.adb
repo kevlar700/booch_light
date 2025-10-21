@@ -5,7 +5,7 @@
 --  The book SOFTWARE COMPONENTS WITH Ada Structures, Tools, and_Subsystems,
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
@@ -16,7 +16,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    is
    begin
       if From_The_String.The_Length > To_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "75D5925866B65D41",
             Message => "Exception_Overflow: Copy failed");
          Booch_Status := Exception_Overflow;
@@ -38,7 +38,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    is
    begin
       if From_The_Substring'Length > To_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "7E47195BF0F8D2E5",
             Message => "Exception_Overflow: Copy failed");
          Booch_Status := Exception_Overflow;
@@ -68,7 +68,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    begin
 
       if New_Length > To_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "389B534B43F2203F",
             Message => "Exception_Overflow: Prepend failed");
          Booch_Status := Exception_Overflow;
@@ -95,7 +95,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    begin
 
       if New_Length > To_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "B7A9470F4539AFB4",
             Message => "Exception_Overflow: Prepend failed");
          Booch_Status := Exception_Overflow;
@@ -121,7 +121,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    begin
 
       if New_Length > To_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "69E42C6B74CD4407",
             Message => "Exception_Overflow: Append failed");
          Booch_Status := Exception_Overflow;
@@ -146,7 +146,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    begin
 
       if New_Length > To_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "0FEDA7F4307155F3",
             Message => "Exception_Overflow: Append failed");
          Booch_Status := Exception_Overflow;
@@ -174,13 +174,13 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         At_The_Position + The_String.The_Length;
    begin
       if At_The_Position > In_The_String.The_Length then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "A2388EC2BBA7F90E",
             Message => "Position_Error: Insert failed");
          Booch_Status := Position_Error;
          return;
       elsif New_Length > In_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "7DC94504E4635959",
             Message => "Exception_Overflow: Insert failed");
          Booch_Status := Exception_Overflow;
@@ -210,14 +210,14 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         At_The_Position + The_Substring'Length;
    begin
       if At_The_Position > In_The_String.The_Length then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "5D83E383FF0AE010",
             Message => "Position_Error: Insert failed");
          Booch_Status := Position_Error;
          return;
 
       elsif New_Length > In_The_String.The_Size then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "EBB53A430C9E2121",
             Message => "Exception_Overflow: Insert failed");
          Booch_Status := Exception_Overflow;
@@ -247,7 +247,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         or else (To_The_Position > In_The_String.The_Length)
         or else (From_The_Position > To_The_Position)
       then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "1DD5C2344C3064AB",
             Message => "Position_Error: Delete failed");
          Booch_Status := Position_Error;
@@ -277,7 +277,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       if (At_The_Position > In_The_String.The_Length)
         or else (End_Position > In_The_String.The_Length)
       then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "8E5BF265658CE669",
             Message => "Position_Error: Replace failed");
          Booch_Status := Position_Error;
@@ -303,7 +303,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       if (At_The_Position > In_The_String.The_Length)
         or else (End_Position > In_The_String.The_Length)
       then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "7E5D919BFCE2CB98",
             Message => "Position_Error: Replace failed");
          Booch_Status := Position_Error;
@@ -325,7 +325,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    is
    begin
       if At_The_Position > In_The_String.The_Length then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "40D9030378204C66",
             Message => "Position_Error: Replace failed");
          Booch_Status := Position_Error;
@@ -524,7 +524,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    is
    begin
       if At_The_Position > The_String.The_Length then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "3A0A9ABF65A9B4C4",
             Message => "Position_Error: Item_Of failed");
          Booch_Status := Position_Error;
@@ -556,7 +556,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         or else (To_The_Position > The_String.The_Length)
         or else (From_The_Position > To_The_Position)
       then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "80A2DAC7FEFC0394",
             Message => "Position_Error: Substring_Of failed");
          Booch_Status := Position_Error;

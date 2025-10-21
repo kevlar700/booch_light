@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Polyphase_Sort is
 
@@ -149,7 +149,7 @@ package body Booch_Light.Polyphase_Sort is
          Close (The_File);
          Booch_Status := File_Is_Empty;
          Sorted_File  := Positive'Last;
-                  Alterable_Log.Log
+                  Alogs.Log
            (Log_ID  => "98A32881831DE00C",
             Message => "File_Is_Empty: Polyphase Sort failed");
          Booch_Status := Position_Error;

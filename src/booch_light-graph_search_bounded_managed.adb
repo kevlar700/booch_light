@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 with Booch_Light.Set_Simple_Sequential_Bounded_Managed_Noniterator;
 with Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator;
 with
@@ -47,7 +47,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
       case Add_Status is
          when Item_Is_In_Set | Exception_Overflow | Exception_Storage_Error =>
             Booch_Status := Add_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "FF27F5892D952670",
                Message => "Traverse_Depth_First failed");
             return;
@@ -64,7 +64,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
       case Push_Status is
          when Exception_Overflow =>
             Booch_Status := Push_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "9E186851A8B9A6E3",
                Message => "Exception_Overflow: Traverse_Depth_First failed");
             return;
@@ -86,7 +86,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
             case Top_Of_Status is
                when Exception_Underflow =>
                   Booch_Status := Top_Of_Status;
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "B8F70481BE00D61E",
                      Message =>
                        "Exception_Underflow: Traverse_Depth_First failed");
@@ -107,7 +107,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
             case Pop_Status is
                when Exception_Underflow =>
                   Booch_Status := Pop_Status;
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "CAA89A68A0A85A7C",
                      Message =>
                        "Exception_Underflow: Traverse_Depth_First failed");
@@ -138,7 +138,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
                   when Item_Is_In_Set | Exception_Overflow
                     | Exception_Storage_Error =>
                      Booch_Status := Add_Status;
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "DAE03E1E14A689D1",
                         Message => "Traverse_Depth_First failed");
                      return;
@@ -155,7 +155,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
                case Push_Status is
                   when Exception_Overflow =>
                      Booch_Status := Push_Status;
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "E93B5E8068FE7AEA",
                         Message =>
                           "Exception_Overflow: Traverse_Depth_First failed");
@@ -194,7 +194,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
       case Add_Set_Status is
          when Exception_Overflow | Exception_Storage_Error | Item_Is_In_Set =>
             Booch_Status := Add_Set_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "2EC0E0CEC5FA1BFA",
                Message => "Traverse_Breadth_First failed");
             return;
@@ -211,7 +211,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
       case Add_Queue_Status is
          when Exception_Overflow =>
             Booch_Status := Add_Queue_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "5B4C2FE0C5A7C700",
                Message => "Exception_Overflow: Traverse_Breadth_First failed");
             return;
@@ -232,7 +232,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
             case Front_Of_Queue_Status is
                when Exception_Underflow =>
                   Booch_Status := Front_Of_Queue_Status;
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "51CBFB3DDCBDD9F7",
                      Message =>
                        "Exception_Underflow: Traverse_Breadth_First failed");
@@ -253,7 +253,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
             case Pop_Status is
                when Exception_Underflow =>
                   Booch_Status := Pop_Status;
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "C3BAD12B362D6745",
                      Message =>
                        "Exception_Underflow: Traverse_Breadth_First failed");
@@ -282,7 +282,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
                   when Item_Is_In_Set | Exception_Overflow
                     | Exception_Storage_Error =>
                      Booch_Status := Add_Set_Status;
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "5EE9D6ECDA2A974A",
                         Message => "Traverse_Breadth_First failed");
                      return;
@@ -299,7 +299,7 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
                case Add_Queue_Status is
                   when Exception_Overflow =>
                      Booch_Status := Add_Queue_Status;
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "55DE554E2C4AF12A",
                         Message =>
                           "Exception_Overflow: Traverse_Breadth_First failed");

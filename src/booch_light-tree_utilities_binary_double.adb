@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Tree_Utilities_Binary_Double is
 
@@ -48,7 +48,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
    begin
       if Is_Root (The_Tree) then
          Booch_Status := Tree_Is_Root;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "7ABF61A6F35189FF",
             Message => "Tree_Is_Root: Child_Name_Of failed");
          Result := Child'Last;
@@ -79,7 +79,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
       case Tmp_Status is
          when Tree_Is_Root =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "2FD6E47CC43854C0",
                Message => "Tree_Is_Root: Left_Sibling_Of failed");
             return;
@@ -115,7 +115,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
       case Tmp_Status is
          when Tree_Is_Root =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "0C915D75FAEB664F",
                Message => "Tree_Is_Root: Right_Sibling_Of failed");
             return;

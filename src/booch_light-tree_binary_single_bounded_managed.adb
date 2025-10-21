@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
@@ -67,7 +67,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
          case Booch_Status is
             when Exception_Overflow =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "0BDC6C672FF3463A",
                   Message => "Exception_Overflow: Copy failed");
                return;
@@ -84,7 +84,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
          case Booch_Status is
             when Exception_Overflow =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "EB7B7893E0D8CBBB",
                   Message => "Exception_Overflow: Copy failed");
                return;
@@ -100,7 +100,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "2255DFD36B518AC1",
             Message => "Storage_Error: Exception_Overflow: Copy failed");
          Booch_Status := Exception_Overflow;
@@ -133,7 +133,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "E0F4597D8CD2AA6B",
             Message => "Storage_Error: Exception_Overflow: Construct failed");
          Booch_Status := Exception_Overflow;
@@ -152,7 +152,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "E0F4597D8CD2AA6B",
             Message => "Constraint_Error: Tree_Is_Null: Set_Item failed");
          Booch_Status := Tree_Is_Null;
@@ -180,7 +180,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "287581F1CEEB6D99",
             Message => "Constraint_Error: Tree_Is_Null: Swap_Child failed");
          Booch_Status := Tree_Is_Null;
@@ -229,7 +229,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "8F8CA84FC9CAD864",
             Message => "Constraint_Error: Tree_Is_Null: Item_Of failed");
          Booch_Status := Tree_Is_Null;
@@ -254,7 +254,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "C76FAB1C3AC891AB",
             Message => "Constraint_Error: Tree_Is_Null: Child_Of failed");
          Booch_Status := Tree_Is_Null;

@@ -10,7 +10,7 @@ with Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator;
 with
   Booch_Light
     .Queue_Nonpriority_Nonbalking_Sequential_Bounded_Managed_Noniterator;
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Topological_Sort_Bounded_Managed is
 
@@ -75,7 +75,7 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
                Booch_Status => Add_Status);
             case Add_Status is
                when Exception_Overflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "BC34E6DA54D6A14C",
                      Message =>
                        "Overflow when adding a node to the Process Queue");
@@ -123,7 +123,7 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
 
                   case Add_Status is
                      when Item_Is_In_Set | Exception_Overflow =>
-                        Alterable_Log.Log
+                        Alogs.Log
                           (Log_ID  => "920143CF25D33375",
                            Message =>
                              "Error whilst adding a Successsor node to the " &
@@ -156,7 +156,7 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
 
                case Add_Status is
                   when Exception_Overflow =>
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "57A823692FAFC559",
                         Message =>
                           "Overflow when adding an Index to the " &
@@ -187,7 +187,7 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
 
             case Queue_Status is
                when Exception_Underflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "5E6FF87D141BFD68",
                      Message =>
                        "Exception_Underflow during Topological sorting");
@@ -209,7 +209,7 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
 
             case Queue_Status is
                when Exception_Underflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "316B0B5B1B98470D",
                      Message =>
                        "Exception_Underflow during Topological sorting");
@@ -227,7 +227,7 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
 
             case Set_Status is
                when Exception_Overflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "0D9E83379205E791",
                      Message =>
                        "Exception_Overflow whilst traversing The_Successors " &
@@ -246,7 +246,7 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
 
             case Queue_Status is
                when Exception_Underflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "6322AFB958E49D7B",
                      Message =>
                        "Exception_Underflow whilst popping the Node_Queue");

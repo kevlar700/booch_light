@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light
   .Queue_Nonpriority_Nonbalking_Sequential_Bounded_Managed_Noniterator is
@@ -19,7 +19,7 @@ package body Booch_Light
    begin
       if From_The_Queue.The_Back > To_The_Queue.The_Size then
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "80ADF5233BE70396",
             Message => "Exception_Overflow: Copy failed");
          return;
@@ -53,7 +53,7 @@ package body Booch_Light
    exception
       when Constraint_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "A2B9AD5091648740",
             Message => "Exception_Overflow: Add failed");
 
@@ -67,7 +67,7 @@ package body Booch_Light
    begin
       if The_Queue.The_Back = 0 then
          Booch_Status := Exception_Underflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B60BBB0DA67DBCB3",
             Message => "Exception_Underflow: Pop failed");
          return;
@@ -124,7 +124,7 @@ package body Booch_Light
    begin
       if The_Queue.The_Back = 0 then
          Booch_Status := Exception_Underflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "4541171554C78473",
             Message => "Exception_Overflow: Front_Of failed");
          return;

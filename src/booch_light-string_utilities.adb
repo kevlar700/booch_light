@@ -7,7 +7,7 @@
 --  of this software.
 
 with Booch_Light.Character_Utilities;
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.String_Utilities is
 
@@ -238,7 +238,7 @@ package body Booch_Light.String_Utilities is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "823F10C5BCA80CF2",
             Message => "Lexical_Error: Centering string");
          Booch_Status := Lexical_Error;
@@ -264,7 +264,7 @@ package body Booch_Light.String_Utilities is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "90C9100A54C28001",
             Message => "Lexical_Error: Left justifying string");
          Booch_Status := Lexical_Error;
@@ -289,7 +289,7 @@ package body Booch_Light.String_Utilities is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "2B957AFDF054EA20",
             Message => "Lexical_Error: Right justifying string");
          Booch_Status := Lexical_Error;

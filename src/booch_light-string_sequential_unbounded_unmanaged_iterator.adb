@@ -5,7 +5,7 @@
 --  The book SOFTWARE COMPONENTS WITH Ada Structures, Tools, and_Subsystems,
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
@@ -50,7 +50,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "593C1B3592795C1C",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -74,7 +74,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "1B9C8B9A8219B124",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -112,7 +112,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "02CE7CEFD818795E",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -141,7 +141,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "DABABC930B4A0263",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -169,7 +169,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "45201A51280FB234",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -197,7 +197,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "A2791142B94CD95A",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -218,7 +218,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
         At_The_Position + The_String.The_Length;
    begin
       if At_The_Position > In_The_String.The_Length then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "32D209183855D6E8",
             Message => "Position_Error: Insert parameters are invalid");
          Booch_Status := Position_Error;
@@ -239,7 +239,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "038416A27692A719",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -259,7 +259,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
         At_The_Position + The_Substring'Length;
    begin
       if At_The_Position > In_The_String.The_Length then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "31A5B4830143E690",
             Message => "Position_Error: Insert parameters are invalid");
          Booch_Status := Position_Error;
@@ -279,7 +279,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "5FB3BC4D553F75CE",
             Message => "Storage_Error: Unbounded String");
          Booch_Status := Exception_Storage_Error;
@@ -298,7 +298,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
         or else (To_The_Position > In_The_String.The_Length)
         or else (From_The_Position > To_The_Position)
       then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "9E76F35759E1FB03",
             Message => "Position_Error: Delete parameters are invalid");
          Booch_Status := Position_Error;
@@ -331,7 +331,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
       if (At_The_Position > In_The_String.The_Length)
         or else (End_Position > In_The_String.The_Length)
       then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "A14785E8F8E82747",
             Message => "Position_Error: Replace parameters are invalid");
          Booch_Status := Position_Error;
@@ -357,7 +357,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
       if (At_The_Position > In_The_String.The_Length)
         or else (End_Position > In_The_String.The_Length)
       then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "63D71C86D6DCD9F6",
             Message => "Position_Error: Replace parameters are invalid");
          Booch_Status := Position_Error;
@@ -379,7 +379,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    is
    begin
       if At_The_Position > In_The_String.The_Length then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "D41C74429AF39CA3",
             Message => "Position_Error: Set_Item parameters are invalid");
          Booch_Status := Position_Error;
@@ -577,7 +577,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    is
    begin
       if At_The_Position > The_String.The_Length then
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "29DF8D5153DD8E16",
             Message => "Position_Error: Item_Of parameters are invalid");
          Booch_Status := Position_Error;
@@ -621,7 +621,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "11975F007D5FFBD8",
             Message =>
               "Constraint_Error: The_Substring is of an incorrect size");
@@ -654,7 +654,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
         or else (To_The_Position > The_String.The_Length)
         or else (From_The_Position > To_The_Position)
       then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B94330FCA1E409AB",
             Message => "Invalid Substring requested");
          Booch_Status := Position_Error;
@@ -667,7 +667,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "0E69273FD345B148",
             Message =>
               "Constraint_Error: The_Substring is of an incorrect size");

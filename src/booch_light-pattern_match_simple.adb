@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Pattern_Match_Simple is
 
@@ -28,7 +28,7 @@ package body Booch_Light.Pattern_Match_Simple is
          end if;
       end loop;
 
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "74B44A77A93DCB1A",
          Message => "Pattern_Not_Found: Location_Of failed");
       Result       := Index'Last;
@@ -37,7 +37,7 @@ package body Booch_Light.Pattern_Match_Simple is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "BA642358E1A02288",
             Message =>
               "Constraint_Error: Pattern_Not_Found: Location_Of failed");

@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light
   .Map_Discrete_Noncached_Sequential_Bounded_Managed_Iterator is
@@ -34,7 +34,7 @@ package body Booch_Light
    is
    begin
       if In_The_Map (The_Domain).Is_Bound then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "286768A4AB552851",
             Message => "Multiple_Binding: Bind failed");
          Booch_Status := Multiple_Binding;
@@ -56,7 +56,7 @@ package body Booch_Light
    is
    begin
       if not In_The_Map (The_Domain).Is_Bound then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "053FB0CC57AEE092",
             Message => "Domain_Is_Not_Bound: Unbind failed");
          Booch_Status := Domain_Is_Not_Bound;
@@ -130,7 +130,7 @@ package body Booch_Light
    is
    begin
       if not In_The_Map (The_Domain).Is_Bound then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "94104FFBD9E3A428",
             Message => "Domain_Is_Not_Bound: Range_Of failed");
          Booch_Status := Domain_Is_Not_Bound;

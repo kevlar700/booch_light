@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light
   .Map_Simple_Noncached_Sequential_Bounded_Managed_Iterator is
@@ -56,7 +56,7 @@ package body Booch_Light
       The_Bucket : Natural;
    begin
       if From_The_Map.The_Count > To_The_Map.The_Size then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "1115B0BDB28E4D62",
             Message =>
               "This bounded Set has insufficient space for the copy " &
@@ -101,7 +101,7 @@ package body Booch_Light
    begin
       Find (The_Domain, In_The_Map, The_Bucket);
       if In_The_Map.The_Items (The_Bucket).The_State = Bound then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "7E2AF121981B3CFF",
             Message => "Multiple binding attempted");
          Booch_Status := Multiple_Binding;
@@ -119,7 +119,7 @@ package body Booch_Light
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "968AE36879DAE323",
             Message => "Constraint_Error: During Bind");
          Booch_Status := Exception_Overflow;
@@ -138,7 +138,7 @@ package body Booch_Light
          In_The_Map.The_Items (The_Bucket).The_State := Deleted;
          In_The_Map.The_Count := In_The_Map.The_Count - 1;
       else
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "D44EC0BDB73A9AA6",
             Message => "The_Domain must exist in order to be unbinded");
          Booch_Status := Domain_Is_Not_Bound;
@@ -149,7 +149,7 @@ package body Booch_Light
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "0C18A6EFF582096D",
             Message => "Constraint_Error: During Unbind");
          Booch_Status := Domain_Is_Not_Bound;
@@ -239,7 +239,7 @@ package body Booch_Light
          Booch_Status := OK;
          return;
       else
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "D49A9CC7B47AE67E",
             Message => "The_Domain must exist in order to be ranged");
          Booch_Status := Domain_Is_Not_Bound;
@@ -248,7 +248,7 @@ package body Booch_Light
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "A3D952B8224432BC",
             Message => "Constraint_Error: During Range_Of");
          Booch_Status := Domain_Is_Not_Bound;

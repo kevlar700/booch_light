@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
 
@@ -44,7 +44,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "D9C98776F487FDBB",
             Message => "Item_Is_Not_In_Bag: Cannot remove it");
          Booch_Status := Item_Is_Not_In_Bag;
@@ -138,7 +138,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    is
    begin
       if In_The_Bag.The_Items (The_Item) = 0 then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "05F5ED2BFD976EAB",
             Message => "Item_Is_Not_In_Bag: Number_Of failed");
          Booch_Status  := Item_Is_Not_In_Bag;

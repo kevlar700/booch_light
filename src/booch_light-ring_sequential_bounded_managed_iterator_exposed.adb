@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
 
@@ -17,7 +17,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
    is
    begin
       if From_The_Ring.Concealed.The_Back > To_The_Ring.The_Size then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "E0226DEA590B15A0",
             Message => "Exception_Overflow: Copy failed");
          Booch_Status := Exception_Overflow;
@@ -52,7 +52,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
    is
    begin
       if In_The_Ring.Concealed.The_Back = In_The_Ring.The_Size then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "3A6FE56A5F9E48A8",
             Message => "Exception_Overflow: Insert failed due to full ring");
          Booch_Status := Exception_Overflow;
@@ -86,7 +86,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
    is
    begin
       if The_Ring.Concealed.The_Back = 0 then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "C7B73016257FF434",
             Message => "Exception_Underflow: Pop failed");
          Booch_Status := Exception_Underflow;
@@ -124,7 +124,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
    is
    begin
       if The_Ring.Concealed.The_Back = 0 then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B99958D1C2DE80DD",
             Message => "Rotate_Error: Rotate failed as the ring is empty");
          Booch_Status := Rotate_Error;
@@ -232,7 +232,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "1CDBE3159F743C04",
             Message => "Constraint_Error: Exception_Underflow: Top_Of failed");
          Booch_Status := Exception_Underflow;

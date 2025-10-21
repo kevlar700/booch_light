@@ -7,7 +7,7 @@
 --  of this software.
 
 with Booch_Light.Storage_Manager_Sequential;
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light
   .Queue_Nonpriority_Nonbalking_Sequential_Unbounded_Managed_Noniterator is
@@ -75,7 +75,7 @@ package body Booch_Light
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "9DA6C3C44B6543BB",
             Message => "Exception_Overflow: Copy failed");
          return;
@@ -109,7 +109,7 @@ package body Booch_Light
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "0E33AC90999650F5",
             Message => "Exception_Overflow: Add failed");
 
@@ -134,7 +134,7 @@ package body Booch_Light
    exception
       when Constraint_Error =>
          Booch_Status := Exception_Underflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "15612B9B74348C2D",
             Message => "Exception_Underflow: Pop failed");
          return;
@@ -160,7 +160,7 @@ package body Booch_Light
       return (Right_Index = null);
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "A2B9AD5091648740",
             Message => "Exception_Overflow: Add failed");
          return False;
@@ -200,7 +200,7 @@ package body Booch_Light
    exception
       when Constraint_Error =>
          Booch_Status := Exception_Underflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "DF394D35304D4052",
             Message => "Exception_Underflow: Front_Of failed");
          return;

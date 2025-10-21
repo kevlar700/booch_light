@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
 
@@ -17,7 +17,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    is
    begin
       if From_The_Bag.The_Back > To_The_Bag.The_Size then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B16D9DE9925817D9",
             Message => "Exception_Overflow: Cannot copy between the bags");
          Booch_Status := Exception_Overflow;
@@ -64,7 +64,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "78EC63445113DF18",
             Message => "Exception_Overflow: Cannot Add To_The_Bag");
          Booch_Status := Exception_Overflow;
@@ -97,7 +97,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
          end if;
       end loop;
 
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "D9C9FF52CF33F56B",
          Message => "Item_Is_Not_In_Bag: Cannot remove it from the bag");
       Booch_Status := Item_Is_Not_In_Bag;
@@ -143,7 +143,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "5848BD73C08A5CEE",
             Message => "Exception_Overflow: Union of bags failed");
          Booch_Status := Exception_Overflow;
@@ -192,7 +192,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "5848BD73C08A5CEE",
             Message => "Exception_Overflow: Intersection of bags failed");
          Booch_Status := Exception_Overflow;
@@ -240,7 +240,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "EB5D4DA7AB2EA11E",
             Message => "Exception_Overflow: Difference of bags failed");
          Booch_Status := Exception_Overflow;
@@ -317,7 +317,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
          end if;
       end loop;
 
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "9F26B4639B25F58D",
          Message => "Item_Is_Not_In_Bag: Number_Of failed");
       Booch_Status := Item_Is_Not_In_Bag;

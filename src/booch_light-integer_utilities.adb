@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 with Booch_Light.Character_Utilities;
 
 package body Booch_Light.Integer_Utilities is
@@ -165,7 +165,7 @@ package body Booch_Light.Integer_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "900C85F5E131FD1A",
                Message => "Lexical_Error: Value_Of failed");
             Result       := Number'Last;
@@ -179,7 +179,7 @@ package body Booch_Light.Integer_Utilities is
       end case;
 
       if Result > Number (With_The_Base) then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "23D8EF5BE3C01633",
             Message => "Lexical_Error: Value_Of failed");
          Booch_Status := Lexical_Error;
@@ -211,7 +211,7 @@ package body Booch_Light.Integer_Utilities is
 
          case Booch_Status is
             when Lexical_Error =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "472F0CBDE7A53CEC",
                   Message => "Lexical_Error: Value_Of failed");
                Result := Number'Last;
@@ -244,7 +244,7 @@ package body Booch_Light.Integer_Utilities is
 
          case Booch_Status is
             when Lexical_Error =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "0FA76E3385517BCB",
                   Message => "Lexical_Error: Value_Of failed");
                Result := Number'Last;

@@ -7,7 +7,7 @@
 --  of this software.
 
 with Booch_Light.Map_Simple_Noncached_Sequential_Bounded_Managed_Iterator;
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Graph_Directed_Bounded_Managed is
 
@@ -63,7 +63,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
       Temporary_Vertex : Vertex;
    begin
       if Vertex_Free_List = Null_Vertex then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "D0B31F93174E72A1",
             Message =>
               "No_Storage_Available: Vertex_Free_List indicates that all " &
@@ -97,7 +97,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
       Temporary_Arc : Arc;
    begin
       if Arc_Free_List = Null_Arc then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "926ED38D301DBEC7",
             Message =>
               "No_Storage_Available: Arc_Free_List indicates that all space " &
@@ -147,7 +147,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
                Booch_Status => New_Item_Status);
             case New_Item_Status is
                when No_Storage_Available =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "83280D75475FB3D6",
                      Message => "Failed to create Temporary_Arc");
                   Booch_Status := New_Item_Status;
@@ -174,7 +174,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
                   when Domain_Is_Not_Bound | Item_Is_In_Set
                     | Exception_Overflow | Exception_Storage_Error
                     | Multiple_Binding =>
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "D5D4FFA4400C4637",
                         Message => "Failed to Visit The_Destination");
                      Continue     := False;
@@ -200,7 +200,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
                case Map_Status is
                   when Domain_Is_Not_Bound =>
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "168273D4496FD173",
                         Message =>
                           "Failed to Vertex_Map.Range_Of The_Destination");
@@ -221,7 +221,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
             case Set_Status is
                when Item_Is_In_Set | Exception_Overflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "113055E039189CC5",
                      Message => "Failed to add Arc to Vertex_Heap");
                   Booch_Status := Set_Status;
@@ -238,7 +238,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
                Booch_Status => Set_Status);
             case Set_Status is
                when Item_Is_In_Set | Exception_Overflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "63F395FA5664C067",
                      Message => "Failed to add Arc To_The_Graph");
                   Booch_Status := Set_Status;
@@ -268,7 +268,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
             case New_Item_Status is
                when No_Storage_Available =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "F47E1C978103042E",
                      Message => "Not enough storage to add Vertex");
                   Booch_Status := New_Item_Status;
@@ -293,7 +293,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
             case Bind_Status is
                when Exception_Overflow | Multiple_Binding =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "D4529FA9EEFD388E",
                      Message => "Failed to Bind The_Vertex");
                   Booch_Status := Bind_Status;
@@ -311,7 +311,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
             case Add_Status is
                when Item_Is_In_Set | Exception_Overflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "B3AA5CA049C5F8A1",
                      Message => "Failed to Add Vertex To_The_Graph");
                   Booch_Status := Add_Status;
@@ -332,7 +332,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
                case Status_Duplicate is
                   when Domain_Is_Not_Bound | Item_Is_In_Set
                     | Exception_Overflow | Exception_Storage_Error =>
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "4C02FB94920AD302",
                         Message =>
                           "Error whilst processing Duplicate over The_ARC");
@@ -360,7 +360,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    exception
 
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "0E5B139E3428329D",
             Message => "Error whilst processing Duplicate over The_ARC");
          Booch_Status := Exception_Storage_Error;
@@ -413,7 +413,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
       case New_Item_Status is
          when No_Storage_Available =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "E624E1876CCC1A29",
                Message => "No_Storage_Available: to Add The_Vertex");
             Booch_Status := New_Item_Status;
@@ -431,7 +431,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
       case Add_Status is
          when Item_Is_In_Set | Exception_Overflow =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "C8914B1BE42BDA0A",
                Message => "Unable to Add The_Vertex");
             Booch_Status := Add_Status;
@@ -445,7 +445,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "966190A2E2444B6C",
             Message => "Storage_Error: Failed to Add The_Vertex");
          Booch_Status := Exception_Storage_Error;
@@ -480,7 +480,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
          case Remove_Status is
             when Item_Is_Not_In_Set =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "3E33758AC76CAD8A",
                   Message => "Failed to remove The_Arc");
                Continue     := False;
@@ -503,7 +503,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    begin
       if Vertex_Heap (The_Vertex.The_Head).Reference_Count /= 0 then
          Booch_Status := Vertex_Has_References;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "2E7CE31F3C9EC16F",
             Message => "Vertex_Has_References: Remove failed");
          return;
@@ -511,7 +511,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
           (The_Vertex, From_The_Graph.The_Vertices)
       then
          Booch_Status := Vertex_Is_Not_In_Graph;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "30923A85E1882575",
             Message => "Vertex_Is_Not_In_Graph: Remove failed");
          return;
@@ -528,7 +528,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
          case Remove_Status is
             when Item_Is_Not_In_Set =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "13BE9B90595FD6E5",
                   Message => "Failed to Remove The_Vertex");
                Booch_Status := Remove_Status;
@@ -545,7 +545,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "A77E20F670A35991",
             Message => "Constraint_Error: Failed to Remove The_Vertex");
          Booch_Status := Vertex_Is_Null;
@@ -565,7 +565,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    exception
       when Constraint_Error =>
          Booch_Status := Vertex_Is_Null;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "E06B9318BDA2DEC4",
             Message => "Vertex_Is_Null: Set_Item failed");
          return;
@@ -586,7 +586,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
       if (From_The_Vertex = Null_Vertex) or else (To_The_Vertex = Null_Vertex)
       then
          Booch_Status := Vertex_Is_Null;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "F6D09C7CB7B57B61",
             Message => "Vertex_Is_Null: Create failed");
          return;
@@ -596,7 +596,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
            (To_The_Vertex, In_The_Graph.The_Vertices))
       then
          Booch_Status := Vertex_Is_Not_In_Graph;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "1A396D7A6D48188E",
             Message => "Vertex_Is_Not_In_Graph: Create failed");
          return;
@@ -608,7 +608,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
          case New_Item_Status is
             when No_Storage_Available =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "C71396981E922060",
                   Message => "Failed to Create The_Arc in The_Graph");
                Booch_Status := New_Item_Status;
@@ -628,7 +628,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
          case Add_Status is
             when Item_Is_In_Set | Exception_Overflow =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "FB02B331B381F524",
                   Message => "Failed to Create The_Arc in The_Graph");
                Booch_Status := Add_Status;
@@ -645,7 +645,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
          case Add_Status is
             when Item_Is_In_Set | Exception_Overflow =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "8C501B93233413D0",
                   Message => "Failed to Create The_Arc in The_Graph");
                Booch_Status := Add_Status;
@@ -665,7 +665,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "1B45FB165F040EEB",
             Message => "Constraint_Error: Failed to Create The_Arc");
          Booch_Status := Exception_Storage_Error;
@@ -681,14 +681,14 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    begin
       if The_Arc = Null_Arc then
          Booch_Status := Arc_Is_Null;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID => "B16E6EDA52A488B4",
 
             Message => "Arc_Is_Null: Destroy failed");
          return;
       elsif not Arc_Set.Is_A_Member (The_Arc, In_The_Graph.The_Arcs) then
          Booch_Status := Arc_Is_Not_In_Graph;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B59D2D9BA0834DEC",
             Message => "Arc_Is_Not_In_Graph: Destroy failed");
          return;
@@ -703,7 +703,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
          case Remove_Status is
             when Item_Is_Not_In_Set =>
                Booch_Status := Remove_Status;
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "86AD031E3D413599",
                   Message => "Item_Is_Not_In_Set: Destroy failed");
                return;
@@ -729,7 +729,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
             Booch_Status => Remove_Status);
          case Remove_Status is
             when Item_Is_Not_In_Set =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "53ECC7DA9C4BECDB",
                   Message => "Failed to Remove The_Arc from The_Graph");
                Booch_Status := Remove_Status;
@@ -757,7 +757,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "E28BB51C0E077FE1",
             Message => "Arc_Is_Null: Set_Attribute failed");
          Booch_Status := Arc_Is_Null;
@@ -778,7 +778,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "1F17E58486153BA7",
             Message =>
               "Constraint_Error: Number_Of_Arcs_From failed due to" &
@@ -839,7 +839,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "28F166ADC9C9C05B",
             Message => "Constraint_Error: Item_Of failed due to null vertex");
          Booch_Status := Vertex_Is_Null;
@@ -858,7 +858,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "558A6844277E4346",
             Message => "Constraint_Error: Item_Of failed due to null arc");
          Booch_Status := Arc_Is_Null;
@@ -876,7 +876,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "558A6844277E4346",
             Message => "Constraint_Error: Source_Of failed due to null arc");
          Booch_Status := Arc_Is_Null;
@@ -895,7 +895,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "8C00B2193DCF94F8",
             Message =>
               "Constraint_Error: Destination_Of failed due to null arc");
@@ -945,7 +945,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "0EECBFDA50F02DA1",
             Message =>
               "Constraint_Error: Reiterate failed due to null vertex");

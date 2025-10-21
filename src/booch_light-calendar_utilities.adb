@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 with Booch_Light.Fixed_Point_Utilities;
 with Booch_Light.Integer_Utilities;
 with Booch_Light.String_Utilities;
@@ -209,7 +209,7 @@ package body Booch_Light.Calendar_Utilities is
 
       Result       := No_Time;
       Booch_Status := Lexical_Error;
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "C7F9DDA704DD1668",
          Message => "Lexical_Error: Time_Of failed");
       return;
@@ -371,7 +371,7 @@ package body Booch_Light.Calendar_Utilities is
 
             case Tmp_Status is
                when Lexical_Error =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "189E09AD2B32D108",
                      Message => "Lexical_Error: Value_Of Time failed");
                   Booch_Status := Tmp_Status;
@@ -391,7 +391,7 @@ package body Booch_Light.Calendar_Utilities is
 
             case Tmp_Status is
                when Lexical_Error =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "6DDF508FB5D9BCB3",
                      Message => "Lexical_Error: Value_Of Time failed");
                   Booch_Status := Tmp_Status;
@@ -414,7 +414,7 @@ package body Booch_Light.Calendar_Utilities is
 
             case Tmp_Status is
                when Lexical_Error =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "9C686C45B94FD310",
                      Message => "Lexical_Error: Value_Of Time failed");
                   Booch_Status := Tmp_Status;
@@ -437,7 +437,7 @@ package body Booch_Light.Calendar_Utilities is
 
             case Tmp_Status is
                when Lexical_Error =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "D8AD6D7432A297D9",
                      Message => "Lexical_Error: Value_Of Time failed");
                   Booch_Status := Tmp_Status;
@@ -458,7 +458,7 @@ package body Booch_Light.Calendar_Utilities is
             case Tmp_Status is
                when Lexical_Error =>
 
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "BC7F114563C9C5E3",
                      Message => "Lexical_Error: Value_Of Time failed");
                   Booch_Status := Tmp_Status;
@@ -482,7 +482,7 @@ package body Booch_Light.Calendar_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "45AAE0C7916E96C9",
                Message => "Lexical_Error: Value_Of Time failed");
             Booch_Status := Tmp_Status;
@@ -505,7 +505,7 @@ package body Booch_Light.Calendar_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "5F5050A07B115913",
                Message => "Lexical_Error: Value_Of Time failed");
             Booch_Status := Tmp_Status;
@@ -527,7 +527,7 @@ package body Booch_Light.Calendar_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "5FEAD5065E3E21B5",
                Message => "Lexical_Error: Value_Of Time failed");
             Booch_Status := Tmp_Status;
@@ -552,7 +552,7 @@ package body Booch_Light.Calendar_Utilities is
 
             case Tmp_Status is
                when Lexical_Error =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "E62C74B71D0761E5",
                      Message => "Lexical_Error: Value_Of Time failed");
                   Booch_Status := Tmp_Status;
@@ -579,7 +579,7 @@ package body Booch_Light.Calendar_Utilities is
 
             case Tmp_Status is
                when Lexical_Error =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "DA2978378BC22E9D",
                      Message => "Lexical_Error: Value_Of Time failed");
                   Booch_Status := Tmp_Status;
@@ -596,7 +596,7 @@ package body Booch_Light.Calendar_Utilities is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B62F6874C6736DD6",
             Message => "Lexical_Error: Value_Of Time failed");
          Booch_Status := Lexical_Error;
@@ -689,7 +689,7 @@ package body Booch_Light.Calendar_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "6D2FDFAB1C3BE263",
                Message => "Lexical_Error: Value_Of Interval failed");
             Booch_Status := Tmp_Status;
@@ -712,7 +712,7 @@ package body Booch_Light.Calendar_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "24F1847BAFC2D78C",
                Message => "Lexical_Error: Value_Of Interval failed");
             Booch_Status := Tmp_Status;
@@ -735,7 +735,7 @@ package body Booch_Light.Calendar_Utilities is
       case Tmp_Status is
          when Lexical_Error =>
 
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "1399261FFD58D47B",
                Message => "Lexical_Error: Value_Of Interval failed");
             Booch_Status := Tmp_Status;
@@ -757,7 +757,7 @@ package body Booch_Light.Calendar_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "1F5161333F3E9872",
                Message => "Lexical_Error: Value_Of Interval failed");
             Booch_Status := Tmp_Status;
@@ -776,7 +776,7 @@ package body Booch_Light.Calendar_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "2AF2DE8239A853DF",
                Message => "Lexical_Error: Value_Of Interval failed");
             Booch_Status := Tmp_Status;
@@ -791,7 +791,7 @@ package body Booch_Light.Calendar_Utilities is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "E443669A9D5388A6",
             Message => "Lexical_Error: Value_Of Interval failed");
          Booch_Status := Lexical_Error;

@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 with Booch_Light.Storage_Manager_Sequential;
 
 package body Booch_Light.Set_Simple_Sequential_Unbounded_Managed_Iterator is
@@ -71,7 +71,7 @@ package body Booch_Light.Set_Simple_Sequential_Unbounded_Managed_Iterator is
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "0DF12A5FDE5C2E42",
             Message => "Storage_Error: Copy failed");
          return;
@@ -107,7 +107,7 @@ package body Booch_Light.Set_Simple_Sequential_Unbounded_Managed_Iterator is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "41C0B28479E3827A",
             Message => "Storage_Error: Unbounded set is likely full");
          Booch_Status := Exception_Overflow;
@@ -140,7 +140,7 @@ package body Booch_Light.Set_Simple_Sequential_Unbounded_Managed_Iterator is
          end if;
       end loop;
 
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "0F05EAAEC2B42437",
          Message => "Item_Is_Not_In_Set: Remove failed");
       Booch_Status := Item_Is_Not_In_Set;
@@ -190,7 +190,7 @@ package body Booch_Light.Set_Simple_Sequential_Unbounded_Managed_Iterator is
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "BE910133B1CF3D35",
             Message => "Storage_Error: Union of Sets failed");
          return;
@@ -229,7 +229,7 @@ package body Booch_Light.Set_Simple_Sequential_Unbounded_Managed_Iterator is
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "E263024C578E73CE",
             Message => "Storage_Error: Intersection of Sets failed");
          return;
@@ -270,7 +270,7 @@ package body Booch_Light.Set_Simple_Sequential_Unbounded_Managed_Iterator is
    exception
       when Storage_Error =>
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "AAF51CFA75F4F059",
             Message => "Storage_Error: Difference of Sets failed");
          return;

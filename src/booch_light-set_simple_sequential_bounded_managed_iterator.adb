@@ -5,7 +5,7 @@
 --  The book SOFTWARE COMPONENTS WITH Ada Structures, Tools, and_Subsystems,
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
 
@@ -17,7 +17,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    begin
       if From_The_Set.The_Back > To_The_Set.The_Size then
          Booch_Status := Exception_Overflow;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "91D739548184A9BE",
             Message => "Exception_Overflow: Copy failed");
          return;
@@ -45,7 +45,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
 
       for Index in 1 .. To_The_Set.The_Back loop
          if The_Item = To_The_Set.The_Items (Index) then
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "8965B5BC68EB0E0E",
                Message =>
                  "Item_Is_In_Set: Adding to bounded sequential set failed");
@@ -61,7 +61,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "9E624910669B84F7",
             Message => "Constraint_Error: Bounded set is likely full");
          Booch_Status := Exception_Overflow;
@@ -84,7 +84,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
          end if;
       end loop;
 
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "AE45D7381D8BDD9F",
          Message => "Item_Is_Not_In_Set: Remove failed");
       Booch_Status := Item_Is_Not_In_Set;
@@ -125,7 +125,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "C3F0C44D3AE8632D",
             Message => "Constraint_Error: Union of Sets failed");
          Booch_Status := Exception_Overflow;
@@ -162,7 +162,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "FDABB96AB4964564",
             Message => "Constraint_Error: Intersection of Sets failed");
          Booch_Status := Exception_Overflow;
@@ -201,7 +201,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "EC8038191403699A",
             Message => "Constraint_Error: Difference of Sets failed");
          Booch_Status := Exception_Overflow;

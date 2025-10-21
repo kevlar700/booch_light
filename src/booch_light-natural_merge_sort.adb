@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Natural_Merge_Sort is
 
@@ -79,7 +79,7 @@ package body Booch_Light.Natural_Merge_Sort is
             Close (Temporary_File_1);
             Close (Temporary_File_2);
             Booch_Status := File_Is_Empty;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "44EAD0CA81130844",
                Message => "File_Is_Empty: Natural_Merge Sort failed");
             Booch_Status := Position_Error;

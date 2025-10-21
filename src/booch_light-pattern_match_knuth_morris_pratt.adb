@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Pattern_Match_Knuth_Morris_Pratt is
 
@@ -96,14 +96,14 @@ package body Booch_Light.Pattern_Match_Knuth_Morris_Pratt is
       end loop;
 
       Booch_Status := Pattern_Not_Found;
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "AE4CE426DD6CEE8B",
          Message => "Pattern_Not_Found: Location_Of failed");
 
    exception
       when Constraint_Error =>
          Booch_Status := Pattern_Not_Found;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "68711A6F72CCC1E5",
             Message =>
               "Constraint_Error: Pattern_Not_Found: Location_Of failed");

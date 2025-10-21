@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
@@ -89,7 +89,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
          case Booch_Status is
             when Multiple_Binding =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "C0C8154DB53EF80F",
                   Message => "Multiple_Binding: Copy_Child failed");
                Booch_Status_Nested := Multiple_Binding;
@@ -97,7 +97,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
                return;
 
             when Exception_Overflow =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "9F49BC98A31AF4E9",
                   Message => "Exception_Overflow: Copy_Child failed");
                Booch_Status_Nested := Exception_Overflow;
@@ -117,7 +117,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
          case Tmp_Status is
             when Exception_Overflow =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "B098377AEF46F66B",
                   Message => "Exception_Overflow: Copy_Child failed");
                Booch_Status_Nested := Exception_Overflow;
@@ -125,7 +125,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
                return;
 
             when Multiple_Binding =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "386F654B3C939C6E",
                   Message => "Multiple_Binding: Copy_Child failed");
                Booch_Status_Nested := Multiple_Binding;
@@ -159,7 +159,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
             case Tmp_Status is
                when Multiple_Binding =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "159E2A3FB7AA1B09",
                      Message =>
                        "Multiple_Binding: Copy (Copy_Children) failed");
@@ -167,7 +167,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
                   return;
 
                when Exception_Overflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "FA9C07F2A6522EA7",
                      Message =>
                        "Exception_Overflow: Copy (Copy_Children) failed");
@@ -185,7 +185,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "565AC41CBCCC30B8",
             Message => "Storage_Error: Exception_Overflow: Copy failed");
          Booch_Status := Exception_Overflow;
@@ -215,7 +215,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
             Booch_Status                          := OK;
             return;
          else
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "5ADEC896EA953100",
                Message => "Tree_Is_Not_Null: Construct failed");
             Booch_Status := Tree_Is_Not_Null;
@@ -223,7 +223,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
          end if;
 
       elsif On_The_Child > Number_Of_Children then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "3BD71D02EF94B5DB",
             Message => "Child_Error: Construct failed");
          Booch_Status := Child_Error;
@@ -248,14 +248,14 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
             case Map_Status is
                when Exception_Overflow =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "15A8162AC90887DA",
                      Message => "Exception_Overflow: Construct failed");
                   Booch_Status := Map_Status;
                   return;
 
                when Multiple_Binding =>
-                  Alterable_Log.Log
+                  Alogs.Log
                     (Log_ID  => "C42428F2CC404508",
                      Message => "Multiple_Binding: Construct failed");
                   Booch_Status := Map_Status;
@@ -273,7 +273,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
    exception
       when Storage_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "2AC884F5EBCD9830",
             Message => "Storage_Error: Construct failed");
          Booch_Status := Exception_Overflow;
@@ -291,7 +291,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "1DABA23D7E43EC8D",
             Message => "Constraint_Error: Tree_Is_Null: Set_Item failed");
          Booch_Status := Tree_Is_Null;
@@ -318,7 +318,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
       case Status_Range_Of is
          when Domain_Is_Not_Bound =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "AF79F4BE8CEFD1D8",
                Message =>
                  "Domain_Is_Not_Bound: Child_Error Swap_Child failed");
@@ -336,7 +336,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
       case Status_Unbind is
          when Domain_Is_Not_Bound =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "3DB08BD04D764F8A",
                Message =>
                  "Domain_Is_Not_Bound: Child_Error: Swap_Child failed");
@@ -355,14 +355,14 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
       case Status_Bind is
          when Exception_Overflow =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "BE41D2170DA6BBF7",
                Message => "Exception_Overflow: Swap_Child failed");
             Booch_Status := Status_Bind;
             return;
 
          when Multiple_Binding =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "6FE49FAD32040D71",
                Message => "Multiple_Binding: Swap_Child failed");
             Booch_Status := Status_Bind;
@@ -377,7 +377,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "2A963FCB56155963",
             Message => "Constraint_Error: Tree_Is_Null: Swap_Child failed");
          Booch_Status := Tree_Is_Null;
@@ -411,7 +411,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
          case Status_Range_Of is
             when Domain_Is_Not_Bound =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "0481375987C547C9",
                   Message =>
                     "Domain_Is_Not_Bound: Check_Child_Equality failed");
@@ -469,12 +469,12 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
       when Constraint_Error =>
          Result := (Left = Null_Tree) and then (Right = Null_Tree);
          if Result then
-            Alterable_Log.Status_Exception
+            Alogs.Status_Exception
               (Log_ID  => "A38D0E21B8FA5DE0",
                Message => "Constraint_Error: Both were null and so Is_Equal");
             Booch_Status := OK;
          else
-            Alterable_Log.Status_Exception
+            Alogs.Status_Exception
               (Log_ID  => "6AD4740FA59B7900",
                Message => "Constraint_Error: Is_Equal failed");
             Booch_Status := Exception_Constraint_Error;
@@ -502,7 +502,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "0FA3C3FB26D6284B",
             Message => "Constraint_Error: Tree_Is_Null: Item_Of failed");
          Booch_Status := Tree_Is_Null;
@@ -521,7 +521,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "DD2C9BC408E1CC9D",
             Message =>
               "Constraint_Error: Tree_Is_Null: Number_Of_Children_In failed");
@@ -547,7 +547,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
       case Status_Range_Of is
          when Domain_Is_Not_Bound =>
             Booch_Status := Child_Error;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "E4E0BB86B5BEE838",
                Message => "Child_Error: Domain_Is_Not_Bound: Child_Of failed");
 
@@ -557,7 +557,7 @@ package body Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "6864A4ECFC5BEF51",
             Message => "Constraint_Error: Tree_Is_Null: Child_Of failed");
          Booch_Status := Tree_Is_Null;

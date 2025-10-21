@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.List_Search is
 
@@ -31,7 +31,7 @@ package body Booch_Light.List_Search is
          end if;
       end loop;
 
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "4EFBD2076988B23D",
          Message => "Item_Not_Found: Position_Of failed");
       Booch_Status := Item_Not_Found;
@@ -54,7 +54,7 @@ package body Booch_Light.List_Search is
          for Count in 2 .. The_Position loop
             Index := Tail_Of (Index);
             if Is_Null (Index) then
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "01984CA10949A0C5",
                   Message => "Position_Error: Location_Of failed");
                Booch_Status := Position_Error;
@@ -86,7 +86,7 @@ package body Booch_Light.List_Search is
          end if;
       end loop;
 
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "76AA1ED3B13735F4",
          Message => "Item_Not_Found: Location_Of failed");
       Booch_Status := Item_Not_Found;

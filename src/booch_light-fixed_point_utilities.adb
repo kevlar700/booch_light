@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 with Booch_Light.Character_Utilities;
 with Booch_Light.Integer_Utilities;
 with Booch_Light.String_Utilities;
@@ -219,7 +219,7 @@ package body Booch_Light.Fixed_Point_Utilities is
 
       case Tmp_Status is
          when Lexical_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "B00CB334B3C02ECC",
                Message => "Lexical_Error: Fixed point Value_Of failed");
             Booch_Status := Tmp_Status;
@@ -232,7 +232,7 @@ package body Booch_Light.Fixed_Point_Utilities is
       end case;
 
       if Result > Number (With_The_Base) then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "59EF5270194ABE46",
             Message => "Lexical_Error: Result larger than With_The_Base");
          Booch_Status := Lexical_Error;
@@ -259,7 +259,7 @@ package body Booch_Light.Fixed_Point_Utilities is
       Result := 0.0;
 
       if Radix_Point = 0 then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "E37B57B38F7F46D7",
             Message => "Lexical_Error: Radix_Point was 0");
          Booch_Status := Lexical_Error;
@@ -268,7 +268,7 @@ package body Booch_Light.Fixed_Point_Utilities is
       else
          The_Power := Radix_Point - The_Image'Length;
          if The_Power = 0 then
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID => "29AECF0EF19E1EFB",
 
                Message => "Lexical_Error: The_Power was 0");
@@ -287,7 +287,7 @@ package body Booch_Light.Fixed_Point_Utilities is
 
                case Predicated_Status is
                   when Lexical_Error =>
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "65DF24B5CE1F3A9F",
                         Message =>
                           "Lexical_Error: Fixed point Value_Of failed");
@@ -317,7 +317,7 @@ package body Booch_Light.Fixed_Point_Utilities is
 
                case Predicated_Status is
                   when Lexical_Error =>
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "AD284DE7057244D0",
                         Message =>
                           "Lexical_Error: Fixed point Value_Of failed");
@@ -353,7 +353,7 @@ package body Booch_Light.Fixed_Point_Utilities is
 
                case Predicated_Status is
                   when Lexical_Error =>
-                     Alterable_Log.Log
+                     Alogs.Log
                        (Log_ID  => "BC4814296AEED708",
                         Message =>
                           "Lexical_Error: Fixed point Value_Of failed");

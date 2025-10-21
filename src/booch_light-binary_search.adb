@@ -5,7 +5,7 @@
 --  The book SOFTWARE COMPONENTS WITH Ada Structures, Tools, and_Subsystems,
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Binary_Search is
 
@@ -35,7 +35,7 @@ package body Booch_Light.Binary_Search is
 
       The_Location := Index'Last;
       Booch_Status := Item_Not_Found;
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "C4215680AF21A1F7",
          Message => "Item_Not_Found: Binary search failed");
 

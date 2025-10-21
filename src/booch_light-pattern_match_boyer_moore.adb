@@ -7,7 +7,7 @@
 --  of this software.
 
 with Booch_Light.Integer_Utilities;
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Pattern_Match_Boyer_Moore is
 
@@ -112,14 +112,14 @@ package body Booch_Light.Pattern_Match_Boyer_Moore is
       end loop;
 
       Booch_Status := Pattern_Not_Found;
-      Alterable_Log.Log
+      Alogs.Log
         (Log_ID  => "5701D42C73911EC3",
          Message => "Pattern_Not_Found: Location_Of failed");
 
    exception
       when Constraint_Error =>
          Booch_Status := Pattern_Not_Found;
-         Alterable_Log.Status_Exception
+         Alogs.Status_Exception
            (Log_ID  => "E7F195A75987EDBA",
             Message =>
               "Constraint_Error: Pattern_Not_Found: Location_Of failed");

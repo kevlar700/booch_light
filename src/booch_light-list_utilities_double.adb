@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.List_Utilities_Double is
 
@@ -19,7 +19,7 @@ package body Booch_Light.List_Utilities_Double is
       Index : List;
    begin
       if Is_Null (In_The_List) then
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "A8B761B9B3D1D6E7",
             Message => "Position_Error: Location_Of failed");
          Booch_Status := Position_Error;
@@ -29,7 +29,7 @@ package body Booch_Light.List_Utilities_Double is
          for Count in 2 .. The_Position loop
             Index := Tail_Of (Index);
             if Is_Null (Index) then
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "6F9BE8581B0D545B",
                   Message => "Position_Error: Location_Of failed");
                Booch_Status := Position_Error;
@@ -81,7 +81,7 @@ package body Booch_Light.List_Utilities_Double is
       case Tmp_Status is
          when Position_Error =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "95A6F63524D138A8",
                Message => "Split: Position_Error failed");
             return;
@@ -97,7 +97,7 @@ package body Booch_Light.List_Utilities_Double is
 
    exception
       when Constraint_Error =>
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "56093C72FA8756F1",
             Message => "Position_Error: Split failed");
          Booch_Status := Position_Error;
@@ -123,7 +123,7 @@ package body Booch_Light.List_Utilities_Double is
       case Tmp_Status is
          when Position_Error =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "4C04C5CCA2420981",
                Message => "Position_Error: Insert failed");
             return;
@@ -165,7 +165,7 @@ package body Booch_Light.List_Utilities_Double is
       case Tmp_Status is
          when Position_Error =>
             Booch_Status := Tmp_Status;
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "63908F19C8D78BCF",
                Message => "Position_Error: Insert failed");
             return;
@@ -228,7 +228,7 @@ package body Booch_Light.List_Utilities_Double is
 
       case Tmp_Status is
          when Position_Error =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "CE6306BA55E42883",
                Message => "Position_Error: Remove_Item failed");
             Booch_Status := Tmp_Status;

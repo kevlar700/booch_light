@@ -1,32 +1,29 @@
---  This package simply facilitates a wrapper that may be used to add e.g.
---  networking or any log transformation that you desire, easily.
-
---           Original Booch Components (Ada 83 version)
---  Copyright (C) 1987 Grady Booch, provided WITHOUT ANY WARRANTY. Further
---  license details should appear at the end of this file.
---
---  The book SOFTWARE COMPONENTS WITH Ada Structures, Tools, and_Subsystems,
---  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
---  of this software.
-
-with Elogs;
-
-package Booch_Light.Alterable_Log is
+package body Booch_Light.Alogs is
 
    procedure Log
      (Log_ID  : in Elogs.Log_ID_Type;
-      Message : in String);
+      Message : in String)
+   is
+   begin
+      Elogs.Log
+        (Log_ID  => Log_ID,
+         Message => Message);
+   end Log;
 
    procedure Status_Exception
      (Log_ID  : in Elogs.Log_ID_Type;
-      Message : in String);
+      Message : in String)
+   is
+   begin
+      Elogs.Status_Exception
+        (Log_ID  => Log_ID,
+         Message => Message);
+   end Status_Exception;
 
-end Booch_Light.Alterable_Log;
+end Booch_Light.Alogs;
 
---              Original Booch Components (Ada 83 version)
 --  License: MIT
---  Copyright (C) 1987 Grady Booch Copyright (C) 2024 Kevin Chadwick (Light
---  runtime compatibility)
+--  Copyright (C) 2024 Kevin Chadwick (Elansys Limited)
 --
 --  Permission is hereby granted, free of charge, to any person obtaining
 --  a copy of this software and associated documentation files (the

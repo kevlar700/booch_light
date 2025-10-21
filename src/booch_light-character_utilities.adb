@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Character_Utilities is
 
@@ -136,16 +136,15 @@ package body Booch_Light.Character_Utilities is
       Result        :    out Digit;
       Booch_Status  :    out Locus.Value_Of)
    is
-      Invalid_Value : constant Integer := Digit'Last + 1;
    begin
       if The_Character in Digit_Character then
          Result := (Character'Pos (The_Character) - Character'Pos ('0'));
       elsif The_Character in 'A' .. 'F' then
          Result := (Character'Pos (The_Character) - Character'Pos ('A') + 10);
       else
-         Result       := Invalid_Value;
+         Result       := Digit'First;
          Booch_Status := Lexical_Error;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "B092967AD2885D4E",
             Message => "Lexical_Error: Value_Of failed");
          return;
@@ -180,7 +179,7 @@ package body Booch_Light.Character_Utilities is
       else
          Result       := Letter'Last;
          Booch_Status := Lexical_Error;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "7ADD317BA5D91AEA",
             Message => "Lexical_Error: Index_Of failed");
       end if;

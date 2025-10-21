@@ -6,7 +6,7 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Alterable_Log;
+with Booch_Light.Alogs;
 
 package body Booch_Light.Tree_Utilities_Arbitrary_Double is
 
@@ -53,7 +53,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    begin
       if Is_Root (The_Tree) then
          Booch_Status := Tree_Is_Root;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "20D5A00297F03441",
             Message => "Tree_Is_Root: Child_Name_Of failed");
          Result := Positive'Last;
@@ -79,7 +79,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    begin
       if Is_Root (The_Tree) then
          Booch_Status := Tree_Is_Root;
-         Alterable_Log.Log
+         Alogs.Log
            (Log_ID  => "99F89694B6FF0A72",
             Message => "Tree_Is_Root: Number_Of_Siblings_Of failed");
          Result := Natural'Last;
@@ -101,7 +101,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
       Child_Name_Of (The_Tree, Child_Name_Of_Result, Booch_Status);
       case Booch_Status is
          when Tree_Is_Root =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "0E04612F6E18474A",
                Message => "Tree_Is_Root: Left_Sibling_Of failed");
             return;
@@ -119,7 +119,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
          Child_Name_Of (The_Tree, Child_Name_Of_Result, Booch_Status);
          case Booch_Status is
             when Tree_Is_Root =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "E5A5651E53B6FCF4",
                   Message => "Tree_Is_Root: Left_Sibling_Of failed");
                return;
@@ -147,7 +147,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
       Child_Name_Of (The_Tree, Child_Name_Of_Result, Booch_Status);
       case Booch_Status is
          when Tree_Is_Root =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "4AE68586D9511BDD",
                Message => "Tree_Is_Root: Right_Sibling_Of failed");
             return;
@@ -165,7 +165,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
          Child_Name_Of (The_Tree, Child_Name_Of_Result, Booch_Status);
          case Booch_Status is
             when Tree_Is_Root =>
-               Alterable_Log.Log
+               Alogs.Log
                  (Log_ID  => "7B3565AE9E202755",
                   Message => "Tree_Is_Root: Right_Sibling_Of failed");
                return;
@@ -193,7 +193,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
       Child_Name_Of (The_Tree, Child_Name_Of_Result, Booch_Status);
       case Booch_Status is
          when Tree_Is_Root =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "D736B59058BA7777",
                Message => "Tree_Is_Root: Leftmost_Sibling_Of failed");
             return;
@@ -223,7 +223,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
       Child_Name_Of (The_Tree, Child_Name_Of_Result, Booch_Status);
       case Booch_Status is
          when Tree_Is_Root =>
-            Alterable_Log.Log
+            Alogs.Log
               (Log_ID  => "80E15AF8BF8F4E02",
                Message => "Tree_Is_Root: Rightmost_Sibling_Of failed");
             return;
