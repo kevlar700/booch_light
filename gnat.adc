@@ -1,23 +1,24 @@
---pragma SPARK_Mode (On);
+--  pragma SPARK_Mode (On);
 pragma Restrictions (No_Wide_Characters);
 pragma Restrictions (No_Unchecked_Deallocation);
 pragma Restrictions (No_Unchecked_Access);
+--  pragma Restrictions (No_Recursion);
 pragma Restrictions (No_Implicit_Dynamic_code);
 pragma Restrictions (No_Entry_Calls_In_Elaboration_Code);
 pragma Restrictions (No_Dynamic_Attachment);
-pragma Restrictions (No_Dispatch);
---pragma Restrictions (No_Delay);
+--  pragma Restrictions (No_Secondary_Stack);
+--  pragma Restrictions (No_Delay);
 pragma Restrictions (No_Dynamic_Accessibility_Checks);
 pragma Check_Float_Overflow;
 
--- Inherited ZFP restrictions
+--  Inherited ZFP restrictions
 pragma Restrictions (No_Exception_Propagation);
 pragma Restrictions (No_Exception_Registration);
 pragma Restrictions (No_Implicit_Dynamic_code);
 pragma Restrictions (No_Finalization);
 pragma Restrictions (No_Tasking);
--- pragma Discard_Names
--- end ZFP
+--  pragma Discard_Names
+--  end ZFP
 
 pragma Assertion_Policy (Pre               => Ignore,
                          Pre'Class         => Ignore,
@@ -27,4 +28,3 @@ pragma Assertion_Policy (Pre               => Ignore,
                          Ghost             => Ignore,
                          Static_Predicate  => Check,
                          Dynamic_Predicate => Check);
-pragma Check_Float_Overflow;

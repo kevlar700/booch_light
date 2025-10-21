@@ -5,7 +5,7 @@ project Booch_Light is
    for Library_Version use Project'Library_Name & ".so." & Booch_Light_Config.Crate_Version;
 
    for Languages use ("Ada");
-   for Source_Dirs use ("src/", "config/");
+   for Source_Dirs use ("src/", "config/", "src/alterable_logs/");
    for Object_Dir use "obj/" & Booch_Light_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";
@@ -21,12 +21,23 @@ project Booch_Light is
       --  Whether They Are Modified. Usually The Compiler ends up being Correct
       --  But in This case I Am Skeptical As the procedure Split seems like it
       --  Must Modify Both in out Parameters?
-      for Default_Switches ("Ada") use Booch_Light_Config.Ada_Compiler_Switches & ("-gnat2022", "-gnaty-Ix", "-gnaty+ABdOSu", "-gnatwa.b.f.kl.o.st.wfy.ac.X.c_cgi.r.qq.ppo.mmv.vwxz.z.tkJ");
+      for Default_Switches ("Ada") use Booch_Light_Config.Ada_Compiler_Switches
+                  & ("-gnat2022");
+      --  & ("-gnaty-Ix", "-gnaty+ABdOSu", "-gnatwa.b.f.l.o.st.wfy.ac.X.c_cgi.r.qq.ppo.mmv.vwxz.z.tkJ");
       for Local_Configuration_Pragmas use "gnat.adc";
    end Compiler;
 
    package Pretty_Printer is
-      for Default_Switches ("ada") use ("--call-threshold=1", "--par-threshold=1", "--vertical-enum-types", "--vertical-named-aggregates", "-W8", "-c5", "-c4");
+      for Default_Switches ("ada") use ("--eol=unix",
+                                        "--call-threshold=1",
+                                        "--par-threshold=1",
+                                        "--vertical-enum-types",
+                                        "--vertical-named-aggregates",
+                                        "-W8",
+                                        "-c5",
+                                        "-c4",
+                                        "--separate-loop-then",
+                                        "--separate-then");
    end Pretty_Printer;
 
    package Binder is
