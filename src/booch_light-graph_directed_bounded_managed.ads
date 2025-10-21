@@ -14,23 +14,6 @@ generic
    Number_Of_Arcs : in Positive;
 package Booch_Light.Graph_Directed_Bounded_Managed is
 
-   --  type Code is
-   --    (OK,
-   --     Vertex_Is_Null,
-   --     Vertex_Is_Not_In_Graph,
-   --     Vertex_Has_References,
-   --     Arc_Is_Null,
-   --     Arc_Is_Not_In_Graph,
-   --     --  XXX remove from_Set etc.?
-   --     Item_Is_In_Set_From_Set,
-   --     Item_Is_Not_In_Set_From_Set,
-   --     Exception_Overflow_From_Set,
-   --     Exception_Storage_Error_From_Set,
-   --     Exception_Overflow_From_Map,
-   --     Domain_Is_Not_Bound_From_Map,
-   --     Multiple_Binding_From_Map,
-   --     Exception_Overflow,
-   --     Exception_Storage_Error);
    package Locus is
 
       subtype New_Item is Status_Code with
