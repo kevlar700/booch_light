@@ -11,12 +11,13 @@ with Booch_Light.Alogs;
 package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
 
    procedure Copy
-     (From_The_Stack : in     Stack;
+     (From_The_Stack :        Stack;
       To_The_Stack   : in out Stack;
       Booch_Status   :    out Locus.Copy)
    is
    begin
-      if From_The_Stack.The_Top > To_The_Stack.The_Size then
+      if From_The_Stack.The_Top > To_The_Stack.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID => "C6368FE9EC9FBE11",
 
@@ -36,7 +37,7 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    end Clear;
 
    procedure Push
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       On_The_Stack : in out Stack;
       Booch_Status :    out Locus.Push)
    is
@@ -70,16 +71,18 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    end Pop;
 
    function Is_Equal
-     (Left  : in Stack;
-      Right : in Stack)
+     (Left  : Stack;
+      Right : Stack)
       return Boolean
    is
    begin
-      if Left.The_Top /= Right.The_Top then
+      if Left.The_Top /= Right.The_Top
+      then
          return False;
       else
          for Index in 1 .. Left.The_Top loop
-            if Left.The_Items (Index) /= Right.The_Items (Index) then
+            if Left.The_Items (Index) /= Right.The_Items (Index)
+            then
                return False;
             end if;
          end loop;
@@ -88,7 +91,7 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    end Is_Equal;
 
    function Depth_Of
-     (The_Stack : in Stack)
+     (The_Stack : Stack)
       return Natural
    is
    begin
@@ -96,7 +99,7 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    end Depth_Of;
 
    function Is_Empty
-     (The_Stack : in Stack)
+     (The_Stack : Stack)
       return Boolean
    is
    begin
@@ -104,9 +107,9 @@ package body Booch_Light.Stack_Sequential_Bounded_Managed_Noniterator is
    end Is_Empty;
 
    procedure Top_Of
-     (The_Stack    : in     Stack;
-      The_Top      :    out Item;
-      Booch_Status :    out Locus.Top_Of)
+     (The_Stack    :     Stack;
+      The_Top      : out Item;
+      Booch_Status : out Locus.Top_Of)
    is
    begin
       The_Top := The_Stack.The_Items (The_Stack.The_Top);

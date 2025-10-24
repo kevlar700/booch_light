@@ -11,19 +11,21 @@ with Booch_Light.Alogs;
 package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
 
    procedure Copy
-     (From_The_Ring : in     Ring;
+     (From_The_Ring :        Ring;
       To_The_Ring   : in out Ring;
       Booch_Status  :    out Locus.Copy)
    is
    begin
-      if From_The_Ring.The_Back > To_The_Ring.The_Size then
+      if From_The_Ring.The_Back > To_The_Ring.The_Size
+      then
          Alogs.Log
            (Log_ID  => "E0226DEA590B15A0",
             Message => "Exception_Overflow: Copy failed");
          Booch_Status := Exception_Overflow;
          return;
 
-      elsif From_The_Ring.The_Back = 0 then
+      elsif From_The_Ring.The_Back = 0
+      then
          To_The_Ring.The_Top  := 0;
          To_The_Ring.The_Back := 0;
          To_The_Ring.The_Mark := 0;
@@ -46,18 +48,20 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
    end Clear;
 
    procedure Insert
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       In_The_Ring  : in out Ring;
       Booch_Status :    out Locus.Insert)
    is
    begin
-      if In_The_Ring.The_Back = In_The_Ring.The_Size then
+      if In_The_Ring.The_Back = In_The_Ring.The_Size
+      then
          Alogs.Log
            (Log_ID  => "3A6FE56A5F9E48A8",
             Message => "Exception_Overflow: Insert failed due to full ring");
          Booch_Status := Exception_Overflow;
          return;
-      elsif In_The_Ring.The_Back = 0 then
+      elsif In_The_Ring.The_Back = 0
+      then
          In_The_Ring.The_Top       := 1;
          In_The_Ring.The_Back      := 1;
          In_The_Ring.The_Mark      := 1;
@@ -68,7 +72,8 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
            In_The_Ring.The_Items (In_The_Ring.The_Top .. In_The_Ring.The_Back);
          In_The_Ring.The_Items (In_The_Ring.The_Top) := The_Item;
          In_The_Ring.The_Back := In_The_Ring.The_Back + 1;
-         if In_The_Ring.The_Mark >= In_The_Ring.The_Top then
+         if In_The_Ring.The_Mark >= In_The_Ring.The_Top
+         then
             In_The_Ring.The_Mark := In_The_Ring.The_Mark + 1;
          end if;
       end if;
@@ -81,14 +86,16 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
       Booch_Status :    out Locus.Pop)
    is
    begin
-      if The_Ring.The_Back = 0 then
+      if The_Ring.The_Back = 0
+      then
          Alogs.Log
            (Log_ID  => "C7B73016257FF434",
             Message => "Exception_Underflow: Pop failed");
          Booch_Status := Exception_Underflow;
          return;
 
-      elsif The_Ring.The_Back = 1 then
+      elsif The_Ring.The_Back = 1
+      then
          The_Ring.The_Top  := 0;
          The_Ring.The_Back := 0;
          The_Ring.The_Mark := 0;
@@ -96,13 +103,16 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
          The_Ring.The_Items (The_Ring.The_Top .. (The_Ring.The_Back - 1)) :=
            The_Ring.The_Items ((The_Ring.The_Top + 1) .. The_Ring.The_Back);
          The_Ring.The_Back := The_Ring.The_Back - 1;
-         if The_Ring.The_Top > The_Ring.The_Back then
-            if The_Ring.The_Top = The_Ring.The_Mark then
+         if The_Ring.The_Top > The_Ring.The_Back
+         then
+            if The_Ring.The_Top = The_Ring.The_Mark
+            then
                The_Ring.The_Mark := 1;
             end if;
             The_Ring.The_Top := 1;
          else
-            if The_Ring.The_Mark > The_Ring.The_Top then
+            if The_Ring.The_Mark > The_Ring.The_Top
+            then
                The_Ring.The_Mark := The_Ring.The_Mark - 1;
             end if;
          end if;
@@ -113,25 +123,29 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
 
    procedure Rotate
      (The_Ring         : in out Ring;
-      In_The_Direction : in     Direction;
+      In_The_Direction :        Direction;
       Booch_Status     :    out Locus.Rotate)
    is
    begin
-      if The_Ring.The_Back = 0 then
+      if The_Ring.The_Back = 0
+      then
          Alogs.Log
            (Log_ID  => "B99958D1C2DE80DD",
             Message => "Rotate_Error: Rotate failed as the ring is empty");
          Booch_Status := Rotate_Error;
          return;
 
-      elsif In_The_Direction = Forward then
+      elsif In_The_Direction = Forward
+      then
          The_Ring.The_Top := The_Ring.The_Top + 1;
-         if The_Ring.The_Top > The_Ring.The_Back then
+         if The_Ring.The_Top > The_Ring.The_Back
+         then
             The_Ring.The_Top := 1;
          end if;
       else
          The_Ring.The_Top := The_Ring.The_Top - 1;
-         if The_Ring.The_Top = 0 then
+         if The_Ring.The_Top = 0
+         then
             The_Ring.The_Top := The_Ring.The_Back;
          end if;
       end if;
@@ -150,16 +164,18 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
    end Rotate_To_Mark;
 
    function Is_Equal
-     (Left  : in Ring;
-      Right : in Ring)
+     (Left  : Ring;
+      Right : Ring)
       return Boolean
    is
       Left_Index  : Natural := Left.The_Top;
       Right_Index : Natural := Right.The_Top;
    begin
-      if Left.The_Back /= Right.The_Back then
+      if Left.The_Back /= Right.The_Back
+      then
          return False;
-      elsif Left.The_Items (Left_Index) /= Right.The_Items (Right_Index) then
+      elsif Left.The_Items (Left_Index) /= Right.The_Items (Right_Index)
+      then
          return False;
       elsif (Left.The_Mark = Left_Index)
         and then (Right.The_Mark /= Right_Index)
@@ -167,11 +183,13 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
          return False;
       else
          Left_Index := Left_Index + 1;
-         if Left_Index > Left.The_Back then
+         if Left_Index > Left.The_Back
+         then
             Left_Index := 1;
          end if;
          Right_Index := Right_Index + 1;
-         if Right_Index > Right.The_Back then
+         if Right_Index > Right.The_Back
+         then
             Right_Index := 1;
          end if;
          while Left_Index /= Left.The_Top loop
@@ -184,11 +202,13 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
                return False;
             else
                Left_Index := Left_Index + 1;
-               if Left_Index > Left.The_Back then
+               if Left_Index > Left.The_Back
+               then
                   Left_Index := 1;
                end if;
                Right_Index := Right_Index + 1;
-               if Right_Index > Right.The_Back then
+               if Right_Index > Right.The_Back
+               then
                   Right_Index := 1;
                end if;
             end if;
@@ -201,7 +221,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
    end Is_Equal;
 
    function Extent_Of
-     (The_Ring : in Ring)
+     (The_Ring : Ring)
       return Natural
    is
    begin
@@ -209,7 +229,7 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
    end Extent_Of;
 
    function Is_Empty
-     (The_Ring : in Ring)
+     (The_Ring : Ring)
       return Boolean
    is
    begin
@@ -217,9 +237,9 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
    end Is_Empty;
 
    procedure Top_Of
-     (The_Ring     : in     Ring;
-      Result       :    out Item;
-      Booch_Status :    out Locus.Top_Of)
+     (The_Ring     :     Ring;
+      Result       : out Item;
+      Booch_Status : out Locus.Top_Of)
    is
    begin
       Result := The_Ring.The_Items (The_Ring.The_Top);
@@ -234,21 +254,22 @@ package body Booch_Light.Ring_Sequential_Bounded_Managed_Iterator is
    end Top_Of;
 
    function At_Mark
-     (The_Ring : in Ring)
+     (The_Ring : Ring)
       return Boolean
    is
    begin
       return (The_Ring.The_Top = The_Ring.The_Mark);
    end At_Mark;
 
-   procedure Iterate (Over_The_Ring : in Ring) is
+   procedure Iterate (Over_The_Ring : Ring) is
       Continue : Boolean := True;
    begin
       for The_Iterator in Over_The_Ring.The_Top .. Over_The_Ring.The_Back loop
          Process (Over_The_Ring.The_Items (The_Iterator), Continue);
          exit when not Continue;
       end loop;
-      if Continue then
+      if Continue
+      then
          for The_Iterator in 1 .. Over_The_Ring.The_Top - 1 loop
             Process (Over_The_Ring.The_Items (The_Iterator), Continue);
             exit when not Continue;

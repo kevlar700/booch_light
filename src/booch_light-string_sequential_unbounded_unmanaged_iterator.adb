@@ -11,8 +11,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    procedure Set
      (The_String         : in out U_String;
-      To_The_Size        : in     Natural;
-      Preserve_The_Value : in     Boolean)
+      To_The_Size        :     Natural;
+      Preserve_The_Value :     Boolean)
    is
       Temporary_Structure : Structure;
    begin
@@ -34,7 +34,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Set;
 
    procedure Copy
-     (From_The_String : in     U_String;
+     (From_The_String :     U_String;
       To_The_String   : in out U_String;
       Booch_Status    :    out Locus.Copy)
    is
@@ -58,7 +58,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Copy;
 
    procedure Copy
-     (From_The_Substring : in     Substring;
+     (From_The_Substring :     Substring;
       To_The_String      : in out U_String;
       Booch_Status       :    out Locus.Copy)
    is
@@ -91,7 +91,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Clear;
 
    procedure Prepend
-     (The_String    : in     U_String;
+     (The_String    :     U_String;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Prepend)
    is
@@ -121,7 +121,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Prepend;
 
    procedure Prepend
-     (The_Substring : in     Substring;
+     (The_Substring :     Substring;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Prepend)
    is
@@ -150,7 +150,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Prepend;
 
    procedure Append
-     (The_String    : in     U_String;
+     (The_String    :     U_String;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Append)
    is
@@ -178,7 +178,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Append;
 
    procedure Append
-     (The_Substring : in     Substring;
+     (The_Substring :     Substring;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Append)
    is
@@ -206,9 +206,9 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Append;
 
    procedure Insert
-     (The_String      : in     U_String;
+     (The_String      :     U_String;
       In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
+      At_The_Position :     Positive;
       Booch_Status    :    out Locus.Insert)
    is
       Old_Length   : constant Natural := In_The_String.The_Length;
@@ -247,9 +247,9 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Insert;
 
    procedure Insert
-     (The_Substring   : in     Substring;
+     (The_Substring   :     Substring;
       In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
+      At_The_Position :     Positive;
       Booch_Status    :    out Locus.Insert)
    is
       Old_Length   : constant Natural := In_The_String.The_Length;
@@ -288,8 +288,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    procedure Delete
      (In_The_String     : in out U_String;
-      From_The_Position : in     Positive;
-      To_The_Position   : in     Positive;
+      From_The_Position :     Positive;
+      To_The_Position   :     Positive;
       Booch_Status      :    out Locus.Delete)
    is
       New_Length : Natural;
@@ -321,8 +321,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    procedure Replace
      (In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
-      With_The_String : in     U_String;
+      At_The_Position :     Positive;
+      With_The_String :     U_String;
       Booch_Status    :    out Locus.Replace)
    is
       End_Position : constant Natural :=
@@ -347,8 +347,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    procedure Replace
      (In_The_String      : in out U_String;
-      At_The_Position    : in     Positive;
-      With_The_Substring : in     Substring;
+      At_The_Position    :     Positive;
+      With_The_Substring :     Substring;
       Booch_Status       :    out Locus.Replace)
    is
       End_Position : constant Natural :=
@@ -373,8 +373,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    procedure Set_Item
      (In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
-      With_The_Item   : in     Item;
+      At_The_Position :     Positive;
+      With_The_Item   :     Item;
       Booch_Status    :    out Locus.Set_Item)
    is
    begin
@@ -392,8 +392,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Set_Item;
 
    function Is_Equal
-     (Left  : in U_String;
-      Right : in U_String)
+     (Left  : U_String;
+      Right : U_String)
       return Boolean
    is
    begin
@@ -410,8 +410,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Equal;
 
    function Is_Equal
-     (Left  : in Substring;
-      Right : in U_String)
+     (Left  : Substring;
+      Right : U_String)
       return Boolean
    is
    begin
@@ -428,8 +428,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Equal;
 
    function Is_Equal
-     (Left  : in U_String;
-      Right : in Substring)
+     (Left  : U_String;
+      Right : Substring)
       return Boolean
    is
    begin
@@ -446,8 +446,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Equal;
 
    function Is_Less_Than
-     (Left  : in U_String;
-      Right : in U_String)
+     (Left  : U_String;
+      Right : U_String)
       return Boolean
    is
    begin
@@ -464,8 +464,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Less_Than;
 
    function Is_Less_Than
-     (Left  : in Substring;
-      Right : in U_String)
+     (Left  : Substring;
+      Right : U_String)
       return Boolean
    is
    begin
@@ -482,8 +482,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Less_Than;
 
    function Is_Less_Than
-     (Left  : in U_String;
-      Right : in Substring)
+     (Left  : U_String;
+      Right : Substring)
       return Boolean
    is
    begin
@@ -500,8 +500,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Less_Than;
 
    function Is_Greater_Than
-     (Left  : in U_String;
-      Right : in U_String)
+     (Left  : U_String;
+      Right : U_String)
       return Boolean
    is
    begin
@@ -518,8 +518,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Greater_Than;
 
    function Is_Greater_Than
-     (Left  : in Substring;
-      Right : in U_String)
+     (Left  : Substring;
+      Right : U_String)
       return Boolean
    is
    begin
@@ -536,8 +536,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Greater_Than;
 
    function Is_Greater_Than
-     (Left  : in U_String;
-      Right : in Substring)
+     (Left  : U_String;
+      Right : Substring)
       return Boolean
    is
    begin
@@ -554,7 +554,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Greater_Than;
 
    function Length_Of
-     (The_String : in U_String)
+     (The_String : U_String)
       return Natural
    is
    begin
@@ -562,7 +562,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Length_Of;
 
    function Is_Null
-     (The_String : in U_String)
+     (The_String : U_String)
       return Boolean
    is
    begin
@@ -570,8 +570,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Is_Null;
 
    procedure Item_Of
-     (The_String      : in     U_String;
-      At_The_Position : in     Positive;
+     (The_String      :     U_String;
+      At_The_Position :     Positive;
       The_Item        :    out Item;
       Booch_Status    :    out Locus.Item_Of)
    is
@@ -590,7 +590,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Item_Of;
 
    --  function Substring_Of
-   --    (The_String : in U_String)
+   --    (The_String : U_String)
    --     return Substring
    --  is
    --     Temporary_Structure : Substring (1 .. 1);
@@ -602,7 +602,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    --  end Substring_Of;
 
    function Substring_Of_Length
-     (The_String : in U_String)
+     (The_String : U_String)
       return Natural
    is
    begin
@@ -610,7 +610,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Substring_Of_Length;
 
    procedure Substring_Of
-     (The_String    : in     U_String;
+     (The_String    :     U_String;
       The_Substring : in out Substring;
       Booch_Status  :    out Locus.Substring_Of)
    is
@@ -631,9 +631,9 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Substring_Of;
 
    function Substring_Of_Length
-     (The_String        : in U_String;
-      From_The_Position : in Positive;
-      To_The_Position   : in Positive)
+     (The_String        : U_String;
+      From_The_Position : Positive;
+      To_The_Position   : Positive)
       return Natural
    is
    begin
@@ -642,9 +642,9 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    end Substring_Of_Length;
 
    procedure Substring_Of
-     (The_String        : in     U_String;
-      From_The_Position : in     Positive;
-      To_The_Position   : in     Positive;
+     (The_String        :     U_String;
+      From_The_Position :     Positive;
+      To_The_Position   :     Positive;
       The_Substring     : in out Substring;
       Booch_Status      :    out Locus.Substring_Of)
    is
@@ -675,7 +675,7 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
          The_Substring := Temporary_Structure (1 .. 0);
    end Substring_Of;
 
-   procedure Iterate (Over_The_String : in U_String) is
+   procedure Iterate (Over_The_String : U_String) is
       Continue : Boolean;
    begin
       for The_Iterator in 1 .. Over_The_String.The_Length loop
@@ -686,8 +686,8 @@ package body Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
 
    --  function Substring_Of
    --    (The_String        : in U_String;
-   --     From_The_Position : in Positive;
-   --     To_The_Position   : in Positive)
+   --     From_The_Position : Positive;
+   --     To_The_Position   : Positive)
    --     return Substring
    --  is
    --  begin

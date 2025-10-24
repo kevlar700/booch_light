@@ -9,14 +9,15 @@
 package body Booch_Light.Tree_Utilities_Arbitrary_Single is
 
    function Is_Leaf
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean
    is
    begin
       for Index in 1 .. Number_Of_Children_In (The_Tree) loop
          if not Is_Null (Child_Of
                 (The_Tree,
-                 The_Child => Index)) then
+                 The_Child => Index))
+         then
             return False;
          end if;
       end loop;

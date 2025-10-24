@@ -22,7 +22,11 @@ project Booch_Light is
       --  But in This case I Am Skeptical As the procedure Split seems like it
       --  Must Modify Both in out Parameters?
       for Default_Switches ("Ada") use Booch_Light_Config.Ada_Compiler_Switches
-                  & ("-gnat2022");
+                  & ("-gnat2022",
+                  "-gnatw.X",    --  Non local exception warnings
+                  "-gnaty-Ix",   --  Unnecessary parenthesis
+                  "-gnatyM98");  --  Unavoidable line length limit breach
+
       --  & ("-gnaty-Ix", "-gnaty+ABdOSu", "-gnatwa.b.f.l.o.st.wfy.ac.X.c_cgi.r.qq.ppo.mmv.vwxz.z.tkJ");
       for Local_Configuration_Pragmas use "gnat.adc";
    end Compiler;

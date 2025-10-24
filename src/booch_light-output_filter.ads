@@ -11,14 +11,14 @@ generic
    Line_Terminator : Item;
    Page_Terminator : Item;
    File_Terminator : Item;
-   with procedure Put (The_Item : in Item);
+   with procedure Put (The_Item : Item);
    with procedure New_Line;
    with procedure New_Page;
    with procedure End_File;
 
 package Booch_Light.Output_Filter is
 
-   procedure Output (The_Item : in Item);
+   procedure Output (The_Item : Item);
 
 end Booch_Light.Output_Filter;
 

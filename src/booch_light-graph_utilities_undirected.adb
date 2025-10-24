@@ -9,7 +9,7 @@
 package body Booch_Light.Graph_Utilities_Undirected is
 
    function Is_Isolated
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean
    is
       The_Iterator : Iterator;
@@ -27,7 +27,7 @@ package body Booch_Light.Graph_Utilities_Undirected is
    end Is_Isolated;
 
    function Has_Self_Loop
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean
    is
       The_Iterator : Iterator;

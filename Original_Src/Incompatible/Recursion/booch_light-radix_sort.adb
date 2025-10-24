@@ -10,15 +10,16 @@ package body Booch_Light.Radix_Sort is
 
    procedure Sort (The_Items : in out Items) is
       procedure Sort_Recursive
-        (Left_Index  : in Index;
-         Right_Index : in Index;
-         Bit         : in Positive)
+        (Left_Index  : Index;
+         Right_Index : Index;
+         Bit         : Positive)
       is
          Temporary_Left  : Index;
          Temporary_Right : Index;
          Temporary_Item  : Item;
       begin
-         if Right_Index > Left_Index then
+         if Right_Index > Left_Index
+         then
             Temporary_Left  := Left_Index;
             Temporary_Right := Right_Index;
             loop
@@ -37,11 +38,14 @@ package body Booch_Light.Radix_Sort is
                The_Items (Temporary_Right) := Temporary_Item;
                exit when (Temporary_Left = Temporary_Right);
             end loop;
-            if not Bit_Of (The_Items (Right_Index), Bit) then
+            if not Bit_Of (The_Items (Right_Index), Bit)
+            then
                Temporary_Right := Index'Succ (Temporary_Right);
             end if;
-            if Bit < Number_Of_Key_Bits then
-               if Temporary_Right > The_Items'First then
+            if Bit < Number_Of_Key_Bits
+            then
+               if Temporary_Right > The_Items'First
+               then
                   Sort_Recursive
                     (Left_Index, Index'Pred (Temporary_Right), Bit + 1);
                end if;

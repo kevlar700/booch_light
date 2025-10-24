@@ -28,7 +28,8 @@ package body Booch_Light.Natural_Merge_Sort is
       begin
          Get (From_The_File, Temporary_Item);
          Put (To_The_File, Temporary_Item);
-         if Is_End_Of_File (From_The_File) then
+         if Is_End_Of_File (From_The_File)
+         then
             End_Of_Run := True;
          else
             End_Of_Run := (Next_Item (From_The_File) < Temporary_Item);
@@ -55,15 +56,18 @@ package body Booch_Light.Natural_Merge_Sort is
          End_Of_Run : Boolean;
       begin
          loop
-            if not (Next_Item (And_The_File) < Next_Item (From_The_File)) then
+            if not (Next_Item (And_The_File) < Next_Item (From_The_File))
+            then
                Copy (From_The_File, To_The_File, End_Of_Run);
-               if End_Of_Run then
+               if End_Of_Run
+               then
                   Copy_Run (And_The_File, To_The_File);
                   exit;
                end if;
             else
                Copy (And_The_File, To_The_File, End_Of_Run);
-               if End_Of_Run then
+               if End_Of_Run
+               then
                   Copy_Run (From_The_File, To_The_File);
                   exit;
                end if;
@@ -74,7 +78,8 @@ package body Booch_Light.Natural_Merge_Sort is
    begin
       loop
          Open_For_Reading (The_File);
-         if Is_End_Of_File (The_File) then
+         if Is_End_Of_File (The_File)
+         then
             Close (The_File);
             Close (Temporary_File_1);
             Close (Temporary_File_2);
@@ -91,7 +96,8 @@ package body Booch_Light.Natural_Merge_Sort is
                Copy_Run
                  (The_File,
                   To_The_File => Temporary_File_1);
-               if not Is_End_Of_File (The_File) then
+               if not Is_End_Of_File (The_File)
+               then
                   Copy_Run
                     (The_File,
                      To_The_File => Temporary_File_2);

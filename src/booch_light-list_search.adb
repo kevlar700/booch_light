@@ -11,15 +11,16 @@ with Booch_Light.Alogs;
 package body Booch_Light.List_Search is
 
    procedure Position_Of
-     (The_Item     : in     Item;
-      In_The_List  : in     List;
-      Position     :    out Positive;
-      Booch_Status :    out Locus.Position_Of)
+     (The_Item     :     Item;
+      In_The_List  :     List;
+      Position     : out Positive;
+      Booch_Status : out Locus.Position_Of)
    is
       Index : List := In_The_List;
    begin
       while not Is_Null (Index) loop
-         if The_Item = Head_Of (Index) then
+         if The_Item = Head_Of (Index)
+         then
             Position     := 1;
             Booch_Status := OK;
             return;
@@ -39,21 +40,23 @@ package body Booch_Light.List_Search is
    end Position_Of;
 
    procedure Location_Of
-     (The_Position : in     Positive;
-      In_The_List  : in     List;
-      Location     :    out List;
-      Booch_Status :    out Locus.Location_Of)
+     (The_Position :     Positive;
+      In_The_List  :     List;
+      Location     : out List;
+      Booch_Status : out Locus.Location_Of)
    is
       Index : List;
    begin
-      if Is_Null (In_The_List) then
+      if Is_Null (In_The_List)
+      then
          Booch_Status := Position_Error;
          return;
       else
          Index := In_The_List;
          for Count in 2 .. The_Position loop
             Index := Tail_Of (Index);
-            if Is_Null (Index) then
+            if Is_Null (Index)
+            then
                Alogs.Log
                  (Log_ID  => "01984CA10949A0C5",
                   Message => "Position_Error: Location_Of failed");
@@ -69,15 +72,16 @@ package body Booch_Light.List_Search is
    end Location_Of;
 
    procedure Location_Of
-     (The_Item     : in     Item;
-      In_The_List  : in     List;
-      Location     :    out List;
-      Booch_Status :    out Locus.Location_Of_Item)
+     (The_Item     :     Item;
+      In_The_List  :     List;
+      Location     : out List;
+      Booch_Status : out Locus.Location_Of_Item)
    is
       Index : List := In_The_List;
    begin
       while not Is_Null (Index) loop
-         if The_Item = Head_Of (Index) then
+         if The_Item = Head_Of (Index)
+         then
             Location     := Index;
             Booch_Status := OK;
             return;

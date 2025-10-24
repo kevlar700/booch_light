@@ -18,21 +18,21 @@ generic
 
    with procedure Put
      (The_File : in out File;
-      The_Item : in     Item);
+      The_Item :        Item);
 
    with procedure Close (The_File : in out File);
 
    with function Next_Item
-     (The_File : in File)
+     (The_File : File)
       return Item;
 
    with function "<"
-     (Left  : in Item;
-      Right : in Item)
+     (Left  : Item;
+      Right : Item)
       return Boolean;
 
    with function Is_End_Of_File
-     (The_File : in File)
+     (The_File : File)
       return Boolean;
 
 package Booch_Light.Natural_Merge_Sort is

@@ -8,15 +8,15 @@
 
 generic
    type Item is private;
-   with procedure Put (The_Item : in Item);
+   with procedure Put (The_Item : Item);
 
    with function Filter
-     (The_Item : in Item)
+     (The_Item : Item)
       return Item;
 
 package Booch_Light.Translate_Filter is
 
-   procedure Translate (The_Item : in Item);
+   procedure Translate (The_Item : Item);
 
 end Booch_Light.Translate_Filter;
 

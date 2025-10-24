@@ -10,15 +10,41 @@ generic
    type Item is private;
    type Index is (<>);
    type Items is array (Index range <>) of Item;
-   with function "<"
-     (Left  : in Item;
-      Right : in Item)
+   Any_Item : Item;
+   Escape_Item : Item;
+   Not_Item : Item;
+   Closure_Item : Item;
+   Start_Class : Item;
+   Stop_Class : Item;
+
+   with function Is_Equal
+     (Left  : Item;
+      Right : Item)
       return Boolean;
-package Booch_Light.Quick_Sort is
 
-   procedure Sort (The_Items : in out Items);
+package Booch_Light.Pattern_Match_Regular_Expression is
 
-end Booch_Light.Quick_Sort;
+   package Locus is
+
+      subtype Location_Of is Status_Code with
+          Static_Predicate =>
+           Location_Of in Illegal_Pattern | Pattern_Not_Found | OK;
+
+      subtype Is_Match is Status_Code with
+          Static_Predicate => Is_Match in Illegal_Pattern | OK;
+
+      subtype Preprocess is Status_Code with
+          Static_Predicate => Preprocess in Illegal_Pattern | OK;
+
+   end Locus;
+
+   procedure Location_Of
+     (The_Pattern  :     Items;
+      In_The_Items :     Items;
+      Result       : out Index;
+      Booch_Status : out Locus.Location_Of);
+
+end Booch_Light.Pattern_Match_Regular_Expression;
 
 --              Original Booch Components (Ada 83 version)
 --  License: MIT

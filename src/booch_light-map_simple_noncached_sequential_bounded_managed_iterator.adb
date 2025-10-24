@@ -12,8 +12,8 @@ package body Booch_Light
   .Map_Simple_Noncached_Sequential_Bounded_Managed_Iterator is
 
    procedure Find
-     (The_Domain : in     Domain;
-      In_The_Map : in     Map;
+     (The_Domain :     Domain;
+      In_The_Map :     Map;
       The_Bucket :    out Natural)
    is
       Initial_Probe    : constant Natural :=
@@ -49,7 +49,7 @@ package body Booch_Light
    end Find;
 
    procedure Copy
-     (From_The_Map : in     Map;
+     (From_The_Map :     Map;
       To_The_Map   : in out Map;
       Booch_Status :    out Locus.Copy)
    is
@@ -92,8 +92,8 @@ package body Booch_Light
    end Clear;
 
    procedure Bind
-     (The_Domain    : in     Domain;
-      And_The_Range : in     Ranges;
+     (The_Domain    :     Domain;
+      And_The_Range :     Ranges;
       In_The_Map    : in out Map;
       Booch_Status  :    out Locus.Bind)
    is
@@ -127,7 +127,7 @@ package body Booch_Light
    end Bind;
 
    procedure Unbind
-     (The_Domain   : in     Domain;
+     (The_Domain   :     Domain;
       In_The_Map   : in out Map;
       Booch_Status :    out Locus.Unbind)
    is
@@ -158,8 +158,8 @@ package body Booch_Light
    end Unbind;
 
    function Is_Equal
-     (Left  : in Map;
-      Right : in Map)
+     (Left  : Map;
+      Right : Map)
       return Boolean
    is
       Temporary_Index : Natural;
@@ -196,7 +196,7 @@ package body Booch_Light
    end Is_Equal;
 
    function Extent_Of
-     (The_Map : in Map)
+     (The_Map : Map)
       return Natural
    is
    begin
@@ -204,7 +204,7 @@ package body Booch_Light
    end Extent_Of;
 
    function Is_Empty
-     (The_Map : in Map)
+     (The_Map : Map)
       return Boolean
    is
    begin
@@ -212,8 +212,8 @@ package body Booch_Light
    end Is_Empty;
 
    function Is_Bound
-     (The_Domain : in Domain;
-      In_The_Map : in Map)
+     (The_Domain : Domain;
+      In_The_Map : Map)
       return Boolean
    is
       The_Bucket : Natural;
@@ -226,8 +226,8 @@ package body Booch_Light
    end Is_Bound;
 
    procedure Range_Of
-     (The_Domain   : in     Domain;
-      In_The_Map   : in     Map;
+     (The_Domain   :     Domain;
+      In_The_Map   :     Map;
       Result       :    out Ranges;
       Booch_Status :    out Locus.Range_Of)
    is
@@ -256,7 +256,7 @@ package body Booch_Light
    end Range_Of;
 
    procedure Iterate_With_Status
-     (Over_The_Map : in     Map;
+     (Over_The_Map :     Map;
       Booch_Status :    out Status_Item)
    is
       Continue : Boolean;
@@ -273,7 +273,7 @@ package body Booch_Light
       end loop;
    end Iterate_With_Status;
 
-   procedure Iterate (Over_The_Map : in Map) is
+   procedure Iterate (Over_The_Map : Map) is
       Continue : Boolean;
    begin
       for Index in Over_The_Map.The_Items'Range loop

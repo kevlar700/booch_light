@@ -9,14 +9,15 @@
 package body Booch_Light.Sequential_Search is
 
    procedure Location_Of
-     (The_Key      : in     Key;
-      In_The_Items : in     Items;
-      Result       :    out Index;
-      Booch_Status :    out Locus.Location_Of)
+     (The_Key      :     Key;
+      In_The_Items :     Items;
+      Result       : out Index;
+      Booch_Status : out Locus.Location_Of)
    is
    begin
       for The_Index in In_The_Items'Range loop
-         if Is_Equal (The_Key, In_The_Items (The_Index)) then
+         if Is_Equal (The_Key, In_The_Items (The_Index))
+         then
             Result       := The_Index;
             Booch_Status := OK;
             return;

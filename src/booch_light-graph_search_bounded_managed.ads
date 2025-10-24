@@ -12,16 +12,16 @@ generic
    type Iterator is limited private;
    with procedure Initialize
      (The_Iterator    : in out Iterator;
-      With_The_Vertex : in     Vertex);
+      With_The_Vertex :        Vertex);
    with procedure Get_Next (The_Iterator : in out Iterator);
    with function Number_Of_Vertices_In
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Natural;
    with function Value_Of
-     (The_Iterator : in Iterator)
+     (The_Iterator : Iterator)
       return Vertex;
    with function Is_Done
-     (The_Iterator : in Iterator)
+     (The_Iterator : Iterator)
       return Boolean;
 package Booch_Light.Graph_Search_Bounded_Managed is
 
@@ -43,21 +43,21 @@ package Booch_Light.Graph_Search_Bounded_Managed is
 
    generic
       with procedure Process
-        (The_Vertex : in     Vertex;
-         Continue   :    out Boolean);
+        (The_Vertex :     Vertex;
+         Continue   : out Boolean);
    procedure Traverse_Depth_First
-     (From_The_Vertex : in     Vertex;
-      In_The_Graph    : in     Graph;
-      Booch_Status    :    out Locus.Traverse_Depth_First);
+     (From_The_Vertex :     Vertex;
+      In_The_Graph    :     Graph;
+      Booch_Status    : out Locus.Traverse_Depth_First);
 
    generic
       with procedure Process
-        (The_Vertex : in     Vertex;
-         Continue   :    out Boolean);
+        (The_Vertex :     Vertex;
+         Continue   : out Boolean);
    procedure Traverse_Breadth_First
-     (From_The_Vertex : in     Vertex;
-      In_The_Graph    : in     Graph;
-      Booch_Status    :    out Locus.Traverse_Breadth_First);
+     (From_The_Vertex :     Vertex;
+      In_The_Graph    :     Graph;
+      Booch_Status    : out Locus.Traverse_Breadth_First);
 
 end Booch_Light.Graph_Search_Bounded_Managed;
 

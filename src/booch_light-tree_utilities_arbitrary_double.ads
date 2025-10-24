@@ -8,23 +8,23 @@
 
 generic
    type Tree is private;
-   Null_Tree : in Tree;
+   Null_Tree : Tree;
 
    with function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    with function Number_Of_Children_In
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Natural;
 
    with function Child_Of
-     (The_Tree  : in Tree;
-      The_Child : in Positive)
+     (The_Tree  : Tree;
+      The_Child : Positive)
       return Tree;
 
    with function Parent_Of
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Tree;
 
 package Booch_Light.Tree_Utilities_Arbitrary_Double is
@@ -52,46 +52,46 @@ package Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Locus;
 
    function Is_Root
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    function Is_Leaf
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    function Root_Of
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Tree;
 
    procedure Child_Name_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Positive;
-      Booch_Status :    out Locus.Child_Name_Of);
+     (The_Tree     :     Tree;
+      Result       : out Positive;
+      Booch_Status : out Locus.Child_Name_Of);
 
    procedure Number_Of_Siblings_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Natural;
-      Booch_Status :    out Locus.Number_Of_Siblings_Of);
+     (The_Tree     :     Tree;
+      Result       : out Natural;
+      Booch_Status : out Locus.Number_Of_Siblings_Of);
 
    procedure Left_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Left_Sibling_Of);
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Left_Sibling_Of);
 
    procedure Right_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Right_Sibling_Of);
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Right_Sibling_Of);
 
    procedure Leftmost_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Leftmost_Sibling_Of);
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Leftmost_Sibling_Of);
 
    procedure Rightmost_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Rightmost_Sibling_Of);
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Rightmost_Sibling_Of);
 
 end Booch_Light.Tree_Utilities_Arbitrary_Double;
 

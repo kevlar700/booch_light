@@ -9,31 +9,31 @@
 generic
    type Tree is private;
    with function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    with function Number_Of_Children_In
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Natural;
 
    with function Child_Of
-     (The_Tree  : in Tree;
-      The_Child : in Positive)
+     (The_Tree  : Tree;
+      The_Child : Positive)
       return Tree;
 
 package Booch_Light.Tree_Search_Arbitrary is
 
    generic
       with procedure Process
-        (The_Tree : in     Tree;
-         Continue :    out Boolean);
-   procedure Traverse_Pre_Order (The_Tree : in Tree);
+        (The_Tree :     Tree;
+         Continue : out Boolean);
+   procedure Traverse_Pre_Order (The_Tree : Tree);
 
    generic
       with procedure Process
-        (The_Tree : in     Tree;
-         Continue :    out Boolean);
-   procedure Traverse_Post_Order (The_Tree : in Tree);
+        (The_Tree :     Tree;
+         Continue : out Boolean);
+   procedure Traverse_Post_Order (The_Tree : Tree);
 
 end Booch_Light.Tree_Search_Arbitrary;
 

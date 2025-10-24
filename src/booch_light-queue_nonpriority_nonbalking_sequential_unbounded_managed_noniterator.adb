@@ -24,14 +24,14 @@ package body Booch_Light
 
    procedure Set_Next
      (The_Node : in out Node;
-      To_Next  : in     Structure)
+      To_Next  :     Structure)
    is
    begin
       The_Node.Next := To_Next;
    end Set_Next;
 
    function Next_Of
-     (The_Node : in Node)
+     (The_Node : Node)
       return Structure
    is
    begin
@@ -46,7 +46,7 @@ package body Booch_Light
       Pointer_Of  => Next_Of);
 
    procedure Copy
-     (From_The_Queue : in     Queue;
+     (From_The_Queue :     Queue;
       To_The_Queue   : in out Queue;
       Booch_Status   :    out Locus.Copy)
    is
@@ -89,7 +89,7 @@ package body Booch_Light
    end Clear;
 
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :     Item;
       To_The_Queue : in out Queue;
       Booch_Status :    out Locus.Add)
    is
@@ -142,8 +142,8 @@ package body Booch_Light
    end Pop;
 
    function Is_Equal
-     (Left  : in Queue;
-      Right : in Queue)
+     (Left  : Queue;
+      Right : Queue)
       return Boolean
    is
       Left_Index  : Structure := Left.The_Front;
@@ -167,7 +167,7 @@ package body Booch_Light
    end Is_Equal;
 
    function Length_Of
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Natural
    is
       Count : Natural   := 0;
@@ -181,7 +181,7 @@ package body Booch_Light
    end Length_Of;
 
    function Is_Empty
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Boolean
    is
    begin
@@ -189,7 +189,7 @@ package body Booch_Light
    end Is_Empty;
 
    procedure Front_Of
-     (The_Queue    : in     Queue;
+     (The_Queue    :     Queue;
       Result       :    out Item;
       Booch_Status :    out Locus.Front_Of)
    is

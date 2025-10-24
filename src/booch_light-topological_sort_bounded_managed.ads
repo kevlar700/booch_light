@@ -13,24 +13,24 @@ generic
 
    with procedure Initialize_Vertices
      (The_Iterator   : in out Iterator;
-      With_The_Graph : in     Graph);
+      With_The_Graph :     Graph);
 
    with procedure Initialize_Arcs
      (The_Iterator    : in out Iterator;
-      With_The_Vertex : in     Vertex);
+      With_The_Vertex :     Vertex);
 
    with procedure Get_Next (The_Iterator : in out Iterator);
 
    with function Number_Of_Vertices_In
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Natural;
 
    with function Value_Of
-     (The_Iterator : in Iterator)
+     (The_Iterator : Iterator)
       return Vertex;
 
    with function Is_Done
-     (The_Iterator : in Iterator)
+     (The_Iterator : Iterator)
       return Boolean;
 
 package Booch_Light.Topological_Sort_Bounded_Managed is
@@ -52,19 +52,19 @@ package Booch_Light.Topological_Sort_Bounded_Managed is
    end Locus;
 
    generic
-      Ignore_Self_Loops : in Boolean;
-      Process_Cycles : in Boolean;
+      Ignore_Self_Loops : Boolean;
+      Process_Cycles : Boolean;
 
       with procedure Process_Acyclic
-        (The_Vertex : in     Vertex;
+        (The_Vertex :     Vertex;
          Continue   :    out Boolean);
 
       with procedure Process_Cyclic
-        (The_Vertex : in     Vertex;
+        (The_Vertex :     Vertex;
          Continue   :    out Boolean);
 
    procedure Sort
-     (The_Graph    : in     Graph;
+     (The_Graph    :     Graph;
       Booch_Status :    out Locus.Sort);
 
 end Booch_Light.Topological_Sort_Bounded_Managed;

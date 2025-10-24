@@ -11,8 +11,8 @@ generic
    type Index is (<>);
    type Items is array (Index range <>) of Item;
    with function "<"
-     (Left  : in Item;
-      Right : in Item)
+     (Left  : Item;
+      Right : Item)
       return Boolean;
 package Booch_Light.Heap_Sort is
 

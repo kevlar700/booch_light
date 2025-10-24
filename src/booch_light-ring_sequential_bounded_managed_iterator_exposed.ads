@@ -41,14 +41,14 @@ package Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
       Backward);
 
    procedure Copy
-     (From_The_Ring : in     Ring;
+     (From_The_Ring :        Ring;
       To_The_Ring   : in out Ring;
       Booch_Status  :    out Locus.Copy);
 
    procedure Clear (The_Ring : in out Ring);
 
    procedure Insert
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       In_The_Ring  : in out Ring;
       Booch_Status :    out Locus.Insert);
 
@@ -58,39 +58,39 @@ package Booch_Light.Ring_Sequential_Bounded_Managed_Iterator_Exposed is
 
    procedure Rotate
      (The_Ring         : in out Ring;
-      In_The_Direction : in     Direction;
+      In_The_Direction :        Direction;
       Booch_Status     :    out Locus.Rotate);
 
    procedure Mark (The_Ring : in out Ring);
    procedure Rotate_To_Mark (The_Ring : in out Ring);
 
    function Is_Equal
-     (Left  : in Ring;
-      Right : in Ring)
+     (Left  : Ring;
+      Right : Ring)
       return Boolean;
 
    function Extent_Of
-     (The_Ring : in Ring)
+     (The_Ring : Ring)
       return Natural;
 
    function Is_Empty
-     (The_Ring : in Ring)
+     (The_Ring : Ring)
       return Boolean;
 
    procedure Top_Of
-     (The_Ring     : in     Ring;
-      Result       :    out Item;
-      Booch_Status :    out Locus.Top_Of);
+     (The_Ring     :     Ring;
+      Result       : out Item;
+      Booch_Status : out Locus.Top_Of);
 
    function At_Mark
-     (The_Ring : in Ring)
+     (The_Ring : Ring)
       return Boolean;
 
    generic
       with procedure Process
-        (The_Item : in     Item;
-         Continue :    out Boolean);
-   procedure Iterate (Over_The_Ring : in Ring);
+        (The_Item :     Item;
+         Continue : out Boolean);
+   procedure Iterate (Over_The_Ring : Ring);
 
 private
    type Locations is record

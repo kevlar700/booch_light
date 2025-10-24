@@ -6,6 +6,12 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
+--  The most important point from the book to realise is that bounded is
+--  stack arrays based whilst this unbounded component allocates from the heap
+--  as more space is needed but never deallocates but rather reuses "freed"
+--  memory. It is therefore usable by a light runtime but may be problematic
+--  without a specific storage pool other than default.
+
 generic
    type Item is private;
 package Booch_Light
@@ -30,14 +36,14 @@ is
    type Queue is limited private;
 
    procedure Copy
-     (From_The_Queue : in     Queue;
+     (From_The_Queue :        Queue;
       To_The_Queue   : in out Queue;
       Booch_Status   :    out Locus.Copy);
 
    procedure Clear (The_Queue : in out Queue);
 
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       To_The_Queue : in out Queue;
       Booch_Status :    out Locus.Add);
 
@@ -46,22 +52,22 @@ is
       Booch_Status :    out Locus.Pop);
 
    function Is_Equal
-     (Left  : in Queue;
-      Right : in Queue)
+     (Left  : Queue;
+      Right : Queue)
       return Boolean;
 
    function Length_Of
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Natural;
 
    function Is_Empty
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Boolean;
 
    procedure Front_Of
-     (The_Queue    : in     Queue;
-      Result       :    out Item;
-      Booch_Status :    out Locus.Front_Of);
+     (The_Queue    :     Queue;
+      Result       : out Item;
+      Booch_Status : out Locus.Front_Of);
 
 private
    type Node;

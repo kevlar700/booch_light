@@ -10,8 +10,8 @@ with Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator;
 generic
    type Item is private;
    type Attribute is private;
-   Number_Of_Vertices : in Positive;
-   Number_Of_Arcs : in Positive;
+   Number_Of_Vertices : Positive;
+   Number_Of_Arcs : Positive;
 package Booch_Light.Graph_Directed_Bounded_Managed is
 
    package Locus is
@@ -91,16 +91,17 @@ package Booch_Light.Graph_Directed_Bounded_Managed is
    Null_Vertex : constant Vertex;
    Null_Arc    : constant Arc;
 
-   procedure Copy
-     (From_The_Graph : in     Graph;
-      To_The_Graph   : in out Graph;
-      Booch_Status   :    out Locus.Copy);
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  procedure Copy
+   --    (From_The_Graph :        Graph;
+   --     To_The_Graph   : in out Graph;
+   --     Booch_Status   :    out Locus.Copy);
 
    procedure Clear (The_Graph : in out Graph);
 
    procedure Add
      (The_Vertex    : in out Vertex;
-      With_The_Item : in     Item;
+      With_The_Item :        Item;
       To_The_Graph  : in out Graph;
       Booch_Status  :    out Locus.Add);
 
@@ -111,14 +112,14 @@ package Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Set_Item
      (Of_The_Vertex : in out Vertex;
-      To_The_Item   : in     Item;
+      To_The_Item   :        Item;
       Booch_Status  :    out Locus.Set_Item);
 
    procedure Create
      (The_Arc            : in out Arc;
-      With_The_Attribute : in     Attribute;
+      With_The_Attribute :        Attribute;
       From_The_Vertex    : in out Vertex;
-      To_The_Vertex      : in     Vertex;
+      To_The_Vertex      :        Vertex;
       In_The_Graph       : in out Graph;
       Booch_Status       :    out Locus.Create);
 
@@ -129,83 +130,83 @@ package Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Set_Attribute
      (Of_The_Arc       : in out Arc;
-      To_The_Attribute : in     Attribute;
+      To_The_Attribute :        Attribute;
       Booch_Status     :    out Locus.Set_Attribute);
 
    function Is_Empty
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Boolean;
 
    function Is_Null
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean;
 
    function Is_Null
-     (The_Arc : in Arc)
+     (The_Arc : Arc)
       return Boolean;
 
    function Number_Of_Vertices_In
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Natural;
 
    function Number_Of_Arcs_In
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Natural;
 
    procedure Number_Of_Arcs_From
-     (The_Vertex    : in     Vertex;
-      The_Arc_Count :    out Natural;
-      Booch_Status  :    out Locus.Number_Of_Arcs_From);
+     (The_Vertex    :     Vertex;
+      The_Arc_Count : out Natural;
+      Booch_Status  : out Locus.Number_Of_Arcs_From);
 
    procedure Item_Of
-     (The_Vertex   : in     Vertex;
-      The_Item     :    out Item;
-      Booch_Status :    out Locus.Item_Of);
+     (The_Vertex   :     Vertex;
+      The_Item     : out Item;
+      Booch_Status : out Locus.Item_Of);
 
    procedure Attribute_Of
-     (The_Arc       : in     Arc;
-      The_Attribute :    out Attribute;
-      Booch_Status  :    out Locus.Attribute_Of);
+     (The_Arc       :     Arc;
+      The_Attribute : out Attribute;
+      Booch_Status  : out Locus.Attribute_Of);
 
    procedure Source_Of
-     (The_Arc      : in     Arc;
-      The_Source   :    out Vertex;
-      Booch_Status :    out Locus.Source_Of);
+     (The_Arc      :     Arc;
+      The_Source   : out Vertex;
+      Booch_Status : out Locus.Source_Of);
 
    procedure Destination_Of
-     (The_Arc         : in     Arc;
-      The_Destination :    out Vertex;
-      Booch_Status    :    out Locus.Destination_Of);
+     (The_Arc         :     Arc;
+      The_Destination : out Vertex;
+      Booch_Status    : out Locus.Destination_Of);
 
    function Is_A_Member
-     (The_Vertex   : in Vertex;
-      Of_The_Graph : in Graph)
+     (The_Vertex   : Vertex;
+      Of_The_Graph : Graph)
       return Boolean;
 
    function Is_A_Member
-     (The_Arc      : in Arc;
-      Of_The_Graph : in Graph)
+     (The_Arc      : Arc;
+      Of_The_Graph : Graph)
       return Boolean;
 
    generic
       with procedure Process
-        (The_Vertex : in     Vertex;
-         Continue   :    out Boolean);
-   procedure Iterate_Vertices (Over_The_Graph : in Graph);
+        (The_Vertex :     Vertex;
+         Continue   : out Boolean);
+   procedure Iterate_Vertices (Over_The_Graph : Graph);
 
    generic
       with procedure Process
-        (The_Arc  : in     Arc;
-         Continue :    out Boolean);
-   procedure Iterate_Arcs (Over_The_Graph : in Graph);
+        (The_Arc  :     Arc;
+         Continue : out Boolean);
+   procedure Iterate_Arcs (Over_The_Graph : Graph);
 
    generic
       with procedure Process
-        (The_Arc  : in     Arc;
-         Continue :    out Boolean);
+        (The_Arc  :     Arc;
+         Continue : out Boolean);
    procedure Reiterate
-     (Over_The_Vertex : in     Vertex;
-      Booch_Status    :    out Locus.Reiterate);
+     (Over_The_Vertex :     Vertex;
+      Booch_Status    : out Locus.Reiterate);
 
 private
    subtype Vertex_Index is Natural range 0 .. Number_Of_Vertices;

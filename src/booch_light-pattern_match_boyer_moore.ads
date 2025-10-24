@@ -11,8 +11,8 @@ generic
    type Index is (<>);
    type Items is array (Index range <>) of Item;
    with function "="
-     (Left  : in Item;
-      Right : in Item)
+     (Left  : Item;
+      Right : Item)
       return Boolean;
 
 package Booch_Light.Pattern_Match_Boyer_Moore is
@@ -25,10 +25,10 @@ package Booch_Light.Pattern_Match_Boyer_Moore is
    end Locus;
 
    procedure Location_Of
-     (The_Pattern  : in     Items;
-      In_The_Items : in     Items;
-      Result       :    out Index;
-      Booch_Status :    out Locus.Location_Of);
+     (The_Pattern  :     Items;
+      In_The_Items :     Items;
+      Result       : out Index;
+      Booch_Status : out Locus.Location_Of);
 
 end Booch_Light.Pattern_Match_Boyer_Moore;
 

@@ -9,22 +9,22 @@
 generic
    type Tree is private;
    type Child is (<>);
-   Left_Child : in Child;
-   Right_Child : in Child;
+   Left_Child : Child;
+   Right_Child : Child;
 
    with function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    with function Child_Of
-     (The_Tree  : in Tree;
-      The_Child : in Child)
+     (The_Tree  : Tree;
+      The_Child : Child)
       return Tree;
 
 package Booch_Light.Tree_Utilities_Binary_Single is
 
    function Is_Leaf
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
 end Booch_Light.Tree_Utilities_Binary_Single;

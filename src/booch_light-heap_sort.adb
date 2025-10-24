@@ -23,8 +23,10 @@ package body Booch_Light.Heap_Sort is
          The_Back       : Index := Index'Val (Index'Pos (The_Front) * 2);
       begin
          while The_Back <= Right_Index loop
-            if The_Back < Right_Index then
-               if The_Items (The_Back) < The_Items (Index'Succ (The_Back)) then
+            if The_Back < Right_Index
+            then
+               if The_Items (The_Back) < The_Items (Index'Succ (The_Back))
+               then
                   The_Back := Index'Succ (The_Back);
                end if;
             end if;

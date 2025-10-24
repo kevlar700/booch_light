@@ -53,3 +53,4 @@ validation.compile_checks = ["-gnatw.c", "-gnatwf", "-gnatw.o", "-gnatwo", "-gna
 # -gnatw.w
 #    Activate warnings on Warnings Off pragmas.
 #    This switch activates warnings for use of pragma Warnings (Off, entity) where either the pragma is entirely useless (because it suppresses no warnings), or it could be replaced by pragma Unreferenced or pragma Unmodified. Also activates warnings for the case of Warnings (Off, String), where either there is no matching Warnings (On, String), or the Warnings (Off) did not suppress any warning. The default is that these warnings are not given.
+

@@ -11,20 +11,20 @@ generic
    type List is private;
 
    with function "="
-     (Left  : in Item;
-      Right : in Item)
+     (Left  : Item;
+      Right : Item)
       return Boolean;
 
    with function Is_Null
-     (The_List : in List)
+     (The_List : List)
       return Boolean;
 
    with function Head_Of
-     (The_List : in List)
+     (The_List : List)
       return Item;
 
    with function Tail_Of
-     (The_List : in List)
+     (The_List : List)
       return List;
 
 package Booch_Light.List_Search is
@@ -43,22 +43,22 @@ package Booch_Light.List_Search is
    end Locus;
 
    procedure Position_Of
-     (The_Item     : in     Item;
-      In_The_List  : in     List;
-      Position     :    out Positive;
-      Booch_Status :    out Locus.Position_Of);
+     (The_Item     :     Item;
+      In_The_List  :     List;
+      Position     : out Positive;
+      Booch_Status : out Locus.Position_Of);
 
    procedure Location_Of
-     (The_Position : in     Positive;
-      In_The_List  : in     List;
-      Location     :    out List;
-      Booch_Status :    out Locus.Location_Of);
+     (The_Position :     Positive;
+      In_The_List  :     List;
+      Location     : out List;
+      Booch_Status : out Locus.Location_Of);
 
    procedure Location_Of
-     (The_Item     : in     Item;
-      In_The_List  : in     List;
-      Location     :    out List;
-      Booch_Status :    out Locus.Location_Of_Item);
+     (The_Item     :     Item;
+      In_The_List  :     List;
+      Location     : out List;
+      Booch_Status : out Locus.Location_Of_Item);
 
 end Booch_Light.List_Search;
 

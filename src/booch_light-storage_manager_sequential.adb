@@ -27,7 +27,8 @@ package body Booch_Light.Storage_Manager_Sequential is
    function New_Item return Pointer is
       Temporary_Pointer : Pointer;
    begin
-      if Free_List = null then
+      if Free_List = null
+      then
          return new Item;
       else
          Temporary_Pointer := Free_List;

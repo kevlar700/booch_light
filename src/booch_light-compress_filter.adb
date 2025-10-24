@@ -8,7 +8,7 @@
 
 package body Booch_Light.Compress_Filter is
 
-   procedure Compress (The_Items : in Items) is
+   procedure Compress (The_Items : Items) is
    begin
       Put (Filter (The_Items));
    end Compress;

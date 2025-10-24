@@ -11,7 +11,7 @@ with Booch_Light.Alogs;
 package body Booch_Light.Tree_Utilities_Arbitrary_Double is
 
    function Is_Root
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean
    is
    begin
@@ -19,14 +19,15 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Is_Root;
 
    function Is_Leaf
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean
    is
    begin
       for Index in 1 .. Number_Of_Children_In (The_Tree) loop
          if not Is_Null (Child_Of
                 (The_Tree,
-                 The_Child => Index)) then
+                 The_Child => Index))
+         then
             return False;
          end if;
       end loop;
@@ -34,7 +35,7 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Is_Leaf;
 
    function Root_Of
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Tree
    is
       Result : Tree := The_Tree;
@@ -46,12 +47,13 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Root_Of;
 
    procedure Child_Name_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Positive;
-      Booch_Status :    out Locus.Child_Name_Of)
+     (The_Tree     :     Tree;
+      Result       : out Positive;
+      Booch_Status : out Locus.Child_Name_Of)
    is
    begin
-      if Is_Root (The_Tree) then
+      if Is_Root (The_Tree)
+      then
          Booch_Status := Tree_Is_Root;
          Alogs.Log
            (Log_ID  => "20D5A00297F03441",
@@ -62,7 +64,8 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
          for Index in 1 .. Number_Of_Children_In (Parent_Of (The_Tree)) loop
             if Child_Of
                 (Parent_Of (The_Tree),
-                 The_Child => Index) = The_Tree then
+                 The_Child => Index) = The_Tree
+            then
                Booch_Status := OK;
                Result       := Index;
                return;
@@ -72,12 +75,13 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Child_Name_Of;
 
    procedure Number_Of_Siblings_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Natural;
-      Booch_Status :    out Locus.Number_Of_Siblings_Of)
+     (The_Tree     :     Tree;
+      Result       : out Natural;
+      Booch_Status : out Locus.Number_Of_Siblings_Of)
    is
    begin
-      if Is_Root (The_Tree) then
+      if Is_Root (The_Tree)
+      then
          Booch_Status := Tree_Is_Root;
          Alogs.Log
            (Log_ID  => "99F89694B6FF0A72",
@@ -92,9 +96,9 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Number_Of_Siblings_Of;
 
    procedure Left_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Left_Sibling_Of)
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Left_Sibling_Of)
    is
       Child_Name_Of_Result : Positive;
    begin
@@ -111,7 +115,8 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
 
       end case;
 
-      if Child_Name_Of_Result = 1 then
+      if Child_Name_Of_Result = 1
+      then
          Result := Null_Tree;
          return;
       else
@@ -138,9 +143,9 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Left_Sibling_Of;
 
    procedure Right_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Right_Sibling_Of)
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Right_Sibling_Of)
    is
       Child_Name_Of_Result : Positive;
    begin
@@ -184,9 +189,9 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Right_Sibling_Of;
 
    procedure Leftmost_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Leftmost_Sibling_Of)
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Leftmost_Sibling_Of)
    is
       Child_Name_Of_Result : Positive;
    begin
@@ -203,7 +208,8 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
 
       end case;
 
-      if Child_Name_Of_Result = 1 then
+      if Child_Name_Of_Result = 1
+      then
          Result := Null_Tree;
          return;
       else
@@ -214,9 +220,9 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
    end Leftmost_Sibling_Of;
 
    procedure Rightmost_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Rightmost_Sibling_Of)
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Rightmost_Sibling_Of)
    is
       Child_Name_Of_Result : Positive;
    begin
@@ -233,7 +239,8 @@ package body Booch_Light.Tree_Utilities_Arbitrary_Double is
 
       end case;
 
-      if Child_Name_Of_Result = 1 then
+      if Child_Name_Of_Result = 1
+      then
          Result := Null_Tree;
          return;
       else

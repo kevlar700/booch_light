@@ -8,7 +8,7 @@
 
 generic
    type Item is private;
-   The_Size : in Positive;
+   The_Size : Positive;
 package Booch_Light.List_Single_Bounded_Managed is
 
    type List is private;
@@ -33,8 +33,7 @@ package Booch_Light.List_Single_Bounded_Managed is
           Static_Predicate => Set_Head in List_Is_Null | OK;
 
       subtype Construct is Status_Code with
-          Static_Predicate =>
-           Construct in New_Item | Exception_Overflow | OK;
+          Static_Predicate => Construct in New_Item | Exception_Overflow | OK;
 
       subtype Swap_Tail is Status_Code with
           Static_Predicate => Swap_Tail in List_Is_Null | OK;
@@ -42,20 +41,20 @@ package Booch_Light.List_Single_Bounded_Managed is
    end Locus;
 
    procedure Copy
-     (From_The_List : in     List;
+     (From_The_List :        List;
       To_The_List   : in out List;
       Booch_Status  :    out Locus.Copy);
 
    procedure Clear (The_List : in out List);
 
    procedure Construct
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       And_The_List : in out List;
       Booch_Status :    out Locus.Construct);
 
    procedure Set_Head
      (Of_The_List  : in out List;
-      To_The_Item  : in     Item;
+      To_The_Item  :        Item;
       Booch_Status :    out Locus.Set_Head);
 
    procedure Swap_Tail
@@ -64,26 +63,26 @@ package Booch_Light.List_Single_Bounded_Managed is
       Booch_Status :    out Locus.Swap_Tail);
 
    procedure Head_Of
-     (The_List     : in     List;
-      The_Item     :    out Item;
-      Booch_Status :    out Locus.Head_Of);
+     (The_List     :     List;
+      The_Item     : out Item;
+      Booch_Status : out Locus.Head_Of);
 
    procedure Tail_Of
-     (The_List     : in     List;
-      The_Tail     :    out List;
-      Booch_Status :    out Locus.Tail_Of);
+     (The_List     :     List;
+      The_Tail     : out List;
+      Booch_Status : out Locus.Tail_Of);
 
    function Is_Equal
-     (Left  : in List;
-      Right : in List)
+     (Left  : List;
+      Right : List)
       return Boolean;
 
    function Length_Of
-     (The_List : in List)
+     (The_List : List)
       return Natural;
 
    function Is_Null
-     (The_List : in List)
+     (The_List : List)
       return Boolean;
 
 private

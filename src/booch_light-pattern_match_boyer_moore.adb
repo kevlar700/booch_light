@@ -14,8 +14,8 @@ package body Booch_Light.Pattern_Match_Boyer_Moore is
    package Natural_Utilities is new Integer_Utilities (Number => Natural);
 
    procedure Location_Of
-     (The_Pattern  : in     Items;
-      In_The_Items : in     Items;
+     (The_Pattern  :     Items;
+      In_The_Items :     Items;
       Result       :    out Index;
       Booch_Status :    out Locus.Location_Of)
    is
@@ -28,7 +28,7 @@ package body Booch_Light.Pattern_Match_Boyer_Moore is
         Index'Val (Index'Pos (In_The_Items'First) + The_Pattern'Length - 1);
 
       function Items_Skip
-        (The_Item : in Item)
+        (The_Item : Item)
          return Natural
       is
       begin
@@ -41,7 +41,7 @@ package body Booch_Light.Pattern_Match_Boyer_Moore is
       end Items_Skip;
 
       procedure Preprocess
-        (The_Pattern  : in     Items;
+        (The_Pattern  :     Items;
          Pattern_Skip : in out Skip_Table)
       is
          Next          : Skip_Table;

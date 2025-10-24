@@ -11,10 +11,10 @@ with Booch_Light.Alogs;
 package body Booch_Light.Pattern_Match_Regular_Expression is
 
    procedure Location_Of
-     (The_Pattern  : in     Items;
-      In_The_Items : in     Items;
-      Result       :    out Index;
-      Booch_Status :    out Locus.Location_Of)
+     (The_Pattern  :     Items;
+      In_The_Items :     Items;
+      Result       : out Index;
+      Booch_Status : out Locus.Location_Of)
    is
 
       type Kind is
@@ -42,7 +42,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
       Full_Pattern : Patterns (1 .. The_Pattern'Length + 1);
 
       procedure Preprocess
-        (The_Pattern  : in     Items;
+        (The_Pattern  :        Items;
          Full_Pattern : in out Patterns;
          Booch_Status :    out Locus.Preprocess)
       is
@@ -59,8 +59,10 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
          loop
             case The_State is
                when Building_Pattern =>
-                  if Is_Equal (The_Pattern (Pattern_Index), Any_Item) then
-                     if Full_Pattern (Full_Index).True_Pattern then
+                  if Is_Equal (The_Pattern (Pattern_Index), Any_Item)
+                  then
+                     if Full_Pattern (Full_Index).True_Pattern
+                     then
                         Full_Pattern (Full_Index) :=
                           (The_Kind     => Any,
                            True_Pattern =>
@@ -78,8 +80,10 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                   elsif Is_Equal (The_Pattern (Pattern_Index), Escape_Item)
                   then
                      The_State := Building_Escape_Pattern;
-                  elsif Is_Equal (The_Pattern (Pattern_Index), Not_Item) then
-                     if Full_Pattern (Full_Index).True_Pattern then
+                  elsif Is_Equal (The_Pattern (Pattern_Index), Not_Item)
+                  then
+                     if Full_Pattern (Full_Index).True_Pattern
+                     then
                         Full_Pattern (Full_Index).True_Pattern := False;
                      else
                         Alogs.Log
@@ -90,7 +94,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                      end if;
                   elsif Is_Equal (The_Pattern (Pattern_Index), Closure_Item)
                   then
-                     if not Full_Pattern (Last_Pattern).Has_Closure then
+                     if not Full_Pattern (Last_Pattern).Has_Closure
+                     then
                         Full_Pattern (Last_Pattern).Has_Closure := True;
                      else
                         Alogs.Log
@@ -111,7 +116,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                      Last_Pattern              := Full_Index;
                      Full_Index                := Full_Index + 1;
                      The_State                 := Building_Class;
-                  elsif Is_Equal (The_Pattern (Pattern_Index), Stop_Class) then
+                  elsif Is_Equal (The_Pattern (Pattern_Index), Stop_Class)
+                  then
                      Alogs.Log
                        (Log_ID  => "033AFC90B03DA0C2",
                         Message => "Illegal_Pattern: Preprocess failed");
@@ -127,7 +133,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                      Full_Index                := Full_Index + 1;
                   end if;
                when Building_Class =>
-                  if Is_Equal (The_Pattern (Pattern_Index), Any_Item) then
+                  if Is_Equal (The_Pattern (Pattern_Index), Any_Item)
+                  then
                      Alogs.Log
                        (Log_ID  => "BED689DCA789D0F2",
                         Message => "Illegal_Pattern: Preprocess failed");
@@ -136,7 +143,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                   elsif Is_Equal (The_Pattern (Pattern_Index), Escape_Item)
                   then
                      The_State := Building_Escape_Class;
-                  elsif Is_Equal (The_Pattern (Pattern_Index), Not_Item) then
+                  elsif Is_Equal (The_Pattern (Pattern_Index), Not_Item)
+                  then
                      Alogs.Log
                        (Log_ID  => "7FE0D72EF3599611",
                         Message => "Illegal_Pattern: Preprocess failed");
@@ -156,8 +164,10 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                         Message => "Illegal_Pattern: Preprocess failed");
                      Booch_Status := Illegal_Pattern;
                      return;
-                  elsif Is_Equal (The_Pattern (Pattern_Index), Stop_Class) then
-                     if Full_Pattern (Last_Pattern).Number_Of_Items > 0 then
+                  elsif Is_Equal (The_Pattern (Pattern_Index), Stop_Class)
+                  then
+                     if Full_Pattern (Last_Pattern).Number_Of_Items > 0
+                     then
                         The_State := Building_Pattern;
                      else
                         Alogs.Log
@@ -190,7 +200,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                     The_Pattern (Pattern_Index);
                   The_State := Building_Class;
             end case;
-            if Pattern_Index = The_Pattern'Last then
+            if Pattern_Index = The_Pattern'Last
+            then
                if (The_State = Building_Pattern)
                  and then (Full_Pattern (Full_Index).True_Pattern)
                then
@@ -222,15 +233,16 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
       end Preprocess;
 
       procedure Is_Match
-        (The_Pattern   : in     Pattern;
-         The_Item      : in     Item;
-         Result        :    out Boolean;
-         Nested_Status :    out Locus.Is_Match)
+        (The_Pattern   :     Pattern;
+         The_Item      :     Item;
+         Result        : out Boolean;
+         Nested_Status : out Locus.Is_Match)
       is
       begin
          case The_Pattern.The_Kind is
             when Literal =>
-               if The_Pattern.True_Pattern then
+               if The_Pattern.True_Pattern
+               then
                   Result        := Is_Equal (The_Pattern.The_Item, The_Item);
                   Nested_Status := OK;
                   return;
@@ -240,9 +252,11 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                   return;
                end if;
             when Class =>
-               if The_Pattern.True_Pattern then
+               if The_Pattern.True_Pattern
+               then
                   for Index in 1 .. The_Pattern.Number_Of_Items loop
-                     if Is_Equal (The_Pattern.The_Items (Index), The_Item) then
+                     if Is_Equal (The_Pattern.The_Items (Index), The_Item)
+                     then
                         Result        := True;
                         Nested_Status := OK;
                         return;
@@ -253,7 +267,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                   return;
                else
                   for Index in 1 .. The_Pattern.Number_Of_Items loop
-                     if Is_Equal (The_Pattern.The_Items (Index), The_Item) then
+                     if Is_Equal (The_Pattern.The_Items (Index), The_Item)
+                     then
                         Result        := False;
                         Nested_Status := OK;
                         return;
@@ -279,11 +294,11 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
       end Is_Match;
 
       procedure Location_Of
-        (Full_Pattern : in     Patterns;
-         In_The_Items : in     Items;
-         The_Start    : in     Index;
-         Result       :    out Index;
-         Booch_Status :    out Locus.Location_Of)
+        (Full_Pattern :     Patterns;
+         In_The_Items :     Items;
+         The_Start    :     Index;
+         Result       : out Index;
+         Booch_Status : out Locus.Location_Of)
       is
          Items_Index        : Index   := The_Start;
          Total_Closures     : Natural := 0;
@@ -293,11 +308,13 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
          Is_Match_Status    : Locus.Is_Match;
       begin
          for Full_Index in Full_Pattern'Range loop
-            if Full_Pattern (Full_Index).The_Kind = Stop then
+            if Full_Pattern (Full_Index).The_Kind = Stop
+            then
                Result       := The_Start;
                Booch_Status := OK;
                return;
-            elsif Full_Pattern (Full_Index).Has_Closure then
+            elsif Full_Pattern (Full_Index).Has_Closure
+            then
                for Index in Items_Index .. In_The_Items'Last loop
                   Is_Match
                     (The_Pattern   => Full_Pattern (Full_Index),
@@ -318,7 +335,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
                   end case;
 
-                  if Pattern_Matched then
+                  if Pattern_Matched
+                  then
                      Total_Closures := Total_Closures + 1;
                   else
                      exit;
@@ -377,7 +395,8 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
 
             end case;
 
-            if Pattern_Matched then
+            if Pattern_Matched
+            then
                Items_Index := Index'Succ (Items_Index);
             else
                Booch_Status := Pattern_Not_Found;
@@ -410,7 +429,7 @@ package body Booch_Light.Pattern_Match_Regular_Expression is
                  (Log_ID  => "4941C825FA1C88D5",
                   Message => "Illegal_Pattern: Location_Of failed");
                Booch_Status := Preprocess_Status;
-               Result := Index'Last;
+               Result       := Index'Last;
                return;
 
             when OK =>

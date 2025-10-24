@@ -10,15 +10,17 @@ package body Booch_Light
   .Deque_Priority_Balking_Sequential_Bounded_Managed_Iterator is
 
    procedure Copy
-     (From_The_Deque : in     Deque;
+     (From_The_Deque :        Deque;
       To_The_Deque   : in out Deque;
       Status_BC      :    out Locus.Copy)
    is
    begin
-      if From_The_Deque.The_Back > To_The_Deque.The_Size then
+      if From_The_Deque.The_Back > To_The_Deque.The_Size
+      then
          Status_BC := Exception_Overflow;
          return;
-      elsif From_The_Deque.The_Back = 0 then
+      elsif From_The_Deque.The_Back = 0
+      then
          To_The_Deque.The_Back := 0;
       else
          To_The_Deque.The_Items (1 .. From_The_Deque.The_Back) :=
@@ -35,18 +37,20 @@ package body Booch_Light
    end Clear;
 
    procedure Add
-     (The_Item        : in     Item;
+     (The_Item        :        Item;
       To_The_Deque    : in out Deque;
-      At_The_Location : in     Location;
+      At_The_Location :        Location;
       Status_BC       :    out Locus.Add)
    is
       Index : Natural := 1;
    begin
-      if To_The_Deque.The_Back = 0 then
+      if To_The_Deque.The_Back = 0
+      then
          To_The_Deque.The_Items (To_The_Deque.The_Back + 1) := The_Item;
          To_The_Deque.The_Back := To_The_Deque.The_Back + 1;
       else
-         if At_The_Location = Front then
+         if At_The_Location = Front
+         then
             while (Index <= To_The_Deque.The_Back)
               and then
               (Priority_Of (The_Item) <
@@ -63,7 +67,8 @@ package body Booch_Light
                Index := Index + 1;
             end loop;
          end if;
-         if Index > To_The_Deque.The_Back then
+         if Index > To_The_Deque.The_Back
+         then
             To_The_Deque.The_Items (To_The_Deque.The_Back + 1) := The_Item;
             To_The_Deque.The_Back := To_The_Deque.The_Back + 1;
          else
@@ -84,16 +89,19 @@ package body Booch_Light
 
    procedure Pop
      (The_Deque       : in out Deque;
-      At_The_Location : in     Location;
+      At_The_Location :        Location;
       Status_BC       :    out Locus.Pop)
    is
    begin
-      if The_Deque.The_Back = 0 then
+      if The_Deque.The_Back = 0
+      then
          Status_BC := Exception_Underflow;
          return;
-      elsif The_Deque.The_Back = 1 then
+      elsif The_Deque.The_Back = 1
+      then
          The_Deque.The_Back := 0;
-      elsif At_The_Location = Front then
+      elsif At_The_Location = Front
+      then
          The_Deque.The_Items (1 .. (The_Deque.The_Back - 1)) :=
            The_Deque.The_Items (2 .. The_Deque.The_Back);
          The_Deque.The_Back := The_Deque.The_Back - 1;
@@ -106,14 +114,16 @@ package body Booch_Light
 
    procedure Remove_Item
      (From_The_Deque  : in out Deque;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Status_BC       :    out Locus.Remove_Item)
    is
    begin
-      if From_The_Deque.The_Back < At_The_Position then
+      if From_The_Deque.The_Back < At_The_Position
+      then
          Status_BC := Position_Error;
          return;
-      elsif From_The_Deque.The_Back /= At_The_Position then
+      elsif From_The_Deque.The_Back /= At_The_Position
+      then
          From_The_Deque.The_Items
            (At_The_Position .. (From_The_Deque.The_Back - 1)) :=
            From_The_Deque.The_Items
@@ -125,16 +135,18 @@ package body Booch_Light
    end Remove_Item;
 
    function Is_Equal
-     (Left  : in Deque;
-      Right : in Deque)
+     (Left  : Deque;
+      Right : Deque)
       return Boolean
    is
    begin
-      if Left.The_Back /= Right.The_Back then
+      if Left.The_Back /= Right.The_Back
+      then
          return False;
       else
          for Index in 1 .. Left.The_Back loop
-            if Left.The_Items (Index) /= Right.The_Items (Index) then
+            if Left.The_Items (Index) /= Right.The_Items (Index)
+            then
                return False;
             end if;
          end loop;
@@ -143,7 +155,7 @@ package body Booch_Light
    end Is_Equal;
 
    function Length_Of
-     (The_Deque : in Deque)
+     (The_Deque : Deque)
       return Natural
    is
    begin
@@ -151,7 +163,7 @@ package body Booch_Light
    end Length_Of;
 
    function Is_Empty
-     (The_Deque : in Deque)
+     (The_Deque : Deque)
       return Boolean
    is
    begin
@@ -159,12 +171,13 @@ package body Booch_Light
    end Is_Empty;
 
    procedure Front_Of
-     (The_Deque : in     Deque;
-      The_Item  :    out Item;
-      BC_Status :    out Status_Code)
+     (The_Deque :     Deque;
+      The_Item  : out Item;
+      BC_Status : out Status_Code)
    is
    begin
-      if The_Deque.The_Back = 0 then
+      if The_Deque.The_Back = 0
+      then
          BC_Status := Exception_Underflow;
       else
          The_Item  := The_Deque.The_Items (1);
@@ -173,9 +186,9 @@ package body Booch_Light
    end Front_Of;
 
    procedure Back_Of
-     (The_Deque : in     Deque;
-      The_Item  :    out Item;
-      BC_Status :    out Status_Code)
+     (The_Deque :     Deque;
+      The_Item  : out Item;
+      BC_Status : out Status_Code)
    is
    begin
       The_Item  := The_Deque.The_Items (The_Deque.The_Back);
@@ -187,20 +200,21 @@ package body Booch_Light
    end Back_Of;
 
    function Position_Of
-     (The_Item     : in Item;
-      In_The_Deque : in Deque)
+     (The_Item     : Item;
+      In_The_Deque : Deque)
       return Natural
    is
    begin
       for Index in 1 .. In_The_Deque.The_Back loop
-         if In_The_Deque.The_Items (Index) = The_Item then
+         if In_The_Deque.The_Items (Index) = The_Item
+         then
             return Index;
          end if;
       end loop;
       return 0;
    end Position_Of;
 
-   procedure Iterate (Over_The_Deque : in Deque) is
+   procedure Iterate (Over_The_Deque : Deque) is
       Continue : Boolean;
    begin
       for The_Iterator in 1 .. Over_The_Deque.The_Back loop

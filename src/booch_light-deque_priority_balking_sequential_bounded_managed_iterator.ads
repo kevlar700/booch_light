@@ -10,15 +10,15 @@ generic
    type Item is private;
    type Priority is limited private;
    with function Priority_Of
-     (The_Item : in Item)
+     (The_Item : Item)
       return Priority;
    with function "<"
-     (Left  : in Priority;
-      Right : in Priority)
+     (Left  : Priority;
+      Right : Priority)
       return Boolean;
    with function "<="
-     (Left  : in Priority;
-      Right : in Priority)
+     (Left  : Priority;
+      Right : Priority)
       return Boolean;
 package Booch_Light.Deque_Priority_Balking_Sequential_Bounded_Managed_Iterator
 is
@@ -52,7 +52,7 @@ is
       Back);
 
    procedure Copy
-     (From_The_Deque : in     Deque;
+     (From_The_Deque :     Deque;
       To_The_Deque   : in out Deque;
       Status_BC      :    out Locus.Copy);
 
@@ -61,54 +61,54 @@ is
    --  XXX determine the condition of To_The_Deque when Status_BC is not OK.
    --  Confirm that it is safe to continue the use of To_The_Deque;
    procedure Add
-     (The_Item        : in     Item;
+     (The_Item        :     Item;
       To_The_Deque    : in out Deque;
-      At_The_Location : in     Location;
+      At_The_Location :     Location;
       Status_BC       :    out Locus.Add);
 
    procedure Pop
      (The_Deque       : in out Deque;
-      At_The_Location : in     Location;
+      At_The_Location :     Location;
       Status_BC       :    out Locus.Pop);
 
    procedure Remove_Item
      (From_The_Deque  : in out Deque;
-      At_The_Position : in     Positive;
+      At_The_Position :     Positive;
       Status_BC       :    out Locus.Remove_Item);
 
    function Is_Equal
-     (Left  : in Deque;
-      Right : in Deque)
+     (Left  : Deque;
+      Right : Deque)
       return Boolean;
 
    function Length_Of
-     (The_Deque : in Deque)
+     (The_Deque : Deque)
       return Natural;
 
    function Is_Empty
-     (The_Deque : in Deque)
+     (The_Deque : Deque)
       return Boolean;
 
    procedure Front_Of
-     (The_Deque : in     Deque;
+     (The_Deque :     Deque;
       The_Item  :    out Item;
       BC_Status :    out Status_Code);
 
    procedure Back_Of
-     (The_Deque : in     Deque;
+     (The_Deque :     Deque;
       The_Item  :    out Item;
       BC_Status :    out Status_Code);
 
    function Position_Of
-     (The_Item     : in Item;
-      In_The_Deque : in Deque)
+     (The_Item     : Item;
+      In_The_Deque : Deque)
       return Natural;
 
    generic
       with procedure Process
-        (The_Item : in     Item;
+        (The_Item :     Item;
          Continue :    out Boolean);
-   procedure Iterate (Over_The_Deque : in Deque);
+   procedure Iterate (Over_The_Deque : Deque);
 
 private
    type Items is array (Positive range <>) of Item;

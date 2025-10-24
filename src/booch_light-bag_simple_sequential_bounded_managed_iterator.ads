@@ -38,84 +38,84 @@ package Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    type Bag (The_Size : Positive) is limited private;
 
    procedure Copy
-     (From_The_Bag : in     Bag;
+     (From_The_Bag :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Copy);
 
    procedure Clear (The_Bag : in out Bag);
 
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Add);
 
    procedure Remove
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       From_The_Bag : in out Bag;
       Booch_Status :    out Locus.Remove);
 
    procedure Union
-     (Of_The_Bag   : in     Bag;
-      And_The_Bag  : in     Bag;
+     (Of_The_Bag   :        Bag;
+      And_The_Bag  :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Union);
 
    procedure Intersection
-     (Of_The_Bag   : in     Bag;
-      And_The_Bag  : in     Bag;
+     (Of_The_Bag   :        Bag;
+      And_The_Bag  :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Intersection);
 
    procedure Difference
-     (Of_The_Bag   : in     Bag;
-      And_The_Bag  : in     Bag;
+     (Of_The_Bag   :        Bag;
+      And_The_Bag  :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Difference);
 
    function Is_Equal
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean;
 
    function Extent_Of
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Natural;
 
    function Unique_Extent_Of
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Natural;
 
    procedure Number_Of
-     (The_Item     : in     Item;
-      In_The_Bag   : in     Bag;
+     (The_Item      :     Item;
+      In_The_Bag    :     Bag;
       The_Number_Of : out Positive;
-      Booch_Status :    out Locus.Number_Of);
+      Booch_Status  : out Locus.Number_Of);
 
    function Is_Empty
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Boolean;
 
    function Is_A_Member
-     (The_Item   : in Item;
-      Of_The_Bag : in Bag)
+     (The_Item   : Item;
+      Of_The_Bag : Bag)
       return Boolean;
 
    function Is_A_Subset
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean;
 
    function Is_A_Proper_Subset
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean;
 
    generic
       with procedure Process
-        (The_Item  : in     Item;
-         The_Count : in     Positive;
-         Continue  :    out Boolean);
-   procedure Iterate (Over_The_Bag : in Bag);
+        (The_Item  :     Item;
+         The_Count :     Positive;
+         Continue  : out Boolean);
+   procedure Iterate (Over_The_Bag : Bag);
 
 private
 

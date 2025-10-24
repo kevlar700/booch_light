@@ -84,87 +84,90 @@ package Booch_Light.Calendar_Utilities is
       Month_Day_Year); -- 02/27/55
 
    function Is_Leap_Year
-     (The_Year : in Year)
+     (The_Year : Year)
       return Boolean;
 
    function Days_In
-     (The_Year : in Year)
+     (The_Year : Year)
       return Year_Day;
 
    function Days_In
-     (The_Month : in Month;
-      The_Year  : in Year)
+     (The_Month : Month;
+      The_Year  : Year)
       return Day;
 
    function Month_Of
-     (The_Month : in Month)
+     (The_Month : Month)
       return Month_Name;
 
    function Month_Of
-     (The_Month : in Month_Name)
+     (The_Month : Month_Name)
       return Month;
 
    function Day_Of
-     (The_Year : in Year;
-      The_Day  : in Year_Day)
+     (The_Year : Year;
+      The_Day  : Year_Day)
       return Day_Name;
 
    function Day_Of
-     (The_Time : in Time)
+     (The_Time : Time)
       return Year_Day;
 
    procedure Time_Of
-     (The_Year     : in     Year;
-      The_Day      : in     Year_Day;
-      Result       :    out Time;
-      Booch_Status :    out Locus.Time_Of);
+     (The_Year     :     Year;
+      The_Day      :     Year_Day;
+      Result       : out Time;
+      Booch_Status : out Locus.Time_Of);
 
    function Period_Of
-     (The_Time : in Time)
+     (The_Time : Time)
       return Period;
 
    --  function Time_Of
-   --    (The_Time : in Time)
+   --    (The_Time : Time)
    --     return Ada.Calendar.Time;
    --
    --  function Time_Of
-   --    (The_Time : in Ada.Calendar.Time)
+   --    (The_Time : Ada.Calendar.Time)
    --     return Time;
 
-   function Time_Image_Of
-     (The_Time  : in Time;
-      Time_Form : in Time_Format := Full)
-      return String;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Time_Image_Of
+   --       (The_Time  : Time;
+   --        Time_Form : Time_Format := Full)
+   --        return String;
 
-   function Date_Image_Of
-     (The_Time  : in Time;
-      Date_Form : in Date_Format := Full)
-      return String;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Date_Image_Of
+   --    (The_Time  : Time;
+   --     Date_Form : Date_Format := Full)
+   --     return String;
 
    procedure Value_Of
-     (The_Date     : in     String;
-      The_Time     : in     String;
-      Date_Form    : in     Date_Format := Full;
-      Time_Form    : in     Time_Format := Full;
-      Result       :    out Time;
-      Booch_Status :    out Locus.Value_Of);
+     (The_Date     :     String;
+      The_Time     :     String;
+      Date_Form    :     Date_Format := Full;
+      Time_Form    :     Time_Format := Full;
+      Result       : out Time;
+      Booch_Status : out Locus.Value_Of);
 
    function Duration_Of
-     (The_Interval : in Interval)
+     (The_Interval : Interval)
       return Duration;
 
    function Interval_Of
-     (The_Duration : in Duration)
+     (The_Duration : Duration)
       return Interval;
 
-   function Image_Of
-     (The_Interval : in Interval)
-      return String;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Image_Of
+   --    (The_Interval : Interval)
+   --     return String;
 
    procedure Value_Of
-     (The_Interval : in     String;
-      Result       :    out Interval;
-      Booch_Status :    out Locus.Value_Of);
+     (The_Interval :     String;
+      Result       : out Interval;
+      Booch_Status : out Locus.Value_Of);
 
 end Booch_Light.Calendar_Utilities;
 

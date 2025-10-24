@@ -12,7 +12,7 @@ package body Booch_Light
   .Queue_Nonpriority_Nonbalking_Sequential_Bounded_Managed_Noniterator is
 
    procedure Copy
-     (From_The_Queue : in     Queue;
+     (From_The_Queue :     Queue;
       To_The_Queue   : in out Queue;
       Booch_Status   :    out Locus.Copy)
    is
@@ -40,7 +40,7 @@ package body Booch_Light
    end Clear;
 
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :     Item;
       To_The_Queue : in out Queue;
       Booch_Status :    out Locus.Add)
    is
@@ -83,8 +83,8 @@ package body Booch_Light
    end Pop;
 
    function Is_Equal
-     (Left  : in Queue;
-      Right : in Queue)
+     (Left  : Queue;
+      Right : Queue)
       return Boolean
    is
    begin
@@ -101,7 +101,7 @@ package body Booch_Light
    end Is_Equal;
 
    function Length_Of
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Natural
    is
    begin
@@ -109,7 +109,7 @@ package body Booch_Light
    end Length_Of;
 
    function Is_Empty
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Boolean
    is
    begin
@@ -117,7 +117,7 @@ package body Booch_Light
    end Is_Empty;
 
    procedure Front_Of
-     (The_Queue    : in     Queue;
+     (The_Queue    :     Queue;
       The_Front    :    out Item;
       Booch_Status :    out Locus.Front_Of)
    is

@@ -10,10 +10,10 @@ with Booch_Light.Alogs;
 package body Booch_Light.Binary_Search is
 
    procedure Location_Of
-     (The_Key      : in     Key;
-      In_The_Items : in     Items;
-      The_Location :    out Index;
-      Booch_Status :    out Status.Location_Of)
+     (The_Key      :     Key;
+      In_The_Items :     Items;
+      The_Location : out Index;
+      Booch_Status : out Status.Location_Of)
    is
       Lower_Index : Index := In_The_Items'First;
       Upper_Index : Index := In_The_Items'Last;
@@ -21,10 +21,12 @@ package body Booch_Light.Binary_Search is
       while Lower_Index <= Upper_Index loop
          The_Location :=
            Index'Val ((Index'Pos (Lower_Index) + Index'Pos (Upper_Index)) / 2);
-         if Is_Equal (The_Key, In_The_Items (The_Location)) then
+         if Is_Equal (The_Key, In_The_Items (The_Location))
+         then
             Booch_Status := OK;
             return;
-         elsif Is_Less_Than (The_Key, In_The_Items (The_Location)) then
+         elsif Is_Less_Than (The_Key, In_The_Items (The_Location))
+         then
             exit when (The_Location = In_The_Items'First);
             Upper_Index := Index'Pred (The_Location);
          else

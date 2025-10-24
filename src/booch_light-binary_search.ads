@@ -12,12 +12,12 @@ generic
    type Index is (<>);
    type Items is array (Index range <>) of Item;
    with function Is_Equal
-     (Left  : in Key;
-      Right : in Item)
+     (Left  : Key;
+      Right : Item)
       return Boolean;
    with function Is_Less_Than
-     (Left  : in Key;
-      Right : in Item)
+     (Left  : Key;
+      Right : Item)
       return Boolean;
 package Booch_Light.Binary_Search is
 
@@ -29,8 +29,8 @@ package Booch_Light.Binary_Search is
    end Status;
 
    procedure Location_Of
-     (The_Key      : in     Key;
-      In_The_Items : in     Items;
+     (The_Key      :     Key;
+      In_The_Items :     Items;
       The_Location :    out Index;
       Booch_Status :    out Status.Location_Of);
 

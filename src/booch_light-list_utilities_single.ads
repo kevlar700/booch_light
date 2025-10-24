@@ -13,7 +13,7 @@ generic
    with procedure Clear (The_List : in out List);
 
    with procedure Construct
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       And_The_List : in out List);
 
    with procedure Swap_Tail
@@ -21,11 +21,11 @@ generic
       And_The_List : in out List);
 
    with function Is_Null
-     (The_List : in List)
+     (The_List : List)
       return Boolean;
 
    with function Tail_Of
-     (The_List : in List)
+     (The_List : List)
       return List;
 
 package Booch_Light.List_Utilities_Single is
@@ -49,7 +49,7 @@ package Booch_Light.List_Utilities_Single is
    type Items is array (Positive range <>) of Item;
 
    procedure Construct
-     (The_Items    : in     Items;
+     (The_Items    :        Items;
       And_The_List : in out List);
 
    procedure Construct
@@ -58,37 +58,37 @@ package Booch_Light.List_Utilities_Single is
 
    procedure Split
      (The_List        : in out List;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Into_The_List   : in out List;
       Booch_Status    :    out Locus.Split);
 
    procedure Insert
-     (The_Item           : in     Item;
+     (The_Item           :        Item;
       In_The_List        : in out List;
-      After_The_Position : in     Positive;
+      After_The_Position :        Positive;
       Booch_Status       :    out Locus.Insert);
 
    procedure Insert
      (The_List           : in out List;
       In_The_List        : in out List;
-      After_The_Position : in     Positive;
+      After_The_Position :        Positive;
       Booch_Status       :    out Locus.Insert);
 
    procedure Insert
-     (The_Item       : in     Item;
+     (The_Item       :        Item;
       After_The_List : in out List);
 
    procedure Insert
-     (The_List       : in     List;
+     (The_List       :        List;
       After_The_List : in out List);
 
    procedure Remove_Item
      (In_The_List     : in out List;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Booch_Status    :    out Locus.Remove_Item);
 
    function Foot_Of
-     (The_List : in List)
+     (The_List : List)
       return List;
 
 end Booch_Light.List_Utilities_Single;

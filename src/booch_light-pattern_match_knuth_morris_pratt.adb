@@ -11,8 +11,8 @@ with Booch_Light.Alogs;
 package body Booch_Light.Pattern_Match_Knuth_Morris_Pratt is
 
    procedure Location_Of
-     (The_Pattern  : in     Items;
-      In_The_Items : in     Items;
+     (The_Pattern  :     Items;
+      In_The_Items :     Items;
       Result       :    out Index;
       Booch_Status :    out Locus.Location_Of)
    is
@@ -25,7 +25,7 @@ package body Booch_Light.Pattern_Match_Knuth_Morris_Pratt is
       Items_Index   : Index   := In_The_Items'First;
 
       procedure Preprocess
-        (The_Pattern  : in     Items;
+        (The_Pattern  :     Items;
          Pattern_Skip : in out Skip_Table)
       is
          Pattern_Index : Index   := The_Pattern'First;

@@ -16,9 +16,7 @@ package Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
           Static_Predicate => Copy in Exception_Overflow | OK;
 
       subtype Add is Status_Code with
-          Static_Predicate =>
-           Add in
-             Item_Is_In_Set | Exception_Overflow | OK;
+          Static_Predicate => Add in Item_Is_In_Set | Exception_Overflow | OK;
 
       subtype Remove is Status_Code with
           Static_Predicate => Remove in Item_Is_Not_In_Set | OK;
@@ -27,95 +25,93 @@ package Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
           Static_Predicate => Union in Exception_Overflow | OK;
 
       subtype Intersection is Status_Code with
-          Static_Predicate =>
-           Intersection in Exception_Overflow | OK;
+          Static_Predicate => Intersection in Exception_Overflow | OK;
 
       subtype Difference is Status_Code with
-          Static_Predicate =>
-           Difference in Exception_Overflow | OK;
+          Static_Predicate => Difference in Exception_Overflow | OK;
 
    end Locus;
 
    type Set (The_Size : Positive) is limited private;
 
    procedure Copy
-     (From_The_Set : in     Set;
+     (From_The_Set :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Copy);
 
    procedure Clear (The_Set : in out Set);
 
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Add);
 
    procedure Remove
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       From_The_Set : in out Set;
       Booch_Status :    out Locus.Remove);
 
    procedure Union
-     (Of_The_Set   : in     Set;
-      And_The_Set  : in     Set;
+     (Of_The_Set   :        Set;
+      And_The_Set  :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Union);
 
    procedure Intersection
-     (Of_The_Set   : in     Set;
-      And_The_Set  : in     Set;
+     (Of_The_Set   :        Set;
+      And_The_Set  :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Intersection);
 
    procedure Difference
-     (Of_The_Set   : in     Set;
-      And_The_Set  : in     Set;
+     (Of_The_Set   :        Set;
+      And_The_Set  :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Difference);
 
    function Is_Equal
-     (Left  : in Set;
-      Right : in Set)
+     (Left  : Set;
+      Right : Set)
       return Boolean;
 
    function Extent_Of
-     (The_Set : in Set)
+     (The_Set : Set)
       return Natural;
 
    function Is_Empty
-     (The_Set : in Set)
+     (The_Set : Set)
       return Boolean;
 
    function Is_A_Member
-     (The_Item   : in Item;
-      Of_The_Set : in Set)
+     (The_Item   : Item;
+      Of_The_Set : Set)
       return Boolean;
 
    function Is_A_Subset
-     (Left  : in Set;
-      Right : in Set)
+     (Left  : Set;
+      Right : Set)
       return Boolean;
 
    function Is_A_Proper_Subset
-     (Left  : in Set;
-      Right : in Set)
+     (Left  : Set;
+      Right : Set)
       return Boolean;
 
    generic
       type Status_Item is (<>);
       with procedure Process
-        (The_Item     : in     Item;
-         Continue     :    out Boolean;
-         Booch_Status :    out Status_Item);
+        (The_Item     :     Item;
+         Continue     : out Boolean;
+         Booch_Status : out Status_Item);
    procedure Iterate_With_Status
-     (Over_The_Set : in     Set;
-      Booch_Status :    out Status_Item);
+     (Over_The_Set :     Set;
+      Booch_Status : out Status_Item);
 
    generic
       with procedure Process
-        (The_Item : in     Item;
-         Continue :    out Boolean);
-   procedure Iterate (Over_The_Set : in Set);
+        (The_Item :     Item;
+         Continue : out Boolean);
+   procedure Iterate (Over_The_Set : Set);
 
 private
    type Items is array (Positive range <>) of Item;

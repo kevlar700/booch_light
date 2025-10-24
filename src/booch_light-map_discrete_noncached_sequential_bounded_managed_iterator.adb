@@ -12,7 +12,7 @@ package body Booch_Light
   .Map_Discrete_Noncached_Sequential_Bounded_Managed_Iterator is
 
    procedure Copy
-     (From_The_Map : in     Map;
+     (From_The_Map :        Map;
       To_The_Map   : in out Map)
    is
    begin
@@ -27,13 +27,14 @@ package body Booch_Light
    end Clear;
 
    procedure Bind
-     (The_Domain    : in     Domain;
-      And_The_Range : in     Ranges;
+     (The_Domain    :        Domain;
+      And_The_Range :        Ranges;
       In_The_Map    : in out Map;
       Booch_Status  :    out Locus.Bind)
    is
    begin
-      if In_The_Map (The_Domain).Is_Bound then
+      if In_The_Map (The_Domain).Is_Bound
+      then
          Alogs.Log
            (Log_ID  => "286768A4AB552851",
             Message => "Multiple_Binding: Bind failed");
@@ -50,12 +51,13 @@ package body Booch_Light
    end Bind;
 
    procedure Unbind
-     (The_Domain   : in     Domain;
+     (The_Domain   :        Domain;
       In_The_Map   : in out Map;
       Booch_Status :    out Locus.Unbind)
    is
    begin
-      if not In_The_Map (The_Domain).Is_Bound then
+      if not In_The_Map (The_Domain).Is_Bound
+      then
          Alogs.Log
            (Log_ID  => "053FB0CC57AEE092",
             Message => "Domain_Is_Not_Bound: Unbind failed");
@@ -69,13 +71,14 @@ package body Booch_Light
    end Unbind;
 
    function Is_Equal
-     (Left  : in Map;
-      Right : in Map)
+     (Left  : Map;
+      Right : Map)
       return Boolean
    is
    begin
       for Index in Left'Range loop
-         if Left (Index).Is_Bound /= Right (Index).Is_Bound then
+         if Left (Index).Is_Bound /= Right (Index).Is_Bound
+         then
             return False;
          elsif Left (Index).Is_Bound
            and then Left (Index).The_Range /= Right (Index).The_Range
@@ -87,13 +90,14 @@ package body Booch_Light
    end Is_Equal;
 
    function Extent_Of
-     (The_Map : in Map)
+     (The_Map : Map)
       return Natural
    is
       Count : Natural := 0;
    begin
       for Index in The_Map'Range loop
-         if The_Map (Index).Is_Bound then
+         if The_Map (Index).Is_Bound
+         then
             Count := Count + 1;
          end if;
       end loop;
@@ -101,12 +105,13 @@ package body Booch_Light
    end Extent_Of;
 
    function Is_Empty
-     (The_Map : in Map)
+     (The_Map : Map)
       return Boolean
    is
    begin
       for Index in The_Map'Range loop
-         if The_Map (Index).Is_Bound then
+         if The_Map (Index).Is_Bound
+         then
             return False;
          end if;
       end loop;
@@ -114,8 +119,8 @@ package body Booch_Light
    end Is_Empty;
 
    function Is_Bound
-     (The_Domain : in Domain;
-      In_The_Map : in Map)
+     (The_Domain : Domain;
+      In_The_Map : Map)
       return Boolean
    is
    begin
@@ -123,13 +128,14 @@ package body Booch_Light
    end Is_Bound;
 
    procedure Range_Of
-     (The_Domain   : in     Domain;
-      In_The_Map   : in     Map;
-      Result       :    out Ranges;
-      Booch_Status :    out Locus.Range_Of)
+     (The_Domain   :     Domain;
+      In_The_Map   :     Map;
+      Result       : out Ranges;
+      Booch_Status : out Locus.Range_Of)
    is
    begin
-      if not In_The_Map (The_Domain).Is_Bound then
+      if not In_The_Map (The_Domain).Is_Bound
+      then
          Alogs.Log
            (Log_ID  => "94104FFBD9E3A428",
             Message => "Domain_Is_Not_Bound: Range_Of failed");
@@ -142,11 +148,12 @@ package body Booch_Light
 
    end Range_Of;
 
-   procedure Iterate (Over_The_Map : in Map) is
+   procedure Iterate (Over_The_Map : Map) is
       Continue : Boolean;
    begin
       for The_Iterator in Over_The_Map'Range loop
-         if Over_The_Map (The_Iterator).Is_Bound then
+         if Over_The_Map (The_Iterator).Is_Bound
+         then
             Process
               (The_Iterator, Over_The_Map (The_Iterator).The_Range, Continue);
          end if;

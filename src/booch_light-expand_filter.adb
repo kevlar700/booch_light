@@ -8,7 +8,7 @@
 
 package body Booch_Light.Expand_Filter is
 
-   procedure Expand (The_Item : in Item) is
+   procedure Expand (The_Item : Item) is
    begin
       Put (Filter (The_Item));
    end Expand;

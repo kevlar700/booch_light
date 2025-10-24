@@ -6,129 +6,92 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-with Booch_Light.Map_Simple_Noncached_Sequential_Bounded_Managed_Iterator;
-
 generic
    type Item is private;
-   The_Size : in Positive;
-   Maximum_Children : in Positive;
+   The_Size : Positive;
 
-package Booch_Light.Tree_Arbitrary_Single_Bounded_Managed is
-
-   type Tree is private;
-
-   Null_Tree : constant Tree;
-
-   function Hash_Of
-     (The_Child : in Positive)
-      return Positive;
-
-     -- The enums provided by these packages are centralised in booch_light.ads
-     -- and therefore all compatible
-   package Map is new Map_Simple_Noncached_Sequential_Bounded_Managed_Iterator
-     (Domain  => Positive,
-      Ranges  => Positive,
-      Hash_Of => Hash_Of);
+package Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    package Locus is
 
-      subtype Copy_Child is Status_Code with
-          Static_Predicate =>
-           Copy_Child in Multiple_Binding | Exception_Overflow | OK;
-
       subtype Copy is Status_Code with
-          Static_Predicate => Copy in Copy_Child | Exception_Overflow | OK;
+          Static_Predicate => Copy in Exception_Overflow | OK;
 
       subtype Construct is Status_Code with
-          Static_Predicate =>
-           Construct in
-             Map.Locus.Bind | Tree_Is_Not_Null | Child_Error
-             | Exception_Overflow | OK;
+          Static_Predicate => Construct in Exception_Overflow | OK;
 
       subtype Set_Item is Status_Code with
           Static_Predicate => Set_Item in Tree_Is_Null | OK;
 
       subtype Swap_Child is Status_Code with
-          Static_Predicate =>
-           Swap_Child in
-             Map.Locus.Range_Of | Map.Locus.Unbind | Map.Locus.Bind
-             | Tree_Is_Not_Null | Child_Error | Not_At_Root | OK;
-
-      subtype Is_Equal is Status_Code with
-          Static_Predicate => Is_Equal in Map.Locus.Range_Of | OK;
+          Static_Predicate => Swap_Child in Tree_Is_Null | OK;
 
       subtype Item_Of is Status_Code with
           Static_Predicate => Item_Of in Tree_Is_Null | OK;
 
-      subtype Number_Of_Children_In is Status_Code with
-          Static_Predicate => Number_Of_Children_In in Tree_Is_Null | OK;
-
       subtype Child_Of is Status_Code with
-          Static_Predicate =>
-           Child_Of in Map.Locus.Range_Of | Tree_Is_Null | Child_Error | OK;
-
-      subtype Parent_Of is Status_Code with
-          Static_Predicate => Parent_Of in Tree_Is_Null | OK;
+          Static_Predicate => Child_Of in Tree_Is_Null | OK;
 
    end Locus;
 
+   type Tree is private;
+
+   type Child is
+     (Left,
+      Right);
+
+   Null_Tree : constant Tree;
+
    procedure Copy
-     (From_The_Tree : in     Tree;
+     (From_The_Tree :        Tree;
       To_The_Tree   : in out Tree;
       Booch_Status  :    out Locus.Copy);
 
    procedure Clear (The_Tree : in out Tree);
 
    procedure Construct
-     (The_Item           : in     Item;
-      And_The_Tree       : in out Tree;
-      Number_Of_Children : in     Natural;
-      On_The_Child       : in     Natural;
-      Booch_Status       :    out Locus.Construct);
+     (The_Item     :        Item;
+      And_The_Tree : in out Tree;
+      On_The_Child :        Child;
+      Booch_Status :    out Locus.Construct);
 
    procedure Set_Item
      (Of_The_Tree  : in out Tree;
-      To_The_Item  : in     Item;
+      To_The_Item  :        Item;
       Booch_Status :    out Locus.Set_Item);
 
    procedure Swap_Child
-     (The_Child    : in     Positive;
+     (The_Child    :        Child;
       Of_The_Tree  : in out Tree;
       And_The_Tree : in out Tree;
       Booch_Status :    out Locus.Swap_Child);
 
-   procedure Is_Equal
-     (Left         : in     Tree;
-      Right        : in     Tree;
-      Result       :    out Boolean;
-      Booch_Status :    out Locus.Is_Equal);
+   function Is_Equal
+     (Left  : Tree;
+      Right : Tree)
+      return Boolean;
 
    function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
-   procedure Item_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Item;
-      Booch_Status :    out Locus.Item_Of);
 
-   procedure Number_Of_Children_In
-     (The_Tree     : in     Tree;
-      Result       :    out Natural;
-      Booch_Status :    out Locus.Number_Of_Children_In);
+   procedure Item_Of
+     (The_Tree     :     Tree;
+      Result       : out Item;
+      Booch_Status : out Locus.Item_Of);
 
    procedure Child_Of
-     (The_Tree     : in     Tree;
-      The_Child    : in     Positive;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Child_Of);
+     (The_Tree     :     Tree;
+      The_Child    :     Child;
+      Result       : out Tree;
+      Booch_Status : out Locus.Child_Of);
 
 private
    type Tree is record
       The_Head : Natural := 0;
    end record;
    Null_Tree : constant Tree := Tree'(The_Head => 0);
-
-end Booch_Light.Tree_Arbitrary_Single_Bounded_Managed;
+end Booch_Light.Tree_Binary_Single_Bounded_Managed;
 
 --              Original Booch Components (Ada 83 version)
 --  License: MIT

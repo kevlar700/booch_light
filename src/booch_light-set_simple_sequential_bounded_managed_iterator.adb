@@ -10,12 +10,13 @@ with Booch_Light.Alogs;
 package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
 
    procedure Copy
-     (From_The_Set : in     Set;
+     (From_The_Set :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Copy)
    is
    begin
-      if From_The_Set.The_Back > To_The_Set.The_Size then
+      if From_The_Set.The_Back > To_The_Set.The_Size
+      then
          Booch_Status := Exception_Overflow;
          Alogs.Log
            (Log_ID  => "91D739548184A9BE",
@@ -37,14 +38,15 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Clear;
 
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Add)
    is
    begin
 
       for Index in 1 .. To_The_Set.The_Back loop
-         if The_Item = To_The_Set.The_Items (Index) then
+         if The_Item = To_The_Set.The_Items (Index)
+         then
             Alogs.Log
               (Log_ID  => "8965B5BC68EB0E0E",
                Message =>
@@ -69,13 +71,14 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Add;
 
    procedure Remove
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       From_The_Set : in out Set;
       Booch_Status :    out Locus.Remove)
    is
    begin
       for Index in 1 .. From_The_Set.The_Back loop
-         if The_Item = From_The_Set.The_Items (Index) then
+         if The_Item = From_The_Set.The_Items (Index)
+         then
             From_The_Set.The_Items (Index .. (From_The_Set.The_Back - 1)) :=
               From_The_Set.The_Items ((Index + 1) .. From_The_Set.The_Back);
             From_The_Set.The_Back := From_The_Set.The_Back - 1;
@@ -91,8 +94,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Remove;
 
    procedure Union
-     (Of_The_Set   : in     Set;
-      And_The_Set  : in     Set;
+     (Of_The_Set   :        Set;
+      And_The_Set  :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Union)
    is
@@ -114,7 +117,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
                To_Index := To_Index - 1;
             end if;
          end loop;
-         if To_Index = 0 then
+         if To_Index = 0
+         then
             To_The_Set.The_Items (To_The_Set.The_Back + 1) :=
               And_The_Set.The_Items (And_Index);
             To_The_Set.The_Back := To_The_Set.The_Back + 1;
@@ -134,8 +138,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Union;
 
    procedure Intersection
-     (Of_The_Set   : in     Set;
-      And_The_Set  : in     Set;
+     (Of_The_Set   :        Set;
+      And_The_Set  :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Intersection)
    is
@@ -171,8 +175,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Intersection;
 
    procedure Difference
-     (Of_The_Set   : in     Set;
-      And_The_Set  : in     Set;
+     (Of_The_Set   :        Set;
+      And_The_Set  :        Set;
       To_The_Set   : in out Set;
       Booch_Status :    out Locus.Difference)
    is
@@ -190,7 +194,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
                And_Index := And_Index - 1;
             end if;
          end loop;
-         if And_Index = 0 then
+         if And_Index = 0
+         then
             To_The_Set.The_Items (To_The_Set.The_Back + 1) :=
               Of_The_Set.The_Items (Of_Index);
             To_The_Set.The_Back := To_The_Set.The_Back + 1;
@@ -209,13 +214,14 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Difference;
 
    function Is_Equal
-     (Left  : in Set;
-      Right : in Set)
+     (Left  : Set;
+      Right : Set)
       return Boolean
    is
       Right_Index : Natural;
    begin
-      if Left.The_Back /= Right.The_Back then
+      if Left.The_Back /= Right.The_Back
+      then
          return False;
       else
          for Left_Index in 1 .. Left.The_Back loop
@@ -228,7 +234,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
                   Right_Index := Right_Index - 1;
                end if;
             end loop;
-            if Right_Index = 0 then
+            if Right_Index = 0
+            then
                return False;
             end if;
          end loop;
@@ -237,7 +244,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_Equal;
 
    function Extent_Of
-     (The_Set : in Set)
+     (The_Set : Set)
       return Natural
    is
    begin
@@ -245,7 +252,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Extent_Of;
 
    function Is_Empty
-     (The_Set : in Set)
+     (The_Set : Set)
       return Boolean
    is
    begin
@@ -253,13 +260,14 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_Empty;
 
    function Is_A_Member
-     (The_Item   : in Item;
-      Of_The_Set : in Set)
+     (The_Item   : Item;
+      Of_The_Set : Set)
       return Boolean
    is
    begin
       for Index in 1 .. Of_The_Set.The_Back loop
-         if Of_The_Set.The_Items (Index) = The_Item then
+         if Of_The_Set.The_Items (Index) = The_Item
+         then
             return True;
          end if;
       end loop;
@@ -267,8 +275,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_A_Member;
 
    function Is_A_Subset
-     (Left  : in Set;
-      Right : in Set)
+     (Left  : Set;
+      Right : Set)
       return Boolean
    is
       Right_Index : Natural;
@@ -276,13 +284,15 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
       for Left_Index in 1 .. Left.The_Back loop
          Right_Index := Right.The_Back;
          while Right_Index > 0 loop
-            if Left.The_Items (Left_Index) = Right.The_Items (Right_Index) then
+            if Left.The_Items (Left_Index) = Right.The_Items (Right_Index)
+            then
                exit;
             else
                Right_Index := Right_Index - 1;
             end if;
          end loop;
-         if Right_Index = 0 then
+         if Right_Index = 0
+         then
             return False;
          end if;
       end loop;
@@ -290,8 +300,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_A_Subset;
 
    function Is_A_Proper_Subset
-     (Left  : in Set;
-      Right : in Set)
+     (Left  : Set;
+      Right : Set)
       return Boolean
    is
       Right_Index : Natural;
@@ -299,13 +309,15 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
       for Left_Index in 1 .. Left.The_Back loop
          Right_Index := Right.The_Back;
          while Right_Index > 0 loop
-            if Left.The_Items (Left_Index) = Right.The_Items (Right_Index) then
+            if Left.The_Items (Left_Index) = Right.The_Items (Right_Index)
+            then
                exit;
             else
                Right_Index := Right_Index - 1;
             end if;
          end loop;
-         if Right_Index = 0 then
+         if Right_Index = 0
+         then
             return False;
          end if;
       end loop;
@@ -313,8 +325,8 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_A_Proper_Subset;
 
    procedure Iterate_With_Status
-     (Over_The_Set : in     Set;
-      Booch_Status :    out Status_Item)
+     (Over_The_Set :     Set;
+      Booch_Status : out Status_Item)
    is
       Continue : Boolean;
    begin
@@ -327,7 +339,7 @@ package body Booch_Light.Set_Simple_Sequential_Bounded_Managed_Iterator is
       end loop;
    end Iterate_With_Status;
 
-   procedure Iterate (Over_The_Set : in Set) is
+   procedure Iterate (Over_The_Set : Set) is
       Continue : Boolean;
    begin
       for The_Iterator in 1 .. Over_The_Set.The_Back loop

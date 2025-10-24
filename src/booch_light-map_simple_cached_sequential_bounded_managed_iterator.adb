@@ -12,9 +12,9 @@ package body Booch_Light
   .Map_Simple_Cached_Sequential_Bounded_Managed_Iterator is
 
    procedure Find
-     (The_Domain : in     Domain;
-      In_The_Map : in     Map;
-      The_Bucket :    out Natural)
+     (The_Domain :     Domain;
+      In_The_Map :     Map;
+      The_Bucket : out Natural)
    is
       Initial_Probe    : constant Natural :=
         Hash_Of (The_Domain) mod In_The_Map.The_Size;
@@ -27,13 +27,15 @@ package body Booch_Light
            ((Index + Initial_Probe - 2) mod In_The_Map.The_Size) + 1;
          case In_The_Map.The_Items (Temporary_Index).The_State is
             when Empty =>
-               if Temporary_Bucket = 0 then
+               if Temporary_Bucket = 0
+               then
                   Temporary_Bucket := Temporary_Index;
                end if;
                The_Bucket := Temporary_Bucket;
                return;
             when Deleted =>
-               if Temporary_Bucket = 0 then
+               if Temporary_Bucket = 0
+               then
                   Temporary_Bucket := Temporary_Index;
                end if;
             when Bound =>
@@ -49,13 +51,14 @@ package body Booch_Light
    end Find;
 
    procedure Copy
-     (From_The_Map : in     Map;
+     (From_The_Map :        Map;
       To_The_Map   : in out Map;
       Booch_Status :    out Locus.Copy)
    is
       The_Bucket : Natural;
    begin
-      if From_The_Map.The_Count > To_The_Map.The_Size then
+      if From_The_Map.The_Count > To_The_Map.The_Size
+      then
          Alogs.Log
            (Log_ID  => "E13065CDB909A83C",
             Message => "Exception_Overflow: Copy failed");
@@ -68,7 +71,8 @@ package body Booch_Light
       end loop;
       To_The_Map.The_Count := 0;
       for Index in From_The_Map.The_Items'Range loop
-         if From_The_Map.The_Items (Index).The_State = Bound then
+         if From_The_Map.The_Items (Index).The_State = Bound
+         then
             Find
               (From_The_Map.The_Items (Index).The_Domain, To_The_Map,
                The_Bucket);
@@ -93,15 +97,16 @@ package body Booch_Light
    end Clear;
 
    procedure Bind
-     (The_Domain    : in     Domain;
-      And_The_Range : in     Ranges;
+     (The_Domain    :        Domain;
+      And_The_Range :        Ranges;
       In_The_Map    : in out Map;
       Booch_Status  :    out Locus.Bind)
    is
       The_Bucket : Natural;
    begin
       Find (The_Domain, In_The_Map, The_Bucket);
-      if In_The_Map.The_Items (The_Bucket).The_State = Bound then
+      if In_The_Map.The_Items (The_Bucket).The_State = Bound
+      then
          Alogs.Log
            (Log_ID  => "965F816779985A28",
             Message => "Multiple_Binding: Bind failed");
@@ -138,14 +143,15 @@ package body Booch_Light
    end Bind;
 
    procedure Unbind
-     (The_Domain   : in     Domain;
+     (The_Domain   :        Domain;
       In_The_Map   : in out Map;
       Booch_Status :    out Locus.Unbind)
    is
       The_Bucket : Natural;
    begin
       Find (The_Domain, In_The_Map, The_Bucket);
-      if In_The_Map.The_Items (The_Bucket).The_State = Bound then
+      if In_The_Map.The_Items (The_Bucket).The_State = Bound
+      then
          In_The_Map.The_Items (The_Bucket).The_State := Deleted;
          In_The_Map.The_Count := In_The_Map.The_Count - 1;
          In_The_Map.The_Cache.The_Domain             := The_Domain;
@@ -172,17 +178,19 @@ package body Booch_Light
    end Unbind;
 
    function Is_Equal
-     (Left  : in Map;
-      Right : in Map)
+     (Left  : Map;
+      Right : Map)
       return Boolean
    is
       Temporary_Index : Natural;
    begin
-      if Left.The_Count /= Right.The_Count then
+      if Left.The_Count /= Right.The_Count
+      then
          return False;
       else
          for Index in 1 .. Left.The_Size loop
-            if Left.The_Items (Index).The_State = Bound then
+            if Left.The_Items (Index).The_State = Bound
+            then
                Temporary_Index := 0;
                for Inner_Index in 1 .. Right.The_Size loop
                   if (Right.The_Items (Index).The_State = Bound)
@@ -209,7 +217,7 @@ package body Booch_Light
    end Is_Equal;
 
    function Extent_Of
-     (The_Map : in Map)
+     (The_Map : Map)
       return Natural
    is
    begin
@@ -217,7 +225,7 @@ package body Booch_Light
    end Extent_Of;
 
    function Is_Empty
-     (The_Map : in Map)
+     (The_Map : Map)
       return Boolean
    is
    begin
@@ -225,8 +233,8 @@ package body Booch_Light
    end Is_Empty;
 
    function Is_Bound
-     (The_Domain : in Domain;
-      In_The_Map : in Map)
+     (The_Domain : Domain;
+      In_The_Map : Map)
       return Boolean
    is
       The_Bucket : Natural;
@@ -245,17 +253,18 @@ package body Booch_Light
    end Is_Bound;
 
    procedure Range_Of
-     (The_Domain   : in     Domain;
-      In_The_Map   : in     Map;
-      Result       :    out Ranges;
-      Booch_Status :    out Locus.Range_Of)
+     (The_Domain   :     Domain;
+      In_The_Map   :     Map;
+      Result       : out Ranges;
+      Booch_Status : out Locus.Range_Of)
    is
       The_Bucket : Natural;
    begin
       if In_The_Map.The_Cache.Is_Current
         and then In_The_Map.The_Cache.The_Domain = The_Domain
       then
-         if In_The_Map.The_Cache.Is_Bound then
+         if In_The_Map.The_Cache.Is_Bound
+         then
             Result       := In_The_Map.The_Cache.The_Range;
             Booch_Status := OK;
             return;
@@ -268,7 +277,8 @@ package body Booch_Light
          end if;
       else
          Find (The_Domain, In_The_Map, The_Bucket);
-         if In_The_Map.The_Items (The_Bucket).The_State = Bound then
+         if In_The_Map.The_Items (The_Bucket).The_State = Bound
+         then
             Result       := In_The_Map.The_Items (The_Bucket).The_Range;
             Booch_Status := OK;
             return;
@@ -292,11 +302,12 @@ package body Booch_Light
 
    end Range_Of;
 
-   procedure Iterate (Over_The_Map : in Map) is
+   procedure Iterate (Over_The_Map : Map) is
       Continue : Boolean;
    begin
       for Index in Over_The_Map.The_Items'Range loop
-         if Over_The_Map.The_Items (Index).The_State = Bound then
+         if Over_The_Map.The_Items (Index).The_State = Bound
+         then
             Process
               (Over_The_Map.The_Items (Index).The_Domain,
                Over_The_Map.The_Items (Index).The_Range, Continue);

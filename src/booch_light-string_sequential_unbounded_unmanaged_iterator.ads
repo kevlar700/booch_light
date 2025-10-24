@@ -6,12 +6,18 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
+--  The most important point from the book to realise is that bounded is
+--  stack arrays based whilst this unbounded component allocates from the heap
+--  as more space is needed but never deallocates but rather reuses "freed"
+--  memory. It is therefore usable by a light runtime but may be problematic
+--  without a specific storage pool other than default.
+
 generic
    type Item is private;
    type Substring is array (Positive range <>) of Item;
    with function "<"
-     (Left  : in Item;
-      Right : in Item)
+     (Left  : Item;
+      Right : Item)
       return Boolean;
 package Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    --
@@ -60,169 +66,169 @@ package Booch_Light.String_Sequential_Unbounded_Unmanaged_Iterator is
    type U_String is limited private;
 
    procedure Copy
-     (From_The_String : in     U_String;
+     (From_The_String :        U_String;
       To_The_String   : in out U_String;
       Booch_Status    :    out Locus.Copy);
 
    procedure Copy
-     (From_The_Substring : in     Substring;
+     (From_The_Substring :        Substring;
       To_The_String      : in out U_String;
       Booch_Status       :    out Locus.Copy);
 
    procedure Clear (The_String : in out U_String);
 
    procedure Prepend
-     (The_String    : in     U_String;
+     (The_String    :        U_String;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Prepend);
 
    procedure Prepend
-     (The_Substring : in     Substring;
+     (The_Substring :        Substring;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Prepend);
 
    procedure Append
-     (The_String    : in     U_String;
+     (The_String    :        U_String;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Append);
 
    procedure Append
-     (The_Substring : in     Substring;
+     (The_Substring :        Substring;
       To_The_String : in out U_String;
       Booch_Status  :    out Locus.Append);
 
    procedure Insert
-     (The_String      : in     U_String;
+     (The_String      :        U_String;
       In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Booch_Status    :    out Locus.Insert);
 
    procedure Insert
-     (The_Substring   : in     Substring;
+     (The_Substring   :        Substring;
       In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Booch_Status    :    out Locus.Insert);
 
    procedure Delete
      (In_The_String     : in out U_String;
-      From_The_Position : in     Positive;
-      To_The_Position   : in     Positive;
+      From_The_Position :        Positive;
+      To_The_Position   :        Positive;
       Booch_Status      :    out Locus.Delete);
 
    procedure Replace
      (In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
-      With_The_String : in     U_String;
+      At_The_Position :        Positive;
+      With_The_String :        U_String;
       Booch_Status    :    out Locus.Replace);
 
    procedure Replace
      (In_The_String      : in out U_String;
-      At_The_Position    : in     Positive;
-      With_The_Substring : in     Substring;
+      At_The_Position    :        Positive;
+      With_The_Substring :        Substring;
       Booch_Status       :    out Locus.Replace);
 
    procedure Set_Item
      (In_The_String   : in out U_String;
-      At_The_Position : in     Positive;
-      With_The_Item   : in     Item;
+      At_The_Position :        Positive;
+      With_The_Item   :        Item;
       Booch_Status    :    out Locus.Set_Item);
 
    function Is_Equal
-     (Left  : in U_String;
-      Right : in U_String)
+     (Left  : U_String;
+      Right : U_String)
       return Boolean;
 
    function Is_Equal
-     (Left  : in Substring;
-      Right : in U_String)
+     (Left  : Substring;
+      Right : U_String)
       return Boolean;
 
    function Is_Equal
-     (Left  : in U_String;
-      Right : in Substring)
+     (Left  : U_String;
+      Right : Substring)
       return Boolean;
 
    function Is_Less_Than
-     (Left  : in U_String;
-      Right : in U_String)
+     (Left  : U_String;
+      Right : U_String)
       return Boolean;
 
    function Is_Less_Than
-     (Left  : in Substring;
-      Right : in U_String)
+     (Left  : Substring;
+      Right : U_String)
       return Boolean;
 
    function Is_Less_Than
-     (Left  : in U_String;
-      Right : in Substring)
+     (Left  : U_String;
+      Right : Substring)
       return Boolean;
 
    function Is_Greater_Than
-     (Left  : in U_String;
-      Right : in U_String)
+     (Left  : U_String;
+      Right : U_String)
       return Boolean;
 
    function Is_Greater_Than
-     (Left  : in Substring;
-      Right : in U_String)
+     (Left  : Substring;
+      Right : U_String)
       return Boolean;
 
    function Is_Greater_Than
-     (Left  : in U_String;
-      Right : in Substring)
+     (Left  : U_String;
+      Right : Substring)
       return Boolean;
 
    function Length_Of
-     (The_String : in U_String)
+     (The_String : U_String)
       return Natural;
 
    function Is_Null
-     (The_String : in U_String)
+     (The_String : U_String)
       return Boolean;
 
    procedure Item_Of
-     (The_String      : in     U_String;
-      At_The_Position : in     Positive;
-      The_Item        :    out Item;
-      Booch_Status    :    out Locus.Item_Of);
+     (The_String      :     U_String;
+      At_The_Position :     Positive;
+      The_Item        : out Item;
+      Booch_Status    : out Locus.Item_Of);
 
    --  function Substring_Of
-   --    (The_String : in U_String)
+   --    (The_String : U_String)
    --     return Substring;
    --
    --  function Substring_Of
-   --    (The_String        : in U_String;
-   --     From_The_Position : in Positive;
-   --     To_The_Position   : in Positive)
+   --    (The_String        : U_String;
+   --     From_The_Position : Positive;
+   --     To_The_Position   : Positive)
    --     return Substring;
 
    function Substring_Of_Length
-     (The_String : in U_String)
+     (The_String : U_String)
       return Natural;
 
    procedure Substring_Of
-     (The_String    : in     U_String;
+     (The_String    :        U_String;
       The_Substring : in out Substring;
       Booch_Status  :    out Locus.Substring_Of);
 
    function Substring_Of_Length
-     (The_String        : in U_String;
-      From_The_Position : in Positive;
-      To_The_Position   : in Positive)
+     (The_String        : U_String;
+      From_The_Position : Positive;
+      To_The_Position   : Positive)
       return Natural;
 
    procedure Substring_Of
-     (The_String        : in     U_String;
-      From_The_Position : in     Positive;
-      To_The_Position   : in     Positive;
+     (The_String        :        U_String;
+      From_The_Position :        Positive;
+      To_The_Position   :        Positive;
       The_Substring     : in out Substring;
       Booch_Status      :    out Locus.Substring_Of);
 
    generic
       with procedure Process
-        (The_Item : in     Item;
-         Continue :    out Boolean);
-   procedure Iterate (Over_The_String : in U_String);
+        (The_Item :     Item;
+         Continue : out Boolean);
+   procedure Iterate (Over_The_String : U_String);
 
 private
    type Structure is access Substring;

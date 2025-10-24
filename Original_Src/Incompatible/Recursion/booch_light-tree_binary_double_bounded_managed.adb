@@ -8,9 +8,10 @@
 
 with Booch_Light.Alogs;
 
-package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
+package body Booch_Light.Tree_Binary_Double_Bounded_Managed is
 
    type Node is record
+      Previous      : Tree;
       The_Item      : Item;
       Left_Subtree  : Tree;
       Right_Subtree : Tree;
@@ -23,9 +24,11 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    procedure Free (The_Tree : in out Tree) is
       Temporary_Node : Tree;
    begin
-      if The_Tree /= Null_Tree then
+      if The_Tree.The_Head /= 0
+      then
          Free (Heap (The_Tree.The_Head).Left_Subtree);
          Free (Heap (The_Tree.The_Head).Right_Subtree);
+         Heap (The_Tree.The_Head).Previous      := Null_Tree;
          Heap (The_Tree.The_Head).Left_Subtree  := Free_List;
          Heap (The_Tree.The_Head).Right_Subtree := Null_Tree;
          Free_List                              := The_Tree;
@@ -36,7 +39,8 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    function New_Item return Tree is
       Temporary_Node : Tree;
    begin
-      if Free_List.The_Head = 0 then
+      if Free_List.The_Head = 0
+      then
          raise Storage_Error;
       else
          Temporary_Node                              := Free_List;
@@ -47,13 +51,14 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    end New_Item;
 
    procedure Copy
-     (From_The_Tree : in     Tree;
+     (From_The_Tree :        Tree;
       To_The_Tree   : in out Tree;
       Booch_Status  :    out Locus.Copy)
    is
    begin
       Free (To_The_Tree);
-      if From_The_Tree = Null_Tree then
+      if From_The_Tree = Null_Tree
+      then
          To_The_Tree := Null_Tree;
       else
          To_The_Tree                          := New_Item;
@@ -68,7 +73,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
          case Booch_Status is
             when Exception_Overflow =>
                Alogs.Log
-                 (Log_ID  => "0BDC6C672FF3463A",
+                 (Log_ID  => "1B340F5ED5302515",
                   Message => "Exception_Overflow: Copy failed");
                return;
 
@@ -76,6 +81,13 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
                null;
 
          end case;
+
+         if Heap (To_The_Tree.The_Head).Left_Subtree /= Null_Tree
+         then
+            Heap (Heap (To_The_Tree.The_Head).Left_Subtree.The_Head)
+              .Previous :=
+              To_The_Tree;
+         end if;
 
          Copy
            (From_The_Tree => Heap (From_The_Tree.The_Head).Right_Subtree,
@@ -94,6 +106,12 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
          end case;
 
+         if Heap (To_The_Tree.The_Head).Right_Subtree /= Null_Tree
+         then
+            Heap (Heap (To_The_Tree.The_Head).Right_Subtree.The_Head)
+              .Previous :=
+              To_The_Tree;
+         end if;
       end if;
 
       Booch_Status := OK;
@@ -101,11 +119,10 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    exception
       when Storage_Error =>
          Alogs.Status_Exception
-           (Log_ID  => "2255DFD36B518AC1",
+           (Log_ID  => "24542F432ABFBA23",
             Message => "Storage_Error: Exception_Overflow: Copy failed");
          Booch_Status := Exception_Overflow;
          return;
-
    end Copy;
 
    procedure Clear (The_Tree : in out Tree) is
@@ -114,28 +131,44 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    end Clear;
 
    procedure Construct
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       And_The_Tree : in out Tree;
-      On_The_Child : in     Child;
+      On_The_Child :        Child;
       Booch_Status :    out Locus.Construct)
    is
       Temporary_Node : Tree;
    begin
-      Temporary_Node                          := New_Item;
-      Heap (Temporary_Node.The_Head).The_Item := The_Item;
-      if On_The_Child = Left then
-         Heap (Temporary_Node.The_Head).Left_Subtree := And_The_Tree;
+      if And_The_Tree = Null_Tree
+      then
+         And_The_Tree                          := New_Item;
+         Heap (And_The_Tree.The_Head).The_Item := The_Item;
+      elsif Heap (And_The_Tree.The_Head).Previous = Null_Tree
+      then
+         Temporary_Node                          := New_Item;
+         Heap (Temporary_Node.The_Head).The_Item := The_Item;
+         Heap (And_The_Tree.The_Head).Previous   := Temporary_Node;
+         if On_The_Child = Left
+         then
+            Heap (Temporary_Node.The_Head).Left_Subtree := And_The_Tree;
+         else
+            Heap (Temporary_Node.The_Head).Right_Subtree := And_The_Tree;
+         end if;
+         And_The_Tree := Temporary_Node;
       else
-         Heap (Temporary_Node.The_Head).Right_Subtree := And_The_Tree;
+         Alogs.Log
+           (Log_ID  => "0C45A913C8B3B788",
+            Message => "Not_At_Root: Set_Item failed");
+         Booch_Status := Not_At_Root;
+         return;
       end if;
-      And_The_Tree := Temporary_Node;
+
       Booch_Status := OK;
 
    exception
       when Storage_Error =>
          Alogs.Status_Exception
-           (Log_ID  => "E0F4597D8CD2AA6B",
-            Message => "Storage_Error: Exception_Overflow: Construct failed");
+           (Log_ID  => "A4EE89DF94BFE0BB",
+            Message => "Storage_Error: Exception_Overflow: Set_Item failed");
          Booch_Status := Exception_Overflow;
          return;
 
@@ -143,17 +176,18 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
 
    procedure Set_Item
      (Of_The_Tree  : in out Tree;
-      To_The_Item  : in     Item;
+      To_The_Item  :        Item;
       Booch_Status :    out Locus.Set_Item)
    is
    begin
       Heap (Of_The_Tree.The_Head).The_Item := To_The_Item;
-      Booch_Status                         := OK;
+
+      Booch_Status := OK;
 
    exception
       when Constraint_Error =>
          Alogs.Status_Exception
-           (Log_ID  => "E0F4597D8CD2AA6B",
+           (Log_ID  => "A4EE89DF94BFE0BB",
             Message => "Constraint_Error: Tree_Is_Null: Set_Item failed");
          Booch_Status := Tree_Is_Null;
          return;
@@ -161,40 +195,97 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    end Set_Item;
 
    procedure Swap_Child
-     (The_Child    : in     Child;
+     (The_Child    :        Child;
       Of_The_Tree  : in out Tree;
       And_The_Tree : in out Tree;
       Booch_Status :    out Locus.Swap_Child)
    is
       Temporary_Node : Tree;
    begin
-      if The_Child = Left then
-         Temporary_Node := Heap (Of_The_Tree.The_Head).Left_Subtree;
-         Heap (Of_The_Tree.The_Head).Left_Subtree := And_The_Tree;
+      if The_Child = Left
+      then
+         if And_The_Tree = Null_Tree
+         then
+            if Heap (Of_The_Tree.The_Head).Left_Subtree /= Null_Tree
+            then
+               Temporary_Node := Heap (Of_The_Tree.The_Head).Left_Subtree;
+               Heap (Temporary_Node.The_Head).Previous  := Null_Tree;
+               Heap (Of_The_Tree.The_Head).Left_Subtree := Null_Tree;
+               And_The_Tree                             := Temporary_Node;
+            end if;
+         elsif Heap (And_The_Tree.The_Head).Previous = Null_Tree
+         then
+            if Heap (Of_The_Tree.The_Head).Left_Subtree /= Null_Tree
+            then
+               Temporary_Node := Heap (Of_The_Tree.The_Head).Left_Subtree;
+               Heap (Temporary_Node.The_Head).Previous  := Null_Tree;
+               Heap (Of_The_Tree.The_Head).Left_Subtree := And_The_Tree;
+               Heap (And_The_Tree.The_Head).Previous    := Of_The_Tree;
+               And_The_Tree                             := Temporary_Node;
+            else
+               Heap (And_The_Tree.The_Head).Previous    := Of_The_Tree;
+               Heap (Of_The_Tree.The_Head).Left_Subtree := And_The_Tree;
+               And_The_Tree                             := Null_Tree;
+            end if;
+         else
+            Alogs.Log
+              (Log_ID  => "A30177DD3C97B94C",
+               Message => "Not_At_Root: Swap_Child failed");
+            Booch_Status := Not_At_Root;
+            return;
+         end if;
       else
-         Temporary_Node := Heap (Of_The_Tree.The_Head).Right_Subtree;
-         Heap (Of_The_Tree.The_Head).Right_Subtree := And_The_Tree;
+         if And_The_Tree = Null_Tree
+         then
+            if Heap (Of_The_Tree.The_Head).Right_Subtree /= Null_Tree
+            then
+               Temporary_Node := Heap (Of_The_Tree.The_Head).Right_Subtree;
+               Heap (Temporary_Node.The_Head).Previous   := Null_Tree;
+               Heap (Of_The_Tree.The_Head).Right_Subtree := Null_Tree;
+               And_The_Tree                              := Temporary_Node;
+            end if;
+         elsif Heap (And_The_Tree.The_Head).Previous = Null_Tree
+         then
+            if Heap (Of_The_Tree.The_Head).Right_Subtree /= Null_Tree
+            then
+               Temporary_Node := Heap (Of_The_Tree.The_Head).Right_Subtree;
+               Heap (Temporary_Node.The_Head).Previous   := Null_Tree;
+               Heap (Of_The_Tree.The_Head).Right_Subtree := And_The_Tree;
+               Heap (And_The_Tree.The_Head).Previous     := Of_The_Tree;
+               And_The_Tree                              := Temporary_Node;
+            else
+               Heap (And_The_Tree.The_Head).Previous     := Of_The_Tree;
+               Heap (Of_The_Tree.The_Head).Right_Subtree := And_The_Tree;
+               And_The_Tree                              := Null_Tree;
+            end if;
+         else
+            Alogs.Log
+              (Log_ID  => "6F9BC575D65996B9",
+               Message => "Not_At_Root: Swap_Child failed");
+            Booch_Status := Not_At_Root;
+            return;
+         end if;
       end if;
-      And_The_Tree := Temporary_Node;
+
       Booch_Status := OK;
 
    exception
       when Constraint_Error =>
          Alogs.Status_Exception
-           (Log_ID  => "287581F1CEEB6D99",
+           (Log_ID  => "6F9BC575D65996B9",
             Message => "Constraint_Error: Tree_Is_Null: Swap_Child failed");
          Booch_Status := Tree_Is_Null;
          return;
-
    end Swap_Child;
 
    function Is_Equal
-     (Left  : in Tree;
-      Right : in Tree)
+     (Left  : Tree;
+      Right : Tree)
       return Boolean
    is
    begin
-      if Heap (Left.The_Head).The_Item /= Heap (Right.The_Head).The_Item then
+      if Heap (Left.The_Head).The_Item /= Heap (Right.The_Head).The_Item
+      then
          return False;
       else
          return
@@ -211,7 +302,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    end Is_Equal;
 
    function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean
    is
    begin
@@ -219,9 +310,9 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    end Is_Null;
 
    procedure Item_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Item;
-      Booch_Status :    out Locus.Item_Of)
+     (The_Tree     :     Tree;
+      Result       : out Item;
+      Booch_Status : out Locus.Item_Of)
    is
    begin
       Result       := Heap (The_Tree.The_Head).The_Item;
@@ -230,7 +321,7 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    exception
       when Constraint_Error =>
          Alogs.Status_Exception
-           (Log_ID  => "8F8CA84FC9CAD864",
+           (Log_ID  => "BA9F780B9EC3317A",
             Message => "Constraint_Error: Tree_Is_Null: Item_Of failed");
          Booch_Status := Tree_Is_Null;
          return;
@@ -238,13 +329,14 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    end Item_Of;
 
    procedure Child_Of
-     (The_Tree     : in     Tree;
-      The_Child    : in     Child;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Child_Of)
+     (The_Tree     :     Tree;
+      The_Child    :     Child;
+      Result       : out Tree;
+      Booch_Status : out Locus.Child_Of)
    is
    begin
-      if The_Child = Left then
+      if The_Child = Left
+      then
          Result := Heap (The_Tree.The_Head).Left_Subtree;
       else
          Result := Heap (The_Tree.The_Head).Right_Subtree;
@@ -255,12 +347,29 @@ package body Booch_Light.Tree_Binary_Single_Bounded_Managed is
    exception
       when Constraint_Error =>
          Alogs.Status_Exception
-           (Log_ID  => "C76FAB1C3AC891AB",
+           (Log_ID  => "18DBC643F84EC9E6",
             Message => "Constraint_Error: Tree_Is_Null: Child_Of failed");
          Booch_Status := Tree_Is_Null;
          return;
-
    end Child_Of;
+
+   procedure Parent_Of
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Parent_Of)
+   is
+   begin
+      Result       := Heap (The_Tree.The_Head).Previous;
+      Booch_Status := OK;
+
+   exception
+      when Constraint_Error =>
+         Alogs.Status_Exception
+           (Log_ID  => "BB9AB575F21BFF4D",
+            Message => "Constraint_Error: Tree_Is_Null: Parent_Of failed");
+         Booch_Status := Tree_Is_Null;
+         return;
+   end Parent_Of;
 
 begin
    Free_List.The_Head := 1;
@@ -269,7 +378,7 @@ begin
    end loop;
    Heap (The_Size).Left_Subtree := Null_Tree;
 
-end Booch_Light.Tree_Binary_Single_Bounded_Managed;
+end Booch_Light.Tree_Binary_Double_Bounded_Managed;
 
 --              Original Booch Components (Ada 83 version)
 --  License: MIT

@@ -32,7 +32,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    Arc_Free_List    : Arc;
 
    function Hash_Of
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Positive
    is
       pragma Unreferenced (The_Vertex);
@@ -47,7 +47,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Free (The_Vertex : in out Vertex) is
    begin
-      if The_Vertex /= Null_Vertex then
+      if The_Vertex /= Null_Vertex
+      then
          Arc_Set.Clear (Vertex_Heap (The_Vertex.The_Head).The_Arcs);
          Vertex_Heap (The_Vertex.The_Head).Reference_Count := 0;
          Vertex_Heap (The_Vertex.The_Head).Next            := Vertex_Free_List;
@@ -62,7 +63,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    is
       Temporary_Vertex : Vertex;
    begin
-      if Vertex_Free_List = Null_Vertex then
+      if Vertex_Free_List = Null_Vertex
+      then
          Alogs.Log
            (Log_ID  => "D0B31F93174E72A1",
             Message =>
@@ -83,7 +85,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Free (The_Arc : in out Arc) is
    begin
-      if The_Arc /= Null_Arc then
+      if The_Arc /= Null_Arc
+      then
          Arc_Heap (The_Arc.The_Head).Next := Arc_Free_List;
          Arc_Free_List                    := The_Arc;
          The_Arc                          := Null_Arc;
@@ -96,7 +99,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    is
       Temporary_Arc : Arc;
    begin
-      if Arc_Free_List = Null_Arc then
+      if Arc_Free_List = Null_Arc
+      then
          Alogs.Log
            (Log_ID  => "926ED38D301DBEC7",
             Message =>
@@ -115,263 +119,265 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    end New_Item;
 
-   procedure Copy
-     (From_The_Graph : in     Graph;
-      To_The_Graph   : in out Graph;
-      Booch_Status   :    out Locus.Copy)
-
-   is
-      New_Item_Status  : Locus.New_Item;
-      Vertices_Visited : Vertex_Map.Map (From_The_Graph.Total_Vertices);
-      procedure Visit
-        (The_Vertex   : in     Vertex;
-         Continue     :    out Boolean;
-         Booch_Status :    out Locus.Copy)
-      is
-         Bind_Status      : Vertex_Map.Locus.Bind;
-         Add_Status       : Vertex_Set.Locus.Add;
-         Temporary_Vertex : Vertex;
-
-         procedure Duplicate
-           (The_Arc      : in     Arc;
-            Continue     :    out Boolean;
-            Booch_Status :    out Locus.Copy)
-         is
-            Temporary_Arc   : Arc;
-            Set_Status      : Arc_Set.Locus.Add;
-            New_Item_Status : Locus.New_Item;
-         begin -- Duplicate
-
-            New_Item
-              (The_Item     => Temporary_Arc,
-               Booch_Status => New_Item_Status);
-            case New_Item_Status is
-               when No_Storage_Available =>
-                  Alogs.Log
-                    (Log_ID  => "83280D75475FB3D6",
-                     Message => "Failed to create Temporary_Arc");
-                  Booch_Status := New_Item_Status;
-                  Continue     := False;
-                  return;
-
-               when OK =>
-                  null;
-            end case;
-
-            Arc_Heap (Temporary_Arc.The_Head).The_Attribute :=
-              Arc_Heap (The_Arc.The_Head).The_Attribute;
-
-            Arc_Heap (Temporary_Arc.The_Head).The_Source := Temporary_Vertex;
-
-            declare
-               Visit_Status : Locus.Visit;
-            begin
-               Visit
-                 (The_Vertex   => Arc_Heap (The_Arc.The_Head).The_Destination,
-                  Continue     => Continue,
-                  Booch_Status => Visit_Status);
-               case Visit_Status is
-                  when Domain_Is_Not_Bound | Item_Is_In_Set
-                    | Exception_Overflow | Exception_Storage_Error
-                    | Multiple_Binding =>
-                     Alogs.Log
-                       (Log_ID  => "D5D4FFA4400C4637",
-                        Message => "Failed to Visit The_Destination");
-                     Continue     := False;
-                     Booch_Status := Visit_Status;
-                     return;
-
-                  when OK =>
-                     null;
-               end case;
-
-            end;
-
-            declare
-               Map_Status        : Vertex_Map.Locus.Range_Of;
-               Vertex_Map_Ranges : Vertex;
-            begin
-
-               Vertex_Map.Range_Of
-                 (The_Domain   => Arc_Heap (The_Arc.The_Head).The_Destination,
-                  In_The_Map   => Vertices_Visited,
-                  Result       => Vertex_Map_Ranges,
-                  Booch_Status => Map_Status);
-
-               case Map_Status is
-                  when Domain_Is_Not_Bound =>
-                     Alogs.Log
-                       (Log_ID  => "168273D4496FD173",
-                        Message =>
-                          "Failed to Vertex_Map.Range_Of The_Destination");
-                     Booch_Status := Map_Status;
-                     Continue     := False;
-                     return;
-
-                  when OK =>
-                     Arc_Heap (Temporary_Arc.The_Head).The_Destination :=
-                       Vertex_Map_Ranges;
-               end case;
-            end;
-
-            Arc_Set.Add
-              (The_Item     => Temporary_Arc,
-               To_The_Set => Vertex_Heap (Temporary_Vertex.The_Head).The_Arcs,
-               Booch_Status => Set_Status);
-
-            case Set_Status is
-               when Item_Is_In_Set | Exception_Overflow =>
-                  Alogs.Log
-                    (Log_ID  => "113055E039189CC5",
-                     Message => "Failed to add Arc to Vertex_Heap");
-                  Booch_Status := Set_Status;
-                  Continue     := False;
-                  return;
-
-               when OK =>
-                  null;
-            end case;
-
-            Arc_Set.Add
-              (The_Item     => Temporary_Arc,
-               To_The_Set   => To_The_Graph.The_Arcs,
-               Booch_Status => Set_Status);
-            case Set_Status is
-               when Item_Is_In_Set | Exception_Overflow =>
-                  Alogs.Log
-                    (Log_ID  => "63F395FA5664C067",
-                     Message => "Failed to add Arc To_The_Graph");
-                  Booch_Status := Set_Status;
-                  Continue     := False;
-                  return;
-
-               when OK =>
-                  null;
-            end case;
-
-            Booch_Status := OK;
-
-         end Duplicate;
-
-         procedure Process_Duplicate is new Arc_Set.Iterate_With_Status
-           (Process     => Duplicate,
-            Status_Item => Locus.Copy);
-
-      begin --  Visit
-         if not Vertex_Map.Is_Bound
-             (The_Vertex,
-              In_The_Map => Vertices_Visited) then
-
-            New_Item
-              (The_Item     => Temporary_Vertex,
-               Booch_Status => New_Item_Status);
-
-            case New_Item_Status is
-               when No_Storage_Available =>
-                  Alogs.Log
-                    (Log_ID  => "F47E1C978103042E",
-                     Message => "Not enough storage to add Vertex");
-                  Booch_Status := New_Item_Status;
-                  Continue     := False;
-                  return;
-
-               when OK =>
-                  null;
-            end case;
-
-            Vertex_Heap (Temporary_Vertex.The_Head).The_Item :=
-              Vertex_Heap (The_Vertex.The_Head).The_Item;
-
-            Vertex_Heap (Temporary_Vertex.The_Head).Reference_Count :=
-              Vertex_Heap (The_Vertex.The_Head).Reference_Count;
-
-            Vertex_Map.Bind
-              (The_Domain    => The_Vertex,
-               And_The_Range => Temporary_Vertex,
-               In_The_Map    => Vertices_Visited,
-               Booch_Status  => Bind_Status);
-
-            case Bind_Status is
-               when Exception_Overflow | Multiple_Binding =>
-                  Alogs.Log
-                    (Log_ID  => "D4529FA9EEFD388E",
-                     Message => "Failed to Bind The_Vertex");
-                  Booch_Status := Bind_Status;
-                  Continue     := False;
-                  return;
-
-               when OK =>
-                  null;
-            end case;
-
-            Vertex_Set.Add
-              (The_Item     => Temporary_Vertex,
-               To_The_Set   => To_The_Graph.The_Vertices,
-               Booch_Status => Add_Status);
-
-            case Add_Status is
-               when Item_Is_In_Set | Exception_Overflow =>
-                  Alogs.Log
-                    (Log_ID  => "B3AA5CA049C5F8A1",
-                     Message => "Failed to Add Vertex To_The_Graph");
-                  Booch_Status := Add_Status;
-                  Continue     := False;
-                  return;
-
-               when OK =>
-                  null;
-            end case;
-
-            declare
-               Status_Duplicate : Locus.Duplicate;
-            begin
-               Process_Duplicate
-                 (Over_The_Set => Vertex_Heap (The_Vertex.The_Head).The_Arcs,
-                  Booch_Status => Status_Duplicate);
-
-               case Status_Duplicate is
-                  when Domain_Is_Not_Bound | Item_Is_In_Set
-                    | Exception_Overflow | Exception_Storage_Error =>
-                     Alogs.Log
-                       (Log_ID  => "4C02FB94920AD302",
-                        Message =>
-                          "Error whilst processing Duplicate over The_ARC");
-                     Continue := False;
-                     return;
-
-                  when OK =>
-                     null;
-               end case;
-
-            end;
-         end if;
-         Continue     := True;
-         Booch_Status := OK;
-      end Visit;
-
-      procedure Traverse is new Vertex_Set.Iterate_With_Status
-        (Process     => Visit,
-         Status_Item => Locus.Copy);
-
-   begin --  Copy
-      Clear (To_The_Graph);
-      Traverse (From_The_Graph.The_Vertices, Booch_Status);
-
-   exception
-
-      when Storage_Error =>
-         Alogs.Status_Exception
-           (Log_ID  => "0E5B139E3428329D",
-            Message => "Error whilst processing Duplicate over The_ARC");
-         Booch_Status := Exception_Storage_Error;
-         return;
-
-   end Copy;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  procedure Copy
+   --    (From_The_Graph :        Graph;
+   --     To_The_Graph   : in out Graph;
+   --     Booch_Status   :    out Locus.Copy)
+   --
+   --  is
+   --     New_Item_Status  : Locus.New_Item;
+   --     Vertices_Visited : Vertex_Map.Map (From_The_Graph.Total_Vertices);
+   --     procedure Visit
+   --       (The_Vertex   :     Vertex;
+   --        Continue     : out Boolean;
+   --        Booch_Status : out Locus.Copy)
+   --     is
+   --        Bind_Status      : Vertex_Map.Locus.Bind;
+   --        Add_Status       : Vertex_Set.Locus.Add;
+   --        Temporary_Vertex : Vertex;
+   --
+   --        procedure Duplicate
+   --          (The_Arc      :     Arc;
+   --           Continue     : out Boolean;
+   --           Booch_Status : out Locus.Copy)
+   --        is
+   --           Temporary_Arc   : Arc;
+   --           Set_Status      : Arc_Set.Locus.Add;
+   --           New_Item_Status : Locus.New_Item;
+   --        begin -- Duplicate
+   --
+   --           New_Item
+   --             (The_Item     => Temporary_Arc,
+   --              Booch_Status => New_Item_Status);
+   --           case New_Item_Status is
+   --              when No_Storage_Available =>
+   --                 Alogs.Log
+   --                   (Log_ID  => "83280D75475FB3D6",
+   --                    Message => "Failed to create Temporary_Arc");
+   --                 Booch_Status := New_Item_Status;
+   --                 Continue     := False;
+   --                 return;
+   --
+   --              when OK =>
+   --                 null;
+   --           end case;
+   --
+   --           Arc_Heap (Temporary_Arc.The_Head).The_Attribute :=
+   --             Arc_Heap (The_Arc.The_Head).The_Attribute;
+   --
+   --           Arc_Heap (Temporary_Arc.The_Head).The_Source := Temporary_Vertex;
+   --
+   --           declare
+   --              Visit_Status : Locus.Visit;
+   --           begin
+   --              Visit
+   --                (The_Vertex   => Arc_Heap (The_Arc.The_Head).The_Destination,
+   --                 Continue     => Continue,
+   --                 Booch_Status => Visit_Status);
+   --              case Visit_Status is
+   --                 when Domain_Is_Not_Bound | Item_Is_In_Set
+   --                   | Exception_Overflow | Exception_Storage_Error
+   --                   | Multiple_Binding =>
+   --                    Alogs.Log
+   --                      (Log_ID  => "D5D4FFA4400C4637",
+   --                       Message => "Failed to Visit The_Destination");
+   --                    Continue     := False;
+   --                    Booch_Status := Visit_Status;
+   --                    return;
+   --
+   --                 when OK =>
+   --                    null;
+   --              end case;
+   --
+   --           end;
+   --
+   --           declare
+   --              Map_Status        : Vertex_Map.Locus.Range_Of;
+   --              Vertex_Map_Ranges : Vertex;
+   --           begin
+   --
+   --              Vertex_Map.Range_Of
+   --                (The_Domain   => Arc_Heap (The_Arc.The_Head).The_Destination,
+   --                 In_The_Map   => Vertices_Visited,
+   --                 Result       => Vertex_Map_Ranges,
+   --                 Booch_Status => Map_Status);
+   --
+   --              case Map_Status is
+   --                 when Domain_Is_Not_Bound =>
+   --                    Alogs.Log
+   --                      (Log_ID  => "168273D4496FD173",
+   --                       Message =>
+   --                         "Failed to Vertex_Map.Range_Of The_Destination");
+   --                    Booch_Status := Map_Status;
+   --                    Continue     := False;
+   --                    return;
+   --
+   --                 when OK =>
+   --                    Arc_Heap (Temporary_Arc.The_Head).The_Destination :=
+   --                      Vertex_Map_Ranges;
+   --              end case;
+   --           end;
+   --
+   --           Arc_Set.Add
+   --             (The_Item     => Temporary_Arc,
+   --              To_The_Set => Vertex_Heap (Temporary_Vertex.The_Head).The_Arcs,
+   --              Booch_Status => Set_Status);
+   --
+   --           case Set_Status is
+   --              when Item_Is_In_Set | Exception_Overflow =>
+   --                 Alogs.Log
+   --                   (Log_ID  => "113055E039189CC5",
+   --                    Message => "Failed to add Arc to Vertex_Heap");
+   --                 Booch_Status := Set_Status;
+   --                 Continue     := False;
+   --                 return;
+   --
+   --              when OK =>
+   --                 null;
+   --           end case;
+   --
+   --           Arc_Set.Add
+   --             (The_Item     => Temporary_Arc,
+   --              To_The_Set   => To_The_Graph.The_Arcs,
+   --              Booch_Status => Set_Status);
+   --           case Set_Status is
+   --              when Item_Is_In_Set | Exception_Overflow =>
+   --                 Alogs.Log
+   --                   (Log_ID  => "63F395FA5664C067",
+   --                    Message => "Failed to add Arc To_The_Graph");
+   --                 Booch_Status := Set_Status;
+   --                 Continue     := False;
+   --                 return;
+   --
+   --              when OK =>
+   --                 null;
+   --           end case;
+   --
+   --           Booch_Status := OK;
+   --
+   --        end Duplicate;
+   --
+   --        procedure Process_Duplicate is new Arc_Set.Iterate_With_Status
+   --          (Process     => Duplicate,
+   --           Status_Item => Locus.Copy);
+   --
+   --     begin --  Visit
+   --        if not Vertex_Map.Is_Bound
+   --            (The_Vertex,
+   --             In_The_Map => Vertices_Visited)
+   --        then
+   --
+   --           New_Item
+   --             (The_Item     => Temporary_Vertex,
+   --              Booch_Status => New_Item_Status);
+   --
+   --           case New_Item_Status is
+   --              when No_Storage_Available =>
+   --                 Alogs.Log
+   --                   (Log_ID  => "F47E1C978103042E",
+   --                    Message => "Not enough storage to add Vertex");
+   --                 Booch_Status := New_Item_Status;
+   --                 Continue     := False;
+   --                 return;
+   --
+   --              when OK =>
+   --                 null;
+   --           end case;
+   --
+   --           Vertex_Heap (Temporary_Vertex.The_Head).The_Item :=
+   --             Vertex_Heap (The_Vertex.The_Head).The_Item;
+   --
+   --           Vertex_Heap (Temporary_Vertex.The_Head).Reference_Count :=
+   --             Vertex_Heap (The_Vertex.The_Head).Reference_Count;
+   --
+   --           Vertex_Map.Bind
+   --             (The_Domain    => The_Vertex,
+   --              And_The_Range => Temporary_Vertex,
+   --              In_The_Map    => Vertices_Visited,
+   --              Booch_Status  => Bind_Status);
+   --
+   --           case Bind_Status is
+   --              when Exception_Overflow | Multiple_Binding =>
+   --                 Alogs.Log
+   --                   (Log_ID  => "D4529FA9EEFD388E",
+   --                    Message => "Failed to Bind The_Vertex");
+   --                 Booch_Status := Bind_Status;
+   --                 Continue     := False;
+   --                 return;
+   --
+   --              when OK =>
+   --                 null;
+   --           end case;
+   --
+   --           Vertex_Set.Add
+   --             (The_Item     => Temporary_Vertex,
+   --              To_The_Set   => To_The_Graph.The_Vertices,
+   --              Booch_Status => Add_Status);
+   --
+   --           case Add_Status is
+   --              when Item_Is_In_Set | Exception_Overflow =>
+   --                 Alogs.Log
+   --                   (Log_ID  => "B3AA5CA049C5F8A1",
+   --                    Message => "Failed to Add Vertex To_The_Graph");
+   --                 Booch_Status := Add_Status;
+   --                 Continue     := False;
+   --                 return;
+   --
+   --              when OK =>
+   --                 null;
+   --           end case;
+   --
+   --           declare
+   --              Status_Duplicate : Locus.Duplicate;
+   --           begin
+   --              Process_Duplicate
+   --                (Over_The_Set => Vertex_Heap (The_Vertex.The_Head).The_Arcs,
+   --                 Booch_Status => Status_Duplicate);
+   --
+   --              case Status_Duplicate is
+   --                 when Domain_Is_Not_Bound | Item_Is_In_Set
+   --                   | Exception_Overflow | Exception_Storage_Error =>
+   --                    Alogs.Log
+   --                      (Log_ID  => "4C02FB94920AD302",
+   --                       Message =>
+   --                         "Error whilst processing Duplicate over The_ARC");
+   --                    Continue := False;
+   --                    return;
+   --
+   --                 when OK =>
+   --                    null;
+   --              end case;
+   --
+   --           end;
+   --        end if;
+   --        Continue     := True;
+   --        Booch_Status := OK;
+   --     end Visit;
+   --
+   --     procedure Traverse is new Vertex_Set.Iterate_With_Status
+   --       (Process     => Visit,
+   --        Status_Item => Locus.Copy);
+   --
+   --  begin --  Copy
+   --     Clear (To_The_Graph);
+   --     Traverse (From_The_Graph.The_Vertices, Booch_Status);
+   --
+   --  exception
+   --
+   --     when Storage_Error =>
+   --        Alogs.Status_Exception
+   --          (Log_ID  => "0E5B139E3428329D",
+   --           Message => "Error whilst processing Duplicate over The_ARC");
+   --        Booch_Status := Exception_Storage_Error;
+   --        return;
+   --
+   --  end Copy;
 
    procedure Clear (The_Graph : in out Graph) is
       procedure Remove_Vertex
-        (The_Vertex : in     Vertex;
-         Continue   :    out Boolean)
+        (The_Vertex :     Vertex;
+         Continue   : out Boolean)
       is
          Temporary_Vertex : Vertex := The_Vertex;
       begin
@@ -382,8 +388,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
       procedure Traverse is new Vertex_Set.Iterate (Remove_Vertex);
 
       procedure Remove_Arc
-        (The_Arc  : in     Arc;
-         Continue :    out Boolean)
+        (The_Arc  :     Arc;
+         Continue : out Boolean)
       is
          Temporary_Arc : Arc := The_Arc;
       begin
@@ -400,7 +406,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Add
      (The_Vertex    : in out Vertex;
-      With_The_Item : in     Item;
+      With_The_Item :        Item;
       To_The_Graph  : in out Graph;
       Booch_Status  :    out Locus.Add)
    is
@@ -460,9 +466,9 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    is
       Remove_Status : Vertex_Set.Locus.Remove;
       procedure Remove_Arc
-        (The_Arc      : in     Arc;
-         Continue     :    out Boolean;
-         Booch_Status :    out Locus.Remove)
+        (The_Arc      :     Arc;
+         Continue     : out Boolean;
+         Booch_Status : out Locus.Remove)
       is
          Remove_Status : Arc_Set.Locus.Remove;
          Temporary_Arc : Arc := The_Arc;
@@ -501,7 +507,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
          Status_Item => Locus.Copy);
 
    begin
-      if Vertex_Heap (The_Vertex.The_Head).Reference_Count /= 0 then
+      if Vertex_Heap (The_Vertex.The_Head).Reference_Count /= 0
+      then
          Booch_Status := Vertex_Has_References;
          Alogs.Log
            (Log_ID  => "2E7CE31F3C9EC16F",
@@ -517,7 +524,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
          return;
       else
          Traverse (Vertex_Heap (The_Vertex.The_Head).The_Arcs, Booch_Status);
-         if Booch_Status not in OK then
+         if Booch_Status not in OK
+         then
             return;
          end if;
 
@@ -554,7 +562,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Set_Item
      (Of_The_Vertex : in out Vertex;
-      To_The_Item   : in     Item;
+      To_The_Item   :        Item;
       Booch_Status  :    out Locus.Set_Item)
    is
    begin
@@ -574,9 +582,9 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Create
      (The_Arc            : in out Arc;
-      With_The_Attribute : in     Attribute;
+      With_The_Attribute :        Attribute;
       From_The_Vertex    : in out Vertex;
-      To_The_Vertex      : in     Vertex;
+      To_The_Vertex      :        Vertex;
       In_The_Graph       : in out Graph;
       Booch_Status       :    out Locus.Create)
    is
@@ -655,7 +663,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
                null;
          end case;
 
-         if From_The_Vertex /= To_The_Vertex then
+         if From_The_Vertex /= To_The_Vertex
+         then
             Vertex_Heap (To_The_Vertex.The_Head).Reference_Count :=
               Vertex_Heap (To_The_Vertex.The_Head).Reference_Count + 1;
          end if;
@@ -679,14 +688,16 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    is
       Remove_Status : Arc_Set.Locus.Remove;
    begin
-      if The_Arc = Null_Arc then
+      if The_Arc = Null_Arc
+      then
          Booch_Status := Arc_Is_Null;
          Alogs.Log
            (Log_ID => "B16E6EDA52A488B4",
 
             Message => "Arc_Is_Null: Destroy failed");
          return;
-      elsif not Arc_Set.Is_A_Member (The_Arc, In_The_Graph.The_Arcs) then
+      elsif not Arc_Set.Is_A_Member (The_Arc, In_The_Graph.The_Arcs)
+      then
          Booch_Status := Arc_Is_Not_In_Graph;
          Alogs.Log
            (Log_ID  => "B59D2D9BA0834DEC",
@@ -747,7 +758,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
 
    procedure Set_Attribute
      (Of_The_Arc       : in out Arc;
-      To_The_Attribute : in     Attribute;
+      To_The_Attribute :        Attribute;
       Booch_Status     :    out Locus.Set_Attribute)
    is
    begin
@@ -766,9 +777,9 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Set_Attribute;
 
    procedure Number_Of_Arcs_From
-     (The_Vertex    : in     Vertex;
-      The_Arc_Count :    out Natural;
-      Booch_Status  :    out Locus.Number_Of_Arcs_From)
+     (The_Vertex    :     Vertex;
+      The_Arc_Count : out Natural;
+      Booch_Status  : out Locus.Number_Of_Arcs_From)
    is
    begin
       The_Arc_Count :=
@@ -789,7 +800,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Number_Of_Arcs_From;
 
    function Is_Empty
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Boolean
    is
    begin
@@ -797,7 +808,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Is_Empty;
 
    function Is_Null
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean
    is
    begin
@@ -805,7 +816,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Is_Null;
 
    function Is_Null
-     (The_Arc : in Arc)
+     (The_Arc : Arc)
       return Boolean
    is
    begin
@@ -813,7 +824,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Is_Null;
 
    function Number_Of_Vertices_In
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Natural
    is
    begin
@@ -821,7 +832,7 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Number_Of_Vertices_In;
 
    function Number_Of_Arcs_In
-     (The_Graph : in Graph)
+     (The_Graph : Graph)
       return Natural
    is
    begin
@@ -829,9 +840,9 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Number_Of_Arcs_In;
 
    procedure Item_Of
-     (The_Vertex   : in     Vertex;
-      The_Item     :    out Item;
-      Booch_Status :    out Locus.Item_Of)
+     (The_Vertex   :     Vertex;
+      The_Item     : out Item;
+      Booch_Status : out Locus.Item_Of)
    is
    begin
       The_Item     := Vertex_Heap (The_Vertex.The_Head).The_Item;
@@ -848,9 +859,9 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Item_Of;
 
    procedure Attribute_Of
-     (The_Arc       : in     Arc;
-      The_Attribute :    out Attribute;
-      Booch_Status  :    out Locus.Attribute_Of)
+     (The_Arc       :     Arc;
+      The_Attribute : out Attribute;
+      Booch_Status  : out Locus.Attribute_Of)
    is
    begin
       The_Attribute := Arc_Heap (The_Arc.The_Head).The_Attribute;
@@ -866,9 +877,9 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Attribute_Of;
 
    procedure Source_Of
-     (The_Arc      : in     Arc;
-      The_Source   :    out Vertex;
-      Booch_Status :    out Locus.Source_Of)
+     (The_Arc      :     Arc;
+      The_Source   : out Vertex;
+      Booch_Status : out Locus.Source_Of)
    is
    begin
       The_Source   := Arc_Heap (The_Arc.The_Head).The_Source;
@@ -885,9 +896,9 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Source_Of;
 
    procedure Destination_Of
-     (The_Arc         : in     Arc;
-      The_Destination :    out Vertex;
-      Booch_Status    :    out Locus.Destination_Of)
+     (The_Arc         :     Arc;
+      The_Destination : out Vertex;
+      Booch_Status    : out Locus.Destination_Of)
    is
    begin
       The_Destination := Arc_Heap (The_Arc.The_Head).The_Destination;
@@ -905,8 +916,8 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Destination_Of;
 
    function Is_A_Member
-     (The_Vertex   : in Vertex;
-      Of_The_Graph : in Graph)
+     (The_Vertex   : Vertex;
+      Of_The_Graph : Graph)
       return Boolean
    is
    begin
@@ -914,29 +925,29 @@ package body Booch_Light.Graph_Directed_Bounded_Managed is
    end Is_A_Member;
 
    function Is_A_Member
-     (The_Arc      : in Arc;
-      Of_The_Graph : in Graph)
+     (The_Arc      : Arc;
+      Of_The_Graph : Graph)
       return Boolean
    is
    begin
       return Arc_Set.Is_A_Member (The_Arc, Of_The_Graph.The_Arcs);
    end Is_A_Member;
 
-   procedure Iterate_Vertices (Over_The_Graph : in Graph) is
+   procedure Iterate_Vertices (Over_The_Graph : Graph) is
       procedure Traverse is new Vertex_Set.Iterate (Process);
    begin
       Traverse (Over_The_Graph.The_Vertices);
    end Iterate_Vertices;
 
-   procedure Iterate_Arcs (Over_The_Graph : in Graph) is
+   procedure Iterate_Arcs (Over_The_Graph : Graph) is
       procedure Traverse is new Arc_Set.Iterate (Process);
    begin
       Traverse (Over_The_Graph.The_Arcs);
    end Iterate_Arcs;
 
    procedure Reiterate
-     (Over_The_Vertex : in     Vertex;
-      Booch_Status    :    out Locus.Reiterate)
+     (Over_The_Vertex :     Vertex;
+      Booch_Status    : out Locus.Reiterate)
    is
       procedure Traverse is new Arc_Set.Iterate (Process);
    begin

@@ -10,13 +10,13 @@ generic
    type Item is private;
    type Index is (<>);
    type Items is array (Index range <>) of Item;
-   with procedure Put (The_Items : in Items);
+   with procedure Put (The_Items : Items);
    with function Filter
-     (The_Item : in Item)
+     (The_Item : Item)
       return Items;
 package Booch_Light.Expand_Filter is
 
-   procedure Expand (The_Item : in Item);
+   procedure Expand (The_Item : Item);
 
 end Booch_Light.Expand_Filter;
 

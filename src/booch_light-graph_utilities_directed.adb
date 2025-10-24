@@ -9,7 +9,7 @@
 package body Booch_Light.Graph_Utilities_Directed is
 
    function Is_Terminal
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean
    is
    begin
@@ -17,7 +17,7 @@ package body Booch_Light.Graph_Utilities_Directed is
    end Is_Terminal;
 
    function Has_Self_Loop
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean
    is
       The_Iterator : Iterator;

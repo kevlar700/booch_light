@@ -9,7 +9,7 @@
 package body Booch_Light.Tree_Utilities_Binary_Single is
 
    function Is_Leaf
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean
    is
    begin

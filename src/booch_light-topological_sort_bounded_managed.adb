@@ -23,8 +23,8 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
      (Positive);
 
    procedure Sort
-     (The_Graph    : in     Graph;
-      Booch_Status :    out Locus.Sort)
+     (The_Graph    :     Graph;
+      Booch_Status : out Locus.Sort)
    is
       Total_Vertices : constant Natural := Number_Of_Vertices_In (The_Graph);
 
@@ -44,12 +44,13 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
       Continue            : Boolean;
 
       procedure Add
-        (The_Vertex : in     Vertex;
-         The_Node   :    out Positive)
+        (The_Vertex :     Vertex;
+         The_Node   : out Positive)
       is
       begin
          for Index in 1 .. Last_Node loop
-            if The_Vertex = Node_Table (Index).The_Vertex then
+            if The_Vertex = Node_Table (Index).The_Vertex
+            then
                The_Node := Index;
                return;
             end if;
@@ -60,15 +61,16 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
       end Add;
 
       procedure Process_Successor
-        (The_Node            : in     Positive;
-         Continue_Nested     :    out Boolean;
-         Booch_Status_Nested :    out Locus.Process_Successor)
+        (The_Node            :     Positive;
+         Continue_Nested     : out Boolean;
+         Booch_Status_Nested : out Locus.Process_Successor)
       is
          Add_Status : Node_Queue.Locus.Add;
       begin
          Node_Table (The_Node).Number_Of_References :=
            Node_Table (The_Node).Number_Of_References - 1;
-         if Node_Table (The_Node).Number_Of_References = 0 then
+         if Node_Table (The_Node).Number_Of_References = 0
+         then
             Node_Queue.Add
               (The_Node,
                To_The_Queue => Process_Queue,
@@ -144,7 +146,8 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
          Get_Next (The_Graph_Iterator);
       end loop;
       for Index in Node_Table'Range loop
-         if Node_Table (Index).Number_Of_References = 0 then
+         if Node_Table (Index).Number_Of_References = 0
+         then
             declare
                Add_Status : Node_Queue.Locus.Add;
             begin
@@ -261,13 +264,16 @@ package body Booch_Light.Topological_Sort_Bounded_Managed is
          end loop;
       end;
 
-      if not Continue then
+      if not Continue
+      then
          Node_Queue.Clear (Process_Queue);
          Continue := True;
       end if;
       for Index in Node_Table'Range loop
-         if Node_Table (Index).Number_Of_References /= 0 then
-            if Continue and then Process_Cycles then
+         if Node_Table (Index).Number_Of_References /= 0
+         then
+            if Continue and then Process_Cycles
+            then
                Process_Cyclic (Node_Table (Index).The_Vertex, Continue);
             end if;
             Node_Set.Clear (Node_Table (Index).The_Successors);

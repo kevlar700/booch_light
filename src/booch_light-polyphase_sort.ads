@@ -7,7 +7,7 @@
 --  of this software.
 
 generic
-   Number_Of_Files : in Positive;
+   Number_Of_Files : Positive;
    type Item is private;
    type File is limited private;
    with procedure Open_For_Reading (The_File : in out File);
@@ -19,21 +19,21 @@ generic
 
    with procedure Put
      (The_File : in out File;
-      The_Item : in     Item);
+      The_Item :     Item);
 
    with procedure Close (The_File : in out File);
 
    with function Next_Item
-     (From_The_File : in File)
+     (From_The_File : File)
       return Item;
 
    with function "<"
-     (Left  : in Item;
-      Right : in Item)
+     (Left  : Item;
+      Right : Item)
       return Boolean;
 
    with function Is_End_Of_File
-     (The_File : in File)
+     (The_File : File)
       return Boolean;
 
 package Booch_Light.Polyphase_Sort is

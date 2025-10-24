@@ -11,12 +11,13 @@ with Booch_Light.Alogs;
 package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
 
    procedure Copy
-     (From_The_Bag : in     Bag;
+     (From_The_Bag :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Copy)
    is
    begin
-      if From_The_Bag.The_Back > To_The_Bag.The_Size then
+      if From_The_Bag.The_Back > To_The_Bag.The_Size
+      then
          Alogs.Log
            (Log_ID  => "B16D9DE9925817D9",
             Message => "Exception_Overflow: Cannot copy between the bags");
@@ -39,13 +40,14 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Clear;
 
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Add)
    is
    begin
       for Index in 1 .. To_The_Bag.The_Back loop
-         if The_Item = To_The_Bag.The_Items (Index).The_Item then
+         if The_Item = To_The_Bag.The_Items (Index).The_Item
+         then
 
             To_The_Bag.The_Items (Index).The_Count :=
               To_The_Bag.The_Items (Index).The_Count + 1;
@@ -73,14 +75,16 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Add;
 
    procedure Remove
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       From_The_Bag : in out Bag;
       Booch_Status :    out Locus.Remove)
    is
    begin
       for Index in 1 .. From_The_Bag.The_Back loop
-         if The_Item = From_The_Bag.The_Items (Index).The_Item then
-            if From_The_Bag.The_Items (Index).The_Count > 1 then
+         if The_Item = From_The_Bag.The_Items (Index).The_Item
+         then
+            if From_The_Bag.The_Items (Index).The_Count > 1
+            then
 
                From_The_Bag.The_Items (Index).The_Count :=
                  From_The_Bag.The_Items (Index).The_Count - 1;
@@ -105,8 +109,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Remove;
 
    procedure Union
-     (Of_The_Bag   : in     Bag;
-      And_The_Bag  : in     Bag;
+     (Of_The_Bag   :        Bag;
+      And_The_Bag  :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Union)
    is
@@ -128,7 +132,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
                To_Index := To_Index - 1;
             end if;
          end loop;
-         if To_Index = 0 then
+         if To_Index = 0
+         then
             To_The_Bag.The_Items (To_The_Bag.The_Back + 1) :=
               And_The_Bag.The_Items (And_Index);
             To_The_Bag.The_Back := To_The_Bag.The_Back + 1;
@@ -152,8 +157,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Union;
 
    procedure Intersection
-     (Of_The_Bag   : in     Bag;
-      And_The_Bag  : in     Bag;
+     (Of_The_Bag   :        Bag;
+      And_The_Bag  :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Intersection)
    is
@@ -201,8 +206,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Intersection;
 
    procedure Difference
-     (Of_The_Bag   : in     Bag;
-      And_The_Bag  : in     Bag;
+     (Of_The_Bag   :        Bag;
+      And_The_Bag  :        Bag;
       To_The_Bag   : in out Bag;
       Booch_Status :    out Locus.Difference)
    is
@@ -220,7 +225,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
                And_Index := And_Index - 1;
             end if;
          end loop;
-         if And_Index = 0 then
+         if And_Index = 0
+         then
             To_The_Bag.The_Items (To_The_Bag.The_Back + 1) :=
               Of_The_Bag.The_Items (Of_Index);
             To_The_Bag.The_Back := To_The_Bag.The_Back + 1;
@@ -249,13 +255,14 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Difference;
 
    function Is_Equal
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean
    is
       Right_Index : Natural;
    begin
-      if Left.The_Back /= Right.The_Back then
+      if Left.The_Back /= Right.The_Back
+      then
          return False;
       else
          for Left_Index in 1 .. Left.The_Back loop
@@ -275,7 +282,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
                   Right_Index := Right_Index - 1;
                end if;
             end loop;
-            if Right_Index = 0 then
+            if Right_Index = 0
+            then
                return False;
             end if;
          end loop;
@@ -284,7 +292,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_Equal;
 
    function Extent_Of
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Natural
    is
       Count : Natural := 0;
@@ -296,7 +304,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Extent_Of;
 
    function Unique_Extent_Of
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Natural
    is
    begin
@@ -304,14 +312,15 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Unique_Extent_Of;
 
    procedure Number_Of
-     (The_Item      : in     Item;
-      In_The_Bag    : in     Bag;
-      The_Number_Of :    out Positive;
-      Booch_Status  :    out Locus.Number_Of)
+     (The_Item      :     Item;
+      In_The_Bag    :     Bag;
+      The_Number_Of : out Positive;
+      Booch_Status  : out Locus.Number_Of)
    is
    begin
       for Index in 1 .. In_The_Bag.The_Back loop
-         if The_Item = In_The_Bag.The_Items (Index).The_Item then
+         if The_Item = In_The_Bag.The_Items (Index).The_Item
+         then
             The_Number_Of := In_The_Bag.The_Items (Index).The_Count;
             Booch_Status  := OK;
          end if;
@@ -326,7 +335,7 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Number_Of;
 
    function Is_Empty
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Boolean
    is
    begin
@@ -334,13 +343,14 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_Empty;
 
    function Is_A_Member
-     (The_Item   : in Item;
-      Of_The_Bag : in Bag)
+     (The_Item   : Item;
+      Of_The_Bag : Bag)
       return Boolean
    is
    begin
       for Index in 1 .. Of_The_Bag.The_Back loop
-         if Of_The_Bag.The_Items (Index).The_Item = The_Item then
+         if Of_The_Bag.The_Items (Index).The_Item = The_Item
+         then
             return True;
          end if;
       end loop;
@@ -348,8 +358,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_A_Member;
 
    function Is_A_Subset
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean
    is
       Right_Index : Natural;
@@ -365,7 +375,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
                Right_Index := Right_Index - 1;
             end if;
          end loop;
-         if Right_Index = 0 then
+         if Right_Index = 0
+         then
             return False;
          elsif Left.The_Items (Left_Index).The_Count >
            Right.The_Items (Right_Index).The_Count
@@ -377,8 +388,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
    end Is_A_Subset;
 
    function Is_A_Proper_Subset
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean
    is
       Total_Left_Count  : Natural := 0;
@@ -396,7 +407,8 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
                Right_Index := Right_Index - 1;
             end if;
          end loop;
-         if Right_Index = 0 then
+         if Right_Index = 0
+         then
             return False;
          elsif Left.The_Items (Left_Index).The_Count >
            Right.The_Items (Right_Index).The_Count
@@ -410,16 +422,18 @@ package body Booch_Light.Bag_Simple_Sequential_Bounded_Managed_Iterator is
          Total_Right_Count :=
            Total_Right_Count + Right.The_Items (Index).The_Count;
       end loop;
-      if Left.The_Back < Right.The_Back then
+      if Left.The_Back < Right.The_Back
+      then
          return True;
-      elsif Left.The_Back > Right.The_Back then
+      elsif Left.The_Back > Right.The_Back
+      then
          return False;
       else
          return (Total_Left_Count < Total_Right_Count);
       end if;
    end Is_A_Proper_Subset;
 
-   procedure Iterate (Over_The_Bag : in Bag) is
+   procedure Iterate (Over_The_Bag : Bag) is
       Continue : Boolean;
    begin
       for The_Iterator in 1 .. Over_The_Bag.The_Back loop

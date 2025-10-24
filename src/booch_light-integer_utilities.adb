@@ -16,12 +16,13 @@ package body Booch_Light.Integer_Utilities is
    Minus : constant Character := '-';
 
    function Min
-     (Left  : in Number;
-      Right : in Number)
+     (Left  : Number;
+      Right : Number)
       return Number
    is
    begin
-      if Left > Right then
+      if Left > Right
+      then
          return Right;
       else
          return Left;
@@ -29,13 +30,14 @@ package body Booch_Light.Integer_Utilities is
    end Min;
 
    function Min
-     (The_Numbers : in Numbers)
+     (The_Numbers : Numbers)
       return Number
    is
       Smallest_Number : Number := The_Numbers (The_Numbers'First);
    begin
       for Index in (The_Numbers'First + 1) .. The_Numbers'Last loop
-         if The_Numbers (Index) < Smallest_Number then
+         if The_Numbers (Index) < Smallest_Number
+         then
             Smallest_Number := The_Numbers (Index);
          end if;
       end loop;
@@ -43,12 +45,13 @@ package body Booch_Light.Integer_Utilities is
    end Min;
 
    function Max
-     (Left  : in Number;
-      Right : in Number)
+     (Left  : Number;
+      Right : Number)
       return Number
    is
    begin
-      if Left > Right then
+      if Left > Right
+      then
          return Left;
       else
          return Right;
@@ -56,13 +59,14 @@ package body Booch_Light.Integer_Utilities is
    end Max;
 
    function Max
-     (The_Numbers : in Numbers)
+     (The_Numbers : Numbers)
       return Number
    is
       Largest_Number : Number := The_Numbers (The_Numbers'First);
    begin
       for Index in (The_Numbers'First + 1) .. The_Numbers'Last loop
-         if The_Numbers (Index) > Largest_Number then
+         if The_Numbers (Index) > Largest_Number
+         then
             Largest_Number := The_Numbers (Index);
          end if;
       end loop;
@@ -70,7 +74,7 @@ package body Booch_Light.Integer_Utilities is
    end Max;
 
    function Is_Positive
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean
    is
    begin
@@ -78,7 +82,7 @@ package body Booch_Light.Integer_Utilities is
    end Is_Positive;
 
    function Is_Natural
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean
    is
    begin
@@ -86,7 +90,7 @@ package body Booch_Light.Integer_Utilities is
    end Is_Natural;
 
    function Is_Negative
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean
    is
    begin
@@ -94,7 +98,7 @@ package body Booch_Light.Integer_Utilities is
    end Is_Negative;
 
    function Is_Zero
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean
    is
    begin
@@ -102,7 +106,7 @@ package body Booch_Light.Integer_Utilities is
    end Is_Zero;
 
    function Is_Odd
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean
    is
    begin
@@ -110,50 +114,54 @@ package body Booch_Light.Integer_Utilities is
    end Is_Odd;
 
    function Is_Even
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean
    is
    begin
       return (The_Number mod 2 = 0);
    end Is_Even;
 
-   function Based_Image
-     (The_Number    : in Number;
-      With_The_Base : in Base)
-      return String
-   is
-      Result        : Number;
-      The_Remainder : Natural;
-   begin
-      Result        := The_Number / Number (With_The_Base);
-      The_Remainder := Natural (The_Number mod Number (With_The_Base));
-      if Result = 0 then
-         return "" & Character_Utilities.Image_Of (The_Remainder);
-      else
-         return
-           Based_Image (Result, With_The_Base) &
-           Character_Utilities.Image_Of (The_Remainder);
-      end if;
-   end Based_Image;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Based_Image
+   --    (The_Number    : Number;
+   --     With_The_Base : Base)
+   --     return String
+   --  is
+   --     Result        : Number;
+   --     The_Remainder : Natural;
+   --  begin
+   --     Result        := The_Number / Number (With_The_Base);
+   --     The_Remainder := Natural (The_Number mod Number (With_The_Base));
+   --     if Result = 0
+   --     then
+   --        return "" & Character_Utilities.Image_Of (The_Remainder);
+   --     else
+   --        return
+   --          Based_Image (Result, With_The_Base) &
+   --          Character_Utilities.Image_Of (The_Remainder);
+   --     end if;
+   --  end Based_Image;
 
-   function Image_Of
-     (The_Number    : in Number;
-      With_The_Base : in Base := 10)
-      return String
-   is
-   begin
-      if The_Number < 0 then
-         return '-' & Based_Image (abs (The_Number), With_The_Base);
-      else
-         return ' ' & Based_Image (The_Number, With_The_Base);
-      end if;
-   end Image_Of;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Image_Of
+   --    (The_Number    : Number;
+   --     With_The_Base : Base := 10)
+   --     return String
+   --  is
+   --  begin
+   --     if The_Number < 0
+   --     then
+   --        return '-' & Based_Image (abs (The_Number), With_The_Base);
+   --     else
+   --        return ' ' & Based_Image (The_Number, With_The_Base);
+   --     end if;
+   --  end Image_Of;
 
    procedure Value_Of
-     (The_Character : in     Character;
-      With_The_Base : in     Base;
-      Result        :    out Number;
-      Booch_Status  :    out Locus.Value_Of)
+     (The_Character :     Character;
+      With_The_Base :     Base;
+      Result        : out Number;
+      Booch_Status  : out Locus.Value_Of)
    is
       Tmp_Number : Character_Utilities.Digit;
       Tmp_Status : Character_Utilities.Locus.Value_Of;
@@ -178,7 +186,8 @@ package body Booch_Light.Integer_Utilities is
 
       end case;
 
-      if Result > Number (With_The_Base) then
+      if Result > Number (With_The_Base)
+      then
          Alogs.Log
            (Log_ID  => "23D8EF5BE3C01633",
             Message => "Lexical_Error: Value_Of failed");
@@ -192,10 +201,10 @@ package body Booch_Light.Integer_Utilities is
    end Value_Of;
 
    procedure Value_Of
-     (The_Image     : in     String;
-      With_The_Base : in     Base := 10;
-      Result        :    out Number;
-      Booch_Status  :    out Locus.Value_Of)
+     (The_Image     :     String;
+      With_The_Base :     Base := 10;
+      Result        : out Number;
+      Booch_Status  : out Locus.Value_Of)
    is
       Value     : Number  := 0;
       The_Power : Natural := 0;
@@ -229,10 +238,13 @@ package body Booch_Light.Integer_Utilities is
       if (The_Image (The_Image'First) = Plus)
         or else (The_Image (The_Image'First) = Blank)
       then
+            Booch_Status := OK;
          return;
 
-      elsif The_Image (The_Image'First) = Minus then
+      elsif The_Image (The_Image'First) = Minus
+      then
          Result := -Result;
+               Booch_Status := OK;
          return;
 
       else
@@ -248,6 +260,7 @@ package body Booch_Light.Integer_Utilities is
                  (Log_ID  => "0FA76E3385517BCB",
                   Message => "Lexical_Error: Value_Of failed");
                Result := Number'Last;
+               return;
 
             when OK =>
                Value  := Value * (Number (With_The_Base)**The_Power);

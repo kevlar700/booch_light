@@ -3,12 +3,12 @@ with Elogs;
 package Booch_Light.Alogs is
 
    procedure Log
-     (Log_ID  : in Elogs.Log_ID_Type;
-      Message : in String);
+     (Log_ID  : Elogs.Log_ID_Type;
+      Message : String);
 
    procedure Status_Exception
-     (Log_ID  : in Elogs.Log_ID_Type;
-      Message : in String);
+     (Log_ID  : Elogs.Log_ID_Type;
+      Message : String);
 
 end Booch_Light.Alogs;
 

@@ -10,8 +10,8 @@ with Booch_Light.Map_Simple_Noncached_Sequential_Bounded_Managed_Iterator;
 
 generic
    type Item is private;
-   The_Size : in Positive;
-   Maximum_Children : in Positive;
+   The_Size : Positive;
+   Maximum_Children : Positive;
 
 package Booch_Light.Tree_Arbitrary_Double_Bounded_Managed is
 
@@ -20,7 +20,7 @@ package Booch_Light.Tree_Arbitrary_Double_Bounded_Managed is
    Null_Tree : constant Tree;
 
    function Hash_Of
-     (The_Child : in Positive)
+     (The_Child : Positive)
       return Positive;
 
      -- The enums provided by these packages are centralised in booch_light.ads
@@ -73,60 +73,60 @@ package Booch_Light.Tree_Arbitrary_Double_Bounded_Managed is
    end Locus;
 
    procedure Copy
-     (From_The_Tree : in     Tree;
+     (From_The_Tree :        Tree;
       To_The_Tree   : in out Tree;
       Booch_Status  :    out Locus.Copy);
 
    procedure Clear (The_Tree : in out Tree);
 
    procedure Construct
-     (The_Item           : in     Item;
+     (The_Item           :        Item;
       And_The_Tree       : in out Tree;
-      Number_Of_Children : in     Natural;
-      On_The_Child       : in     Natural;
+      Number_Of_Children :        Natural;
+      On_The_Child       :        Natural;
       Booch_Status       :    out Locus.Construct);
 
    procedure Set_Item
      (Of_The_Tree  : in out Tree;
-      To_The_Item  : in     Item;
+      To_The_Item  :        Item;
       Booch_Status :    out Locus.Set_Item);
 
    procedure Swap_Child
-     (The_Child    : in     Positive;
+     (The_Child    :        Positive;
       Of_The_Tree  : in out Tree;
       And_The_Tree : in out Tree;
       Booch_Status :    out Locus.Swap_Child);
 
    procedure Is_Equal
-     (Left         : in     Tree;
-      Right        : in     Tree;
-      Result       :    out Boolean;
-      Booch_Status :    out Locus.Is_Equal);
+     (Left         :     Tree;
+      Right        :     Tree;
+      Result       : out Boolean;
+      Booch_Status : out Locus.Is_Equal);
 
    function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    procedure Item_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Item;
-      Booch_Status :    out Locus.Item_Of);
+     (The_Tree     :     Tree;
+      Result       : out Item;
+      Booch_Status : out Locus.Item_Of);
 
    procedure Number_Of_Children_In
-     (The_Tree     : in     Tree;
-      Result       :    out Natural;
-      Booch_Status :    out Locus.Number_Of_Children_In);
+     (The_Tree     :     Tree;
+      Result       : out Natural;
+      Booch_Status : out Locus.Number_Of_Children_In);
 
    procedure Child_Of
-     (The_Tree     : in     Tree;
-      The_Child    : in     Positive;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Child_Of);
+     (The_Tree     :     Tree;
+      The_Child    :     Positive;
+      Result       : out Tree;
+      Booch_Status : out Locus.Child_Of);
 
    procedure Parent_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Parent_Of);
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Parent_Of);
 
 private
    type Tree is record

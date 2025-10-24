@@ -12,30 +12,30 @@ generic
 
    with procedure Initialize
      (The_Iterator    : in out Iterator;
-      With_The_Vertex : in     Vertex);
+      With_The_Vertex :        Vertex);
 
    with procedure Get_Next (The_Iterator : in out Iterator);
 
    with function Number_Of_Arcs_From
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Natural;
 
    with function Value_Of
-     (The_Iterator : in Iterator)
+     (The_Iterator : Iterator)
       return Vertex;
 
    with function Is_Done
-     (The_Iterator : in Iterator)
+     (The_Iterator : Iterator)
       return Boolean;
 
 package Booch_Light.Graph_Utilities_Directed is
 
    function Is_Terminal
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean;
 
    function Has_Self_Loop
-     (The_Vertex : in Vertex)
+     (The_Vertex : Vertex)
       return Boolean;
 
 end Booch_Light.Graph_Utilities_Directed;

@@ -10,11 +10,11 @@ generic
    type Item is private;
    type Index is (<>);
    type Items is array (Index range <>) of Item;
-   Number_Of_Key_Bits : in Positive;
+   Number_Of_Key_Bits : Positive;
 
    with function Bit_Of
-     (The_Item : in Item;
-      The_Bit  : in Positive)
+     (The_Item : Item;
+      The_Bit  : Positive)
       return Boolean;
 
 package Booch_Light.Radix_Sort is

@@ -36,10 +36,10 @@ package body Booch_Light.String_Utilities is
    end Uncapitalize;
 
    procedure Replace
-     (The_Character      : in     Character;
-      With_The_Character : in     Character;
+     (The_Character      :        Character;
+      With_The_Character :        Character;
       In_The_String      : in out String;
-      Case_Sensitive     : in     Boolean := True)
+      Case_Sensitive     :        Boolean := True)
    is
    begin
       for Index in In_The_String'Range loop
@@ -51,62 +51,67 @@ package body Booch_Light.String_Utilities is
       end loop;
    end Replace;
 
-   function Uppercase
-     (The_String : in String)
-      return String
-   is
-      Temporary_String : String (The_String'Range) := The_String;
-   begin
-      Make_Uppercase (Temporary_String);
-      return Temporary_String;
-   end Uppercase;
+   --  TODO: Avoid secondary stack use
+   --  function Uppercase
+   --    (The_String : String)
+   --     return String
+   --  is
+   --     Temporary_String : String (The_String'Range) := The_String;
+   --  begin
+   --     Make_Uppercase (Temporary_String);
+   --     return Temporary_String;
+   --  end Uppercase;
 
-   function Lowercase
-     (The_String : in String)
-      return String
-   is
-      Temporary_String : String (The_String'Range) := The_String;
-   begin
-      Make_Lowercase (Temporary_String);
-      return Temporary_String;
-   end Lowercase;
+   --  TODO: Avoid secondary stack use
+   --  function Lowercase
+   --    (The_String : String)
+   --     return String
+   --  is
+   --     Temporary_String : String (The_String'Range) := The_String;
+   --  begin
+   --     Make_Lowercase (Temporary_String);
+   --     return Temporary_String;
+   --  end Lowercase;
 
-   function Capitalized
-     (The_String : in String)
-      return String
-   is
-   begin
-      return
-        (Character_Utilities.Uppercase (The_String (The_String'First)) &
-         The_String ((The_String'First + 1) .. The_String'Last));
-   end Capitalized;
+   --  TODO: Avoid secondary stack use
+   --  function Capitalized
+   --    (The_String : String)
+   --     return String
+   --  is
+   --  begin
+   --     return
+   --       (Character_Utilities.Uppercase (The_String (The_String'First)) &
+   --        The_String ((The_String'First + 1) .. The_String'Last));
+   --  end Capitalized;
 
-   function Uncapitalized
-     (The_String : in String)
-      return String
-   is
-   begin
-      return
-        (Character_Utilities.Lowercase (The_String (The_String'First)) &
-         The_String ((The_String'First + 1) .. The_String'Last));
-   end Uncapitalized;
+   --  TODO: Avoid secondary stack use
+   --  function Uncapitalized
+   --    (The_String : String)
+   --     return String
+   --  is
+   --  begin
+   --     return
+   --       (Character_Utilities.Lowercase (The_String (The_String'First)) &
+   --        The_String ((The_String'First + 1) .. The_String'Last));
+   --  end Uncapitalized;
 
-   function Replaced
-     (The_Character      : in Character;
-      With_The_Character : in Character;
-      In_The_String      : in String;
-      Case_Sensitive     : in Boolean := True)
-      return String
-   is
-      Temporary_String : String (In_The_String'Range) := In_The_String;
-   begin
-      Replace
-        (The_Character, With_The_Character, Temporary_String, Case_Sensitive);
-      return Temporary_String;
-   end Replaced;
+   --  TODO: Avoid secondary stack use
+   --  function Replaced
+   --    (The_Character      : Character;
+   --     With_The_Character : Character;
+   --     In_The_String      : String;
+   --     Case_Sensitive     : Boolean := True)
+   --     return String
+   --  is
+   --     Temporary_String : String (In_The_String'Range) := In_The_String;
+   --  begin
+   --     Replace
+   --       (The_Character, With_The_Character, Temporary_String, Case_Sensitive);
+   --     return Temporary_String;
+   --  end Replaced;
 
    function Is_Null
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
@@ -114,12 +119,13 @@ package body Booch_Light.String_Utilities is
    end Is_Null;
 
    function Is_Control
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Control (The_String (Index)) then
+         if not Character_Utilities.Is_Control (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -127,12 +133,13 @@ package body Booch_Light.String_Utilities is
    end Is_Control;
 
    function Is_Graphic
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Graphic (The_String (Index)) then
+         if not Character_Utilities.Is_Graphic (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -140,12 +147,13 @@ package body Booch_Light.String_Utilities is
    end Is_Graphic;
 
    function Is_Uppercase
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Uppercase (The_String (Index)) then
+         if not Character_Utilities.Is_Uppercase (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -153,12 +161,13 @@ package body Booch_Light.String_Utilities is
    end Is_Uppercase;
 
    function Is_Lowercase
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Lowercase (The_String (Index)) then
+         if not Character_Utilities.Is_Lowercase (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -166,12 +175,13 @@ package body Booch_Light.String_Utilities is
    end Is_Lowercase;
 
    function Is_Digit
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Digit (The_String (Index)) then
+         if not Character_Utilities.Is_Digit (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -179,12 +189,13 @@ package body Booch_Light.String_Utilities is
    end Is_Digit;
 
    function Is_Alphabetic
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Alphabetic (The_String (Index)) then
+         if not Character_Utilities.Is_Alphabetic (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -192,12 +203,13 @@ package body Booch_Light.String_Utilities is
    end Is_Alphabetic;
 
    function Is_Alphanumeric
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Alphanumeric (The_String (Index)) then
+         if not Character_Utilities.Is_Alphanumeric (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -205,12 +217,13 @@ package body Booch_Light.String_Utilities is
    end Is_Alphanumeric;
 
    function Is_Special
-     (The_String : in String)
+     (The_String : String)
       return Boolean
    is
    begin
       for Index in The_String'Range loop
-         if not Character_Utilities.Is_Special (The_String (Index)) then
+         if not Character_Utilities.Is_Special (The_String (Index))
+         then
             return False;
          end if;
       end loop;
@@ -218,11 +231,11 @@ package body Booch_Light.String_Utilities is
    end Is_Special;
 
    procedure Centered
-     (The_String      : in     String;
-      In_The_Width    : in     Positive;
-      With_The_Filler : in     Character;
-      Centered_String :    out String;
-      Booch_Status    :    out Locus.Centered)
+     (The_String      :     String;
+      In_The_Width    :     Positive;
+      With_The_Filler :     Character;
+      Centered_String : out String;
+      Booch_Status    : out Locus.Centered)
    is
       Left_Margin  : Natural;
       Right_Margin : Natural;
@@ -247,11 +260,11 @@ package body Booch_Light.String_Utilities is
    end Centered;
 
    procedure Left_Justified
-     (The_String            : in     String;
-      In_The_Width          : in     Positive;
-      With_The_Filler       : in     Character;
-      Left_Justified_String :    out String;
-      Booch_Status          :    out Locus.Left_Justified)
+     (The_String            :     String;
+      In_The_Width          :     Positive;
+      With_The_Filler       :     Character;
+      Left_Justified_String : out String;
+      Booch_Status          : out Locus.Left_Justified)
    is
       Right_Margin : Natural;
    begin
@@ -272,11 +285,11 @@ package body Booch_Light.String_Utilities is
    end Left_Justified;
 
    procedure Right_Justified
-     (The_String             : in     String;
-      In_The_Width           : in     Positive;
-      With_The_Filler        : in     Character;
-      Right_Justified_String :    out String;
-      Booch_Status           :    out Locus.Right_Justified)
+     (The_String             :     String;
+      In_The_Width           :     Positive;
+      With_The_Filler        :     Character;
+      Right_Justified_String : out String;
+      Booch_Status           : out Locus.Right_Justified)
    is
       Left_Margin : Natural;
    begin
@@ -297,70 +310,73 @@ package body Booch_Light.String_Utilities is
 
    end Right_Justified;
 
-   function Stripped
-     (The_Character   : in Character;
-      From_The_String : in String;
-      Case_Sensitive  : in Boolean := True)
-      return String
-   is
-      Temporary_String : String (From_The_String'Range);
-      The_Back         : Natural := Temporary_String'First;
-   begin
-      for Index in From_The_String'Range loop
-         if not Character_Utilities.Is_Equal
-             (The_Character, From_The_String (Index), Case_Sensitive)
-         then
-            Temporary_String (The_Back) := From_The_String (Index);
-            The_Back                    := The_Back + 1;
-         end if;
-      end loop;
-      return Temporary_String (Temporary_String'First .. (The_Back - 1));
-   end Stripped;
+   --  TODO: Avoid secondary stack use
+   --  function Stripped
+   --    (The_Character   : Character;
+   --     From_The_String : String;
+   --     Case_Sensitive  : Boolean := True)
+   --     return String
+   --  is
+   --     Temporary_String : String (From_The_String'Range);
+   --     The_Back         : Natural := Temporary_String'First;
+   --  begin
+   --     for Index in From_The_String'Range loop
+   --        if not Character_Utilities.Is_Equal
+   --            (The_Character, From_The_String (Index), Case_Sensitive)
+   --        then
+   --           Temporary_String (The_Back) := From_The_String (Index);
+   --           The_Back                    := The_Back + 1;
+   --        end if;
+   --     end loop;
+   --     return Temporary_String (Temporary_String'First .. (The_Back - 1));
+   --  end Stripped;
 
-   function Stripped_Leading
-     (The_Character   : in Character;
-      From_The_String : in String;
-      Case_Sensitive  : in Boolean := True)
-      return String
-   is
-      The_Front : Natural := From_The_String'First;
-   begin
-      for Index in From_The_String'Range loop
-         if Character_Utilities.Is_Equal
-             (The_Character, From_The_String (Index), Case_Sensitive)
-         then
-            The_Front := The_Front + 1;
-         else
-            return From_The_String (The_Front .. From_The_String'Last);
-         end if;
-      end loop;
-      return "";
-   end Stripped_Leading;
+   --  TODO: Avoid secondary stack use
+   --  function Stripped_Leading
+   --    (The_Character   : Character;
+   --     From_The_String : String;
+   --     Case_Sensitive  : Boolean := True)
+   --     return String
+   --  is
+   --     The_Front : Natural := From_The_String'First;
+   --  begin
+   --     for Index in From_The_String'Range loop
+   --        if Character_Utilities.Is_Equal
+   --            (The_Character, From_The_String (Index), Case_Sensitive)
+   --        then
+   --           The_Front := The_Front + 1;
+   --        else
+   --           return From_The_String (The_Front .. From_The_String'Last);
+   --        end if;
+   --     end loop;
+   --     return "";
+   --  end Stripped_Leading;
 
-   function Stripped_Trailing
-     (The_Character   : in Character;
-      From_The_String : in String;
-      Case_Sensitive  : in Boolean := True)
-      return String
-   is
-      The_Back : Natural := From_The_String'Last;
-   begin
-      for Index in reverse From_The_String'Range loop
-         if Character_Utilities.Is_Equal
-             (The_Character, From_The_String (Index), Case_Sensitive)
-         then
-            The_Back := The_Back - 1;
-         else
-            return From_The_String (From_The_String'First .. The_Back);
-         end if;
-      end loop;
-      return "";
-   end Stripped_Trailing;
+   --  TODO: Avoid secondary stack use
+   --  function Stripped_Trailing
+   --    (The_Character   : Character;
+   --     From_The_String : String;
+   --     Case_Sensitive  : Boolean := True)
+   --     return String
+   --  is
+   --     The_Back : Natural := From_The_String'Last;
+   --  begin
+   --     for Index in reverse From_The_String'Range loop
+   --        if Character_Utilities.Is_Equal
+   --            (The_Character, From_The_String (Index), Case_Sensitive)
+   --        then
+   --           The_Back := The_Back - 1;
+   --        else
+   --           return From_The_String (From_The_String'First .. The_Back);
+   --        end if;
+   --     end loop;
+   --     return "";
+   --  end Stripped_Trailing;
 
    function Number_Of
-     (The_Character  : in Character;
-      In_The_String  : in String;
-      Case_Sensitive : in Boolean := True)
+     (The_Character  : Character;
+      In_The_String  : String;
+      Case_Sensitive : Boolean := True)
       return Natural
    is
       Count : Natural := 0;
@@ -376,9 +392,9 @@ package body Booch_Light.String_Utilities is
    end Number_Of;
 
    function Number_Of
-     (The_String     : in String;
-      In_The_String  : in String;
-      Case_Sensitive : in Boolean := True)
+     (The_String     : String;
+      In_The_String  : String;
+      Case_Sensitive : Boolean := True)
       return Natural
    is
       Count : Natural := 0;
@@ -398,14 +414,15 @@ package body Booch_Light.String_Utilities is
    end Number_Of;
 
    function Location_Of
-     (The_Character  : in Character;
-      In_The_String  : in String;
-      Case_Sensitive : in Boolean := True;
-      Forward        : in Boolean := True)
+     (The_Character  : Character;
+      In_The_String  : String;
+      Case_Sensitive : Boolean := True;
+      Forward        : Boolean := True)
       return Natural
    is
    begin
-      if Forward then
+      if Forward
+      then
          for Index in In_The_String'Range loop
             if Character_Utilities.Is_Equal
                 (The_Character, In_The_String (Index), Case_Sensitive)
@@ -427,13 +444,14 @@ package body Booch_Light.String_Utilities is
    end Location_Of;
 
    function Is_Equal
-     (Left           : in String;
-      Right          : in String;
-      Case_Sensitive : in Boolean := True)
+     (Left           : String;
+      Right          : String;
+      Case_Sensitive : Boolean := True)
       return Boolean
    is
    begin
-      if Left'Length /= Right'Length then
+      if Left'Length /= Right'Length
+      then
          return False;
       else
          for Index in Left'Range loop
@@ -449,9 +467,9 @@ package body Booch_Light.String_Utilities is
    end Is_Equal;
 
    function Is_Less_Than
-     (Left           : in String;
-      Right          : in String;
-      Case_Sensitive : in Boolean := True)
+     (Left           : String;
+      Right          : String;
+      Case_Sensitive : Boolean := True)
       return Boolean
    is
    begin
@@ -470,9 +488,9 @@ package body Booch_Light.String_Utilities is
    end Is_Less_Than;
 
    function Is_Greater_Than
-     (Left           : in String;
-      Right          : in String;
-      Case_Sensitive : in Boolean := True)
+     (Left           : String;
+      Right          : String;
+      Case_Sensitive : Boolean := True)
       return Boolean
    is
    begin

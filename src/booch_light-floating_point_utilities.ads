@@ -22,69 +22,70 @@ package Booch_Light.Floating_Point_Utilities is
    type Numbers is array (Positive range <>) of Number;
 
    function Integer_Part
-     (The_Number : in Number)
+     (The_Number : Number)
       return Integer;
 
    function Real_Part
-     (The_Number : in Number)
+     (The_Number : Number)
       return Number;
 
    function Floor
-     (The_Number : in Number)
+     (The_Number : Number)
       return Integer;
 
    function Ceiling
-     (The_Number : in Number)
+     (The_Number : Number)
       return Integer;
 
    function Min
-     (Left  : in Number;
-      Right : in Number)
+     (Left  : Number;
+      Right : Number)
       return Number;
 
    function Min
-     (The_Numbers : in Numbers)
+     (The_Numbers : Numbers)
       return Number;
 
    function Max
-     (Left  : in Number;
-      Right : in Number)
+     (Left  : Number;
+      Right : Number)
       return Number;
 
    function Max
-     (The_Numbers : in Numbers)
+     (The_Numbers : Numbers)
       return Number;
 
    function Is_Positive
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean;
 
    function Is_Natural
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean;
 
    function Is_Negative
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean;
 
    function Is_Zero
-     (The_Number : in Number)
+     (The_Number : Number)
       return Boolean;
 
-   function Image_Of
-     (The_Number    : in Number;
-      With_The_Base : in Base := 10)
-      return String;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Image_Of
+   --    (The_Number    : Number;
+   --     With_The_Base : Base := 10)
+   --     return String;
 
    procedure Value_Of
-     (The_Image     : in     String;
-      With_The_Base : in     Base := 10;
+     (The_Image     :     String;
+      With_The_Base :     Base := 10;
       Result        :    out Number;
       Booch_Status  :    out Locus.Value_Of);
 
    function Is_Equal
-     (Left  : in Number;
-      Right : in Number)
+     (Left  : Number;
+      Right : Number)
       return Boolean;
 
 end Booch_Light.Floating_Point_Utilities;

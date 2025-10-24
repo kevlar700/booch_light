@@ -11,7 +11,7 @@ with Booch_Light.Alogs;
 package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
 
    procedure Copy
-     (From_The_Bag : in     Bag;
+     (From_The_Bag :     Bag;
       To_The_Bag   : in out Bag)
    is
    begin
@@ -24,7 +24,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Clear;
 
    procedure Add
-     (The_Item   : in     Item;
+     (The_Item   :     Item;
       To_The_Bag : in out Bag)
    is
    begin
@@ -32,7 +32,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Add;
 
    procedure Remove
-     (The_Item     : in     Item;
+     (The_Item     :     Item;
       From_The_Bag : in out Bag;
       Booch_Status :    out Locus.Remove)
    is
@@ -53,8 +53,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Remove;
 
    procedure Union
-     (Of_The_Bag  : in     Bag;
-      And_The_Bag : in     Bag;
+     (Of_The_Bag  :     Bag;
+      And_The_Bag :     Bag;
       To_The_Bag  : in out Bag)
    is
    begin
@@ -65,8 +65,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Union;
 
    procedure Intersection
-     (Of_The_Bag  : in     Bag;
-      And_The_Bag : in     Bag;
+     (Of_The_Bag  :     Bag;
+      And_The_Bag :     Bag;
       To_The_Bag  : in out Bag)
    is
    begin
@@ -80,8 +80,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Intersection;
 
    procedure Difference
-     (Of_The_Bag  : in     Bag;
-      And_The_Bag : in     Bag;
+     (Of_The_Bag  :     Bag;
+      And_The_Bag :     Bag;
       To_The_Bag  : in out Bag)
    is
    begin
@@ -96,8 +96,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Difference;
 
    function Is_Equal
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean
    is
    begin
@@ -105,7 +105,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Is_Equal;
 
    function Extent_Of
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Natural
    is
       Count : Natural := 0;
@@ -117,7 +117,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Extent_Of;
 
    function Unique_Extent_Of
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Natural
    is
       Count : Natural := 0;
@@ -131,8 +131,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Unique_Extent_Of;
 
    procedure Number_Of
-     (The_Item      : in     Item;
-      In_The_Bag    : in     Bag;
+     (The_Item      :     Item;
+      In_The_Bag    :     Bag;
       The_Number_Of :    out Positive;
       Booch_Status  :    out Locus.Number_Of)
    is
@@ -153,7 +153,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Number_Of;
 
    function Is_Empty
-     (The_Bag : in Bag)
+     (The_Bag : Bag)
       return Boolean
    is
    begin
@@ -161,8 +161,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Is_Empty;
 
    function Is_A_Member
-     (The_Item   : in Item;
-      Of_The_Bag : in Bag)
+     (The_Item   : Item;
+      Of_The_Bag : Bag)
       return Boolean
    is
    begin
@@ -170,8 +170,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Is_A_Member;
 
    function Is_A_Subset
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean
    is
    begin
@@ -184,8 +184,8 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
    end Is_A_Subset;
 
    function Is_A_Proper_Subset
-     (Left  : in Bag;
-      Right : in Bag)
+     (Left  : Bag;
+      Right : Bag)
       return Boolean
    is
       Unique_Left_Count  : Natural := 0;
@@ -215,7 +215,7 @@ package body Booch_Light.Bag_Discrete_Sequential_Bounded_Managed_Iterator is
       end if;
    end Is_A_Proper_Subset;
 
-   procedure Iterate (Over_The_Bag : in Bag) is
+   procedure Iterate (Over_The_Bag : Bag) is
       Continue : Boolean := True;
    begin
       for The_Iterator in Over_The_Bag.The_Items'Range loop

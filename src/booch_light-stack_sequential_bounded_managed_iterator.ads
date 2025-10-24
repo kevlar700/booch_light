@@ -29,13 +29,13 @@ package Booch_Light.Stack_Sequential_Bounded_Managed_Iterator is
    type Stack (The_Size : Positive) is limited private;
 
    procedure Copy
-     (From_The_Stack : in     Stack;
+     (From_The_Stack :        Stack;
       To_The_Stack   : in out Stack;
       Booch_Status   :    out Locus.Copy);
 
    procedure Clear (The_Stack : in out Stack);
    procedure Push
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       On_The_Stack : in out Stack;
       Booch_Status :    out Locus.Push);
 
@@ -44,29 +44,29 @@ package Booch_Light.Stack_Sequential_Bounded_Managed_Iterator is
       Booch_Status :    out Locus.Pop);
 
    procedure Top_Of
-     (The_Stack    : in     Stack;
-      The_Top      :    out Item;
-      Booch_Status :    out Locus.Top_Of);
+     (The_Stack    :     Stack;
+      The_Top      : out Item;
+      Booch_Status : out Locus.Top_Of);
 
    function Is_Equal
-     (Left  : in Stack;
-      Right : in Stack)
+     (Left  : Stack;
+      Right : Stack)
       return Boolean;
 
    function Depth_Of
-     (The_Stack : in Stack)
+     (The_Stack : Stack)
       return Natural;
 
    function Is_Empty
-     (The_Stack : in Stack)
+     (The_Stack : Stack)
       return Boolean;
 
    generic
       with procedure Process
-        (The_Item : in     Item;
-         Continue :    out Boolean);
+        (The_Item :     Item;
+         Continue : out Boolean);
 
-   procedure Iterate (Over_The_Stack : in Stack);
+   procedure Iterate (Over_The_Stack : Stack);
 
 private
    type Items is array (Positive range <>) of Item;

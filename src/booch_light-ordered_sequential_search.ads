@@ -13,13 +13,13 @@ generic
    type Items is array (Index range <>) of Item;
 
    with function Is_Equal
-     (Left  : in Key;
-      Right : in Item)
+     (Left  : Key;
+      Right : Item)
       return Boolean;
 
    with function Is_Less_Than
-     (Left  : in Key;
-      Right : in Item)
+     (Left  : Key;
+      Right : Item)
       return Boolean;
 
 package Booch_Light.Ordered_Sequential_Search is
@@ -32,10 +32,10 @@ package Booch_Light.Ordered_Sequential_Search is
    end Locus;
 
    procedure Location_Of
-     (The_Key      : in     Key;
-      In_The_Items : in     Items;
-      Result       :    out Index;
-      Booch_Status :    out Locus.Location_Of);
+     (The_Key      :     Key;
+      In_The_Items :     Items;
+      Result       : out Index;
+      Booch_Status : out Locus.Location_Of);
 
 end Booch_Light.Ordered_Sequential_Search;
 

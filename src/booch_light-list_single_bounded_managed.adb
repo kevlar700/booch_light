@@ -36,7 +36,8 @@ package body Booch_Light.List_Single_Bounded_Managed is
    is
       Temporary_Node : List;
    begin
-      if Free_List = Null_List then
+      if Free_List = Null_List
+      then
          Booch_Status := No_Storage_Available;
          Alogs.Log
            (Log_ID  => "95FAF582E22FF7C2",
@@ -54,7 +55,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    end New_Item;
 
    procedure Copy
-     (From_The_List : in     List;
+     (From_The_List :        List;
       To_The_List   : in out List;
       Booch_Status  :    out Locus.Copy)
    is
@@ -64,7 +65,8 @@ package body Booch_Light.List_Single_Bounded_Managed is
       New_Item_Status : Locus.New_Item;
    begin
       Free (To_The_List);
-      if From_The_List /= Null_List then
+      if From_The_List /= Null_List
+      then
          New_Item
            (The_Item     => New_List,
             Booch_Status => New_Item_Status);
@@ -128,7 +130,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    end Clear;
 
    procedure Construct
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       And_The_List : in out List;
       Booch_Status :    out Locus.Construct)
    is
@@ -169,7 +171,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
 
    procedure Set_Head
      (Of_The_List  : in out List;
-      To_The_Item  : in     Item;
+      To_The_Item  :        Item;
       Booch_Status :    out Locus.Set_Head)
    is
    begin
@@ -211,8 +213,8 @@ package body Booch_Light.List_Single_Bounded_Managed is
    end Swap_Tail;
 
    function Is_Equal
-     (Left  : in List;
-      Right : in List)
+     (Left  : List;
+      Right : List)
       return Boolean
    is
       Left_Index  : List := Left;
@@ -237,7 +239,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    end Is_Equal;
 
    function Length_Of
-     (The_List : in List)
+     (The_List : List)
       return Natural
    is
       Count : Natural := 0;
@@ -251,7 +253,7 @@ package body Booch_Light.List_Single_Bounded_Managed is
    end Length_Of;
 
    function Is_Null
-     (The_List : in List)
+     (The_List : List)
       return Boolean
    is
    begin
@@ -259,9 +261,9 @@ package body Booch_Light.List_Single_Bounded_Managed is
    end Is_Null;
 
    procedure Head_Of
-     (The_List     : in     List;
-      The_Item     :    out Item;
-      Booch_Status :    out Locus.Head_Of)
+     (The_List     :     List;
+      The_Item     : out Item;
+      Booch_Status : out Locus.Head_Of)
    is
    begin
       The_Item     := Heap (The_List.The_Head).The_Item;
@@ -279,9 +281,9 @@ package body Booch_Light.List_Single_Bounded_Managed is
    end Head_Of;
 
    procedure Tail_Of
-     (The_List     : in     List;
-      The_Tail     :    out List;
-      Booch_Status :    out Locus.Tail_Of)
+     (The_List     :     List;
+      The_Tail     : out List;
+      Booch_Status : out Locus.Tail_Of)
    is
    begin
       The_Tail     := Heap (The_List.The_Head).Next;

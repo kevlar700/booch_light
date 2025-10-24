@@ -11,7 +11,7 @@ with Booch_Light.Alogs;
 package body Booch_Light.Tree_Utilities_Binary_Double is
 
    function Is_Root
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean
    is
    begin
@@ -19,7 +19,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
    end Is_Root;
 
    function Is_Leaf
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean
    is
    begin
@@ -29,7 +29,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
    end Is_Leaf;
 
    function Root_Of
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Tree
    is
       Result : Tree := The_Tree;
@@ -41,7 +41,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
    end Root_Of;
 
    procedure Child_Name_Of
-     (The_Tree     : in     Tree;
+     (The_Tree     :     Tree;
       Result       :    out Child;
       Booch_Status :    out Locus.Child_Name_Of)
    is
@@ -64,7 +64,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
    end Child_Name_Of;
 
    procedure Left_Sibling_Of
-     (The_Tree     : in     Tree;
+     (The_Tree     :     Tree;
       Result       :    out Tree;
       Booch_Status :    out Locus.Left_Sibling_Of)
    is
@@ -100,7 +100,7 @@ package body Booch_Light.Tree_Utilities_Binary_Double is
    end Left_Sibling_Of;
 
    procedure Right_Sibling_Of
-     (The_Tree     : in     Tree;
+     (The_Tree     :     Tree;
       Result       :    out Tree;
       Booch_Status :    out Locus.Right_Sibling_Of)
    is

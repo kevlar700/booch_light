@@ -9,21 +9,21 @@
 generic
    type Tree is private;
    type Child is (<>);
-   Null_Tree : in Tree;
-   Left_Child : in Child;
-   Right_Child : in Child;
+   Null_Tree : Tree;
+   Left_Child : Child;
+   Right_Child : Child;
 
    with function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    with function Child_Of
-     (The_Tree  : in Tree;
-      The_Child : in Child)
+     (The_Tree  : Tree;
+      The_Child : Child)
       return Tree;
 
    with function Parent_Of
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Tree;
 
 package Booch_Light.Tree_Utilities_Binary_Double is
@@ -42,31 +42,31 @@ package Booch_Light.Tree_Utilities_Binary_Double is
    end Locus;
 
    procedure Child_Name_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Child;
-      Booch_Status :    out Locus.Child_Name_Of);
+     (The_Tree     :     Tree;
+      Result       : out Child;
+      Booch_Status : out Locus.Child_Name_Of);
 
    function Is_Root
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    function Is_Leaf
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    function Root_Of
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Tree;
 
    procedure Left_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Left_Sibling_Of);
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Left_Sibling_Of);
 
    procedure Right_Sibling_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Right_Sibling_Of);
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Right_Sibling_Of);
 
 end Booch_Light.Tree_Utilities_Binary_Double;
 

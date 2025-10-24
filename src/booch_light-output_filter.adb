@@ -8,13 +8,16 @@
 
 package body Booch_Light.Output_Filter is
 
-   procedure Output (The_Item : in Item) is
+   procedure Output (The_Item : Item) is
    begin
-      if The_Item = Line_Terminator then
+      if The_Item = Line_Terminator
+      then
          New_Line;
-      elsif The_Item = Page_Terminator then
+      elsif The_Item = Page_Terminator
+      then
          New_Page;
-      elsif The_Item = File_Terminator then
+      elsif The_Item = File_Terminator
+      then
          End_File;
       else
          Put (The_Item);

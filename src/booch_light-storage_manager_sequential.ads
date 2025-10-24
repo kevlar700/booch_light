@@ -14,10 +14,10 @@ generic
 
    with procedure Set_Pointer
      (The_Item    : in out Item;
-      The_Pointer : in     Pointer);
+      The_Pointer :        Pointer);
 
    with function Pointer_Of
-     (The_Item : in Item)
+     (The_Item : Item)
       return Pointer;
 
 package Booch_Light.Storage_Manager_Sequential is

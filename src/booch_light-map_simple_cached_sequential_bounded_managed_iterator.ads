@@ -10,7 +10,7 @@ generic
    type Domain is private;
    type Ranges is private;
    with function Hash_Of
-     (The_Domain : in Domain)
+     (The_Domain : Domain)
       return Positive;
 
 package Booch_Light.Map_Simple_Cached_Sequential_Bounded_Managed_Iterator is
@@ -35,53 +35,53 @@ package Booch_Light.Map_Simple_Cached_Sequential_Bounded_Managed_Iterator is
    type Map (The_Size : Positive) is limited private;
 
    procedure Copy
-     (From_The_Map : in     Map;
+     (From_The_Map :        Map;
       To_The_Map   : in out Map;
       Booch_Status :    out Locus.Copy);
 
    procedure Clear (The_Map : in out Map);
 
    procedure Bind
-     (The_Domain    : in     Domain;
-      And_The_Range : in     Ranges;
+     (The_Domain    :        Domain;
+      And_The_Range :        Ranges;
       In_The_Map    : in out Map;
       Booch_Status  :    out Locus.Bind);
 
    procedure Unbind
-     (The_Domain   : in     Domain;
+     (The_Domain   :        Domain;
       In_The_Map   : in out Map;
       Booch_Status :    out Locus.Unbind);
 
    function Is_Equal
-     (Left  : in Map;
-      Right : in Map)
+     (Left  : Map;
+      Right : Map)
       return Boolean;
 
    function Extent_Of
-     (The_Map : in Map)
+     (The_Map : Map)
       return Natural;
 
    function Is_Empty
-     (The_Map : in Map)
+     (The_Map : Map)
       return Boolean;
 
    function Is_Bound
-     (The_Domain : in Domain;
-      In_The_Map : in Map)
+     (The_Domain : Domain;
+      In_The_Map : Map)
       return Boolean;
 
    procedure Range_Of
-     (The_Domain   : in     Domain;
-      In_The_Map   : in     Map;
-      Result       :    out Ranges;
-      Booch_Status :    out Locus.Range_Of);
+     (The_Domain   :     Domain;
+      In_The_Map   :     Map;
+      Result       : out Ranges;
+      Booch_Status : out Locus.Range_Of);
 
    generic
       with procedure Process
-        (The_Domain : in     Domain;
-         The_Range  : in     Ranges;
-         Continue   :    out Boolean);
-   procedure Iterate (Over_The_Map : in Map);
+        (The_Domain :     Domain;
+         The_Range  :     Ranges;
+         Continue   : out Boolean);
+   procedure Iterate (Over_The_Map : Map);
 
 private
    type State is

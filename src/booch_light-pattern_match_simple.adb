@@ -11,17 +11,18 @@ with Booch_Light.Alogs;
 package body Booch_Light.Pattern_Match_Simple is
 
    procedure Location_Of
-     (The_Pattern  : in     Items;
-      In_The_Items : in     Items;
-      Result       :    out Index;
-      Booch_Status :    out Locus.Location_Of)
+     (The_Pattern  :     Items;
+      In_The_Items :     Items;
+      Result       : out Index;
+      Booch_Status : out Locus.Location_Of)
    is
       Temporary_Index : Index;
    begin
       for The_Location in In_The_Items'Range loop
          Temporary_Index :=
            Index'Val (Index'Pos (The_Location) + The_Pattern'Length - 1);
-         if In_The_Items (The_Location .. Temporary_Index) = The_Pattern then
+         if In_The_Items (The_Location .. Temporary_Index) = The_Pattern
+         then
             Result       := The_Location;
             Booch_Status := OK;
             return;

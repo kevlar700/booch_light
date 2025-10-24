@@ -11,14 +11,15 @@ with Booch_Light.Alogs;
 package body Booch_Light.List_Utilities_Double is
 
    procedure Location_Of
-     (The_Position : in     Positive;
-      In_The_List  : in     List;
-      Result       :    out List;
-      Booch_Status :    out Locus.Location_Of)
+     (The_Position :     Positive;
+      In_The_List  :     List;
+      Result       : out List;
+      Booch_Status : out Locus.Location_Of)
    is
       Index : List;
    begin
-      if Is_Null (In_The_List) then
+      if Is_Null (In_The_List)
+      then
          Alogs.Log
            (Log_ID  => "A8B761B9B3D1D6E7",
             Message => "Position_Error: Location_Of failed");
@@ -28,7 +29,8 @@ package body Booch_Light.List_Utilities_Double is
          Index := In_The_List;
          for Count in 2 .. The_Position loop
             Index := Tail_Of (Index);
-            if Is_Null (Index) then
+            if Is_Null (Index)
+            then
                Alogs.Log
                  (Log_ID  => "6F9BE8581B0D545B",
                   Message => "Position_Error: Location_Of failed");
@@ -44,7 +46,7 @@ package body Booch_Light.List_Utilities_Double is
    end Location_Of;
 
    procedure Construct
-     (The_Items    : in     Items;
+     (The_Items    :        Items;
       And_The_List : in out List)
    is
    begin
@@ -65,7 +67,7 @@ package body Booch_Light.List_Utilities_Double is
 
    procedure Split
      (The_List        : in out List;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Into_The_List   : in out List;
       Booch_Status    :    out Locus.Split)
    is
@@ -105,9 +107,9 @@ package body Booch_Light.List_Utilities_Double is
    end Split;
 
    procedure Insert
-     (The_Item           : in     Item;
+     (The_Item           :        Item;
       In_The_List        : in out List;
-      After_The_Position : in     Positive;
+      After_The_Position :        Positive;
       Booch_Status       :    out Locus.Insert)
    is
       Index          : List;
@@ -147,7 +149,7 @@ package body Booch_Light.List_Utilities_Double is
    procedure Insert
      (The_List           : in out List;
       In_The_List        : in out List;
-      After_The_Position : in     Positive;
+      After_The_Position :        Positive;
       Booch_Status       :    out Locus.Insert)
    is
       Index          : List;
@@ -185,7 +187,7 @@ package body Booch_Light.List_Utilities_Double is
    end Insert;
 
    procedure Insert
-     (The_Item       : in     Item;
+     (The_Item       :        Item;
       After_The_List : in out List)
    is
       Index          : List := Foot_Of (After_The_List);
@@ -200,7 +202,7 @@ package body Booch_Light.List_Utilities_Double is
    end Insert;
 
    procedure Insert
-     (The_List       : in     List;
+     (The_List       :        List;
       After_The_List : in out List)
    is
       Index          : List := Foot_Of (After_The_List);
@@ -213,7 +215,7 @@ package body Booch_Light.List_Utilities_Double is
 
    procedure Remove_Item
      (In_The_List     : in out List;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Booch_Status    :    out Locus.Remove_Item)
    is
       Index          : List;
@@ -238,7 +240,8 @@ package body Booch_Light.List_Utilities_Double is
             null;
       end case;
 
-      if Index = In_The_List then
+      if Index = In_The_List
+      then
          Swap_Tail
            (Index,
             And_The_List => Temporary_List);
@@ -257,7 +260,7 @@ package body Booch_Light.List_Utilities_Double is
    end Remove_Item;
 
    function Foot_Of
-     (The_List : in List)
+     (The_List : List)
       return List
    is
       Index : List := The_List;
@@ -269,7 +272,7 @@ package body Booch_Light.List_Utilities_Double is
    end Foot_Of;
 
    function Is_Head
-     (The_List : in List)
+     (The_List : List)
       return Boolean
    is
    begin
@@ -277,7 +280,7 @@ package body Booch_Light.List_Utilities_Double is
    end Is_Head;
 
    function Head_Of
-     (The_List : in List)
+     (The_List : List)
       return List
    is
       Index : List := The_List;

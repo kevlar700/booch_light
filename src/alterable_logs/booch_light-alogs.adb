@@ -1,8 +1,8 @@
 package body Booch_Light.Alogs is
 
    procedure Log
-     (Log_ID  : in Elogs.Log_ID_Type;
-      Message : in String)
+     (Log_ID  : Elogs.Log_ID_Type;
+      Message : String)
    is
    begin
       Elogs.Log
@@ -11,8 +11,8 @@ package body Booch_Light.Alogs is
    end Log;
 
    procedure Status_Exception
-     (Log_ID  : in Elogs.Log_ID_Type;
-      Message : in String)
+     (Log_ID  : Elogs.Log_ID_Type;
+      Message : String)
    is
    begin
       Elogs.Status_Exception

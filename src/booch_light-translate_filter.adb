@@ -8,7 +8,7 @@
 
 package body Booch_Light.Translate_Filter is
 
-   procedure Translate (The_Item : in Item) is
+   procedure Translate (The_Item : Item) is
    begin
       Put (Filter (The_Item));
    end Translate;
@@ -26,4 +26,4 @@ end Booch_Light.Translate_Filter;
 --  without limitation the rights to use, copy, modify, merge, publish,
 --  distribute, sublicense, and/or sell copies of the Software, and to
 --  permit persons to whom the Software is furnished to do so, subject to
---  the following conditions:-  DEALINGS IN THE SOFTWARE.
+--  the following conditions:- DEALINGS IN THE SOFTWARE.

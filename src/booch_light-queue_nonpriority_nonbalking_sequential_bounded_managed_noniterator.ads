@@ -30,14 +30,16 @@ is
 
    type Queue (The_Size : Positive) is limited private;
 
+   --  From_The_Queue and To_The_Queue may be different capacity arrays but
+   --  will have the same accessible content and lengths after this operation.
    procedure Copy
-     (From_The_Queue : in     Queue;
+     (From_The_Queue :        Queue;
       To_The_Queue   : in out Queue;
       Booch_Status   :    out Locus.Copy);
 
    procedure Clear (The_Queue : in out Queue);
    procedure Add
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       To_The_Queue : in out Queue;
       Booch_Status :    out Locus.Add);
 
@@ -46,21 +48,21 @@ is
       Booch_Status :    out Locus.Pop);
 
    procedure Front_Of
-     (The_Queue    : in     Queue;
-      The_Front    :    out Item;
-      Booch_Status :    out Locus.Front_Of);
+     (The_Queue    :     Queue;
+      The_Front    : out Item;
+      Booch_Status : out Locus.Front_Of);
 
    function Is_Equal
-     (Left  : in Queue;
-      Right : in Queue)
+     (Left  : Queue;
+      Right : Queue)
       return Boolean;
 
    function Length_Of
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Natural;
 
    function Is_Empty
-     (The_Queue : in Queue)
+     (The_Queue : Queue)
       return Boolean;
 
 private

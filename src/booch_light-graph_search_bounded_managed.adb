@@ -25,9 +25,9 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
      (Item => Vertex);
 
    procedure Traverse_Depth_First
-     (From_The_Vertex : in     Vertex;
-      In_The_Graph    : in     Graph;
-      Booch_Status    :    out Locus.Traverse_Depth_First)
+     (From_The_Vertex :     Vertex;
+      In_The_Graph    :     Graph;
+      Booch_Status    : out Locus.Traverse_Depth_First)
    is
       The_Size : constant Natural := Number_Of_Vertices_In (In_The_Graph);
       Vertices_Visited : Vertex_Set.Set (The_Size);
@@ -172,9 +172,9 @@ package body Booch_Light.Graph_Search_Bounded_Managed is
    end Traverse_Depth_First;
 
    procedure Traverse_Breadth_First
-     (From_The_Vertex : in     Vertex;
-      In_The_Graph    : in     Graph;
-      Booch_Status    :    out Locus.Traverse_Breadth_First)
+     (From_The_Vertex :     Vertex;
+      In_The_Graph    :     Graph;
+      Booch_Status    : out Locus.Traverse_Breadth_First)
    is
       The_Size : constant Natural := Number_Of_Vertices_In (In_The_Graph);
       Vertices_Visited : Vertex_Set.Set (The_Size);

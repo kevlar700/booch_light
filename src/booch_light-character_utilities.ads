@@ -30,83 +30,83 @@ package Booch_Light.Character_Utilities is
    procedure Make_Lowercase (The_Character : in out Character);
 
    function Uppercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Character;
 
    function Lowercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Character;
 
    function Is_Control
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    function Is_Graphic
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    function Is_Uppercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    function Is_Lowercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    function Is_Digit
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    function Is_Alphabetic
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    function Is_Alphanumeric
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    function Is_Special
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean;
 
    procedure Value_Of
-     (The_Character : in     Character;
+     (The_Character :     Character;
       Result        :    out Digit;
       Booch_Status  :    out Locus.Value_Of);
 
    function Image_Of
-     (The_Digit : in Digit)
+     (The_Digit : Digit)
       return Character;
 
    procedure Index_Of
-     (The_Character : in     Character;
+     (The_Character :     Character;
       Result        :    out Letter;
       Booch_Status  :    out Locus.Index_Of);
 
    function Uppercase_Of
-     (The_Letter : in Letter)
+     (The_Letter : Letter)
       return Character;
 
    function Lowercase_Of
-     (The_Letter : in Letter)
+     (The_Letter : Letter)
       return Character;
 
    function Is_Equal
-     (Left           : in Character;
-      Right          : in Character;
-      Case_Sensitive : in Boolean := True)
+     (Left           : Character;
+      Right          : Character;
+      Case_Sensitive : Boolean := True)
       return Boolean;
 
    function Is_Less_Than
-     (Left           : in Character;
-      Right          : in Character;
-      Case_Sensitive : in Boolean := True)
+     (Left           : Character;
+      Right          : Character;
+      Case_Sensitive : Boolean := True)
       return Boolean;
 
    function Is_Greater_Than
-     (Left           : in Character;
-      Right          : in Character;
-      Case_Sensitive : in Boolean := True)
+     (Left           : Character;
+      Right          : Character;
+      Case_Sensitive : Boolean := True)
       return Boolean;
 
 end Booch_Light.Character_Utilities;

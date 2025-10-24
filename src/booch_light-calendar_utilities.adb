@@ -47,29 +47,32 @@ package body Booch_Light.Calendar_Utilities is
    package Duration_Utilities is new Fixed_Point_Utilities
      (Number => Duration);
 
-   function Image_Of
-     (The_Number : in Natural)
-      return String
-   is
-   begin
-      if The_Number < 10 then
-         return String_Utilities.Replaced
-             (The_Character      => Blank,
-              With_The_Character => Zero,
-              In_The_String      => Natural_Utilities.Image_Of (The_Number));
-      else
-         return String_Utilities.Stripped_Leading
-             (The_Character   => Blank,
-              From_The_String => Natural_Utilities.Image_Of (The_Number));
-      end if;
-   end Image_Of;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Image_Of
+   --    (The_Number : Natural)
+   --     return String
+   --  is
+   --  begin
+   --     if The_Number < 10
+   --     then
+   --        return String_Utilities.Replaced
+   --            (The_Character      => Blank,
+   --             With_The_Character => Zero,
+   --             In_The_String      => Natural_Utilities.Image_Of (The_Number));
+   --     else
+   --        return String_Utilities.Stripped_Leading
+   --            (The_Character   => Blank,
+   --             From_The_String => Natural_Utilities.Image_Of (The_Number));
+   --     end if;
+   --  end Image_Of;
 
    function Is_Leap_Year
-     (The_Year : in Year)
+     (The_Year : Year)
       return Boolean
    is
    begin
-      if The_Year mod 100 = 0 then
+      if The_Year mod 100 = 0
+      then
          return (The_Year mod 400 = 0);
       else
          return (The_Year mod 4 = 0);
@@ -77,11 +80,12 @@ package body Booch_Light.Calendar_Utilities is
    end Is_Leap_Year;
 
    function Days_In
-     (The_Year : in Year)
+     (The_Year : Year)
       return Year_Day
    is
    begin
-      if Is_Leap_Year (The_Year) then
+      if Is_Leap_Year (The_Year)
+      then
          return (Days_Per_Year + 1);
       else
          return Days_Per_Year;
@@ -89,8 +93,8 @@ package body Booch_Light.Calendar_Utilities is
    end Days_In;
 
    function Days_In
-     (The_Month : in Month;
-      The_Year  : in Year)
+     (The_Month : Month;
+      The_Year  : Year)
       return Day
    is
    begin
@@ -104,7 +108,7 @@ package body Booch_Light.Calendar_Utilities is
    end Days_In;
 
    function Month_Of
-     (The_Month : in Month)
+     (The_Month : Month)
       return Month_Name
    is
    begin
@@ -112,7 +116,7 @@ package body Booch_Light.Calendar_Utilities is
    end Month_Of;
 
    function Month_Of
-     (The_Month : in Month_Name)
+     (The_Month : Month_Name)
       return Month
    is
    begin
@@ -120,15 +124,15 @@ package body Booch_Light.Calendar_Utilities is
    end Month_Of;
 
    function Day_Of
-     (The_Year : in Year;
-      The_Day  : in Year_Day)
+     (The_Year : Year;
+      The_Day  : Year_Day)
       return Day_Name
    is
       February_28Th : constant Year_Day := 59;
       Result        : Day_Name          := First_Day;
       procedure Increment
         (The_Day_Nested : in out Day_Name;
-         Offset         : in     Natural := 1)
+         Offset         :        Natural := 1)
       is
       begin
          The_Day_Nested :=
@@ -140,7 +144,8 @@ package body Booch_Light.Calendar_Utilities is
       end Increment;
    begin
       for Index in (Year'First + 1) .. The_Year loop
-         if Is_Leap_Year (Index) then
+         if Is_Leap_Year (Index)
+         then
             Increment
               (Result,
                Offset => 2);
@@ -148,7 +153,8 @@ package body Booch_Light.Calendar_Utilities is
             Increment (Result);
          end if;
       end loop;
-      if Is_Leap_Year (The_Year) and then (The_Day <= February_28Th) then
+      if Is_Leap_Year (The_Year) and then (The_Day <= February_28Th)
+      then
          Increment
            (Result,
             Offset => 6);
@@ -160,7 +166,7 @@ package body Booch_Light.Calendar_Utilities is
    end Day_Of;
 
    function Day_Of
-     (The_Time : in Time)
+     (The_Time : Time)
       return Year_Day
    is
       Result : Natural := 0;
@@ -172,10 +178,10 @@ package body Booch_Light.Calendar_Utilities is
    end Day_Of;
 
    procedure Time_Of
-     (The_Year     : in     Year;
-      The_Day      : in     Year_Day;
-      Result       :    out Time;
-      Booch_Status :    out Locus.Time_Of)
+     (The_Year     :     Year;
+      The_Day      :     Year_Day;
+      Result       : out Time;
+      Booch_Status : out Locus.Time_Of)
    is
       No_Time : constant Time :=
         (The_Year        => Year'Last,
@@ -188,7 +194,8 @@ package body Booch_Light.Calendar_Utilities is
       Tmp_Day : Year_Day      := The_Day;
    begin
       for Index in Month'First .. Month'Last loop
-         if Tmp_Day <= Year_Day (Days_In (Index, The_Year)) then
+         if Tmp_Day <= Year_Day (Days_In (Index, The_Year))
+         then
 
             Booch_Status := OK;
             Result       :=
@@ -217,11 +224,12 @@ package body Booch_Light.Calendar_Utilities is
    end Time_Of;
 
    function Period_Of
-     (The_Time : in Time)
+     (The_Time : Time)
       return Period
    is
    begin
-      if The_Time.The_Hour >= Noon then
+      if The_Time.The_Hour >= Noon
+      then
          return Pm;
       else
          return Am;
@@ -229,7 +237,7 @@ package body Booch_Light.Calendar_Utilities is
    end Period_Of;
 
    --  function Time_Of
-   --    (The_Time : in Time)
+   --    (The_Time : Time)
    --     return Ada.Calendar.Time
    --  is
    --  begin
@@ -238,7 +246,8 @@ package body Booch_Light.Calendar_Utilities is
    --          Month   => Ada.Calendar.Month_Number (The_Time.The_Month),
    --          Day     => Ada.Calendar.Day_Number (The_Time.The_Day),
    --          Seconds =>
-   --            Ada.Calendar.Day_Duration (The_Time.The_Hour) * Seconds_Per_Hour +
+   --            Ada.Calendar.Day_Duration (The_Time.The_Hour) *
+   --            Seconds_Per_Hour +
    --            Ada.Calendar.Day_Duration (The_Time.The_Minute) *
    --              Seconds_Per_Minute +
    --            Ada.Calendar.Day_Duration (The_Time.The_Second) +
@@ -247,7 +256,7 @@ package body Booch_Light.Calendar_Utilities is
    --  end Time_Of;
    --
    --  function Time_Of
-   --    (The_Time : in Ada.Calendar.Time)
+   --    (The_Time : Ada.Calendar.Time)
    --     return Time
    --  is
    --     Result         : Time;
@@ -272,65 +281,68 @@ package body Booch_Light.Calendar_Utilities is
    --     return Result;
    --  end Time_Of;
 
-   function Time_Image_Of
-     (The_Time  : in Time;
-      Time_Form : in Time_Format := Full)
-      return String
-   is
-   begin
-      case Time_Form is
-         when Full =>
-            if The_Time.The_Hour > Noon then
-               return
-                 (Image_Of (Natural (The_Time.The_Hour - 12)) &
-                  Time_Separator & Image_Of (Natural (The_Time.The_Minute)) &
-                  Time_Separator & Image_Of (Natural (The_Time.The_Second)) &
-                  Time_Separator &
-                  Image_Of (Natural (The_Time.The_Millisecond) / 10) & " PM");
-            else
-               return
-                 (Image_Of (Natural (The_Time.The_Hour)) & Time_Separator &
-                  Image_Of (Natural (The_Time.The_Minute)) & Time_Separator &
-                  Image_Of (Natural (The_Time.The_Second)) & Time_Separator &
-                  Image_Of (Natural (The_Time.The_Millisecond) / 10) & " AM");
-            end if;
-         when Military =>
-            return
-              (Image_Of (Natural (The_Time.The_Hour)) & Time_Separator &
-               Image_Of (Natural (The_Time.The_Minute)) & Time_Separator &
-               Image_Of (Natural (The_Time.The_Second)) & Time_Separator &
-               Image_Of (Natural (The_Time.The_Millisecond) / 10));
-      end case;
-   end Time_Image_Of;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Time_Image_Of
+   --    (The_Time  : Time;
+   --     Time_Form : Time_Format := Full)
+   --     return String
+   --  is
+   --  begin
+   --     case Time_Form is
+   --        when Full =>
+   --           if The_Time.The_Hour > Noon
+   --           then
+   --              return
+   --                (Image_Of (Natural (The_Time.The_Hour - 12)) &
+   --                 Time_Separator & Image_Of (Natural (The_Time.The_Minute)) &
+   --                 Time_Separator & Image_Of (Natural (The_Time.The_Second)) &
+   --                 Time_Separator &
+   --                 Image_Of (Natural (The_Time.The_Millisecond) / 10) & " PM");
+   --           else
+   --              return
+   --                (Image_Of (Natural (The_Time.The_Hour)) & Time_Separator &
+   --                 Image_Of (Natural (The_Time.The_Minute)) & Time_Separator &
+   --                 Image_Of (Natural (The_Time.The_Second)) & Time_Separator &
+   --                 Image_Of (Natural (The_Time.The_Millisecond) / 10) & " AM");
+   --           end if;
+   --        when Military =>
+   --           return
+   --             (Image_Of (Natural (The_Time.The_Hour)) & Time_Separator &
+   --              Image_Of (Natural (The_Time.The_Minute)) & Time_Separator &
+   --              Image_Of (Natural (The_Time.The_Second)) & Time_Separator &
+   --              Image_Of (Natural (The_Time.The_Millisecond) / 10));
+   --     end case;
+   --  end Time_Image_Of;
 
-   function Date_Image_Of
-     (The_Time  : in Time;
-      Date_Form : in Date_Format := Full)
-      return String
-   is
-   begin
-      case Date_Form is
-         when Full =>
-            return
-              (Month_Name'Image (Month_Name'Val (The_Time.The_Month - 1)) &
-               Natural_Utilities.Image_Of (Natural (The_Time.The_Day)) &
-               Comma &
-               Natural_Utilities.Image_Of (Natural (The_Time.The_Year)));
-         when Month_Day_Year =>
-            return
-              (Image_Of (Integer (The_Time.The_Month)) & Date_Separator &
-               Image_Of (Integer (The_Time.The_Day)) & Date_Separator &
-               Image_Of (Integer (The_Time.The_Year)) (4 .. 5));
-      end case;
-   end Date_Image_Of;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Date_Image_Of
+   --    (The_Time  : Time;
+   --     Date_Form : Date_Format := Full)
+   --     return String
+   --  is
+   --  begin
+   --     case Date_Form is
+   --        when Full =>
+   --           return
+   --             (Month_Name'Image (Month_Name'Val (The_Time.The_Month - 1)) &
+   --              Natural_Utilities.Image_Of (Natural (The_Time.The_Day)) &
+   --              Comma &
+   --              Natural_Utilities.Image_Of (Natural (The_Time.The_Year)));
+   --        when Month_Day_Year =>
+   --           return
+   --             (Image_Of (Integer (The_Time.The_Month)) & Date_Separator &
+   --              Image_Of (Integer (The_Time.The_Day)) & Date_Separator &
+   --              Image_Of (Integer (The_Time.The_Year)) (4 .. 5));
+   --     end case;
+   --  end Date_Image_Of;
 
    procedure Value_Of
-     (The_Date     : in     String;
-      The_Time     : in     String;
-      Date_Form    : in     Date_Format := Full;
-      Time_Form    : in     Time_Format := Full;
-      Result       :    out Time;
-      Booch_Status :    out Locus.Value_Of)
+     (The_Date     :     String;
+      The_Time     :     String;
+      Date_Form    :     Date_Format := Full;
+      Time_Form    :     Time_Format := Full;
+      Result       : out Time;
+      Booch_Status : out Locus.Value_Of)
    is
       No_Time     : constant Time :=
         (The_Year        => Year'Last,
@@ -564,8 +576,10 @@ package body Booch_Light.Calendar_Utilities is
 
             Left_Index := Right_Index + 1;
 
-            if Period'Value (The_Time (Left_Index .. The_Time'Last)) = Pm then
-               if Result.The_Hour /= Noon then
+            if Period'Value (The_Time (Left_Index .. The_Time'Last)) = Pm
+            then
+               if Result.The_Hour /= Noon
+               then
                   Result.The_Hour := Result.The_Hour + Noon;
                end if;
             end if;
@@ -605,7 +619,7 @@ package body Booch_Light.Calendar_Utilities is
    end Value_Of;
 
    function Duration_Of
-     (The_Interval : in Interval)
+     (The_Interval : Interval)
       return Duration
    is
    begin
@@ -619,7 +633,7 @@ package body Booch_Light.Calendar_Utilities is
    end Duration_Of;
 
    function Interval_Of
-     (The_Duration : in Duration)
+     (The_Duration : Duration)
       return Interval
    is
       Result      : Interval;
@@ -646,23 +660,24 @@ package body Booch_Light.Calendar_Utilities is
       return Result;
    end Interval_Of;
 
-   function Image_Of
-     (The_Interval : in Interval)
-      return String
-   is
-   begin
-      return
-        (Image_Of (The_Interval.Elapsed_Days) & Time_Separator &
-         Image_Of (Natural (The_Interval.Elapsed_Hours)) & Time_Separator &
-         Image_Of (Natural (The_Interval.Elapsed_Minutes)) & Time_Separator &
-         Image_Of (Natural (The_Interval.Elapsed_Seconds)) & Time_Separator &
-         Image_Of (Natural (The_Interval.Elapsed_Milliseconds)));
-   end Image_Of;
+   --  TODO: Replace as recursion is not permitted in this repo
+   --  function Image_Of
+   --    (The_Interval : Interval)
+   --     return String
+   --  is
+   --  begin
+   --     return
+   --       (Image_Of (The_Interval.Elapsed_Days) & Time_Separator &
+   --        Image_Of (Natural (The_Interval.Elapsed_Hours)) & Time_Separator &
+   --        Image_Of (Natural (The_Interval.Elapsed_Minutes)) & Time_Separator &
+   --        Image_Of (Natural (The_Interval.Elapsed_Seconds)) & Time_Separator &
+   --        Image_Of (Natural (The_Interval.Elapsed_Milliseconds)));
+   --  end Image_Of;
 
    procedure Value_Of
-     (The_Interval : in     String;
-      Result       :    out Interval;
-      Booch_Status :    out Locus.Value_Of)
+     (The_Interval :     String;
+      Result       : out Interval;
+      Booch_Status : out Locus.Value_Of)
    is
       No_Interval : constant Interval :=
         (Elapsed_Days         => Natural'Last,

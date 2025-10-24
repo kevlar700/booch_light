@@ -31,7 +31,7 @@ package body Booch_Light.Character_Utilities is
    end Make_Lowercase;
 
    function Uppercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Character
    is
    begin
@@ -46,7 +46,7 @@ package body Booch_Light.Character_Utilities is
    end Uppercase;
 
    function Lowercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Character
    is
    begin
@@ -61,7 +61,7 @@ package body Booch_Light.Character_Utilities is
    end Lowercase;
 
    function Is_Control
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -69,7 +69,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Control;
 
    function Is_Graphic
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -77,7 +77,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Graphic;
 
    function Is_Uppercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -85,7 +85,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Uppercase;
 
    function Is_Lowercase
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -93,7 +93,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Lowercase;
 
    function Is_Digit
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -101,7 +101,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Digit;
 
    function Is_Alphabetic
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -111,7 +111,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Alphabetic;
 
    function Is_Alphanumeric
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -122,7 +122,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Alphanumeric;
 
    function Is_Special
-     (The_Character : in Character)
+     (The_Character : Character)
       return Boolean
    is
    begin
@@ -132,7 +132,7 @@ package body Booch_Light.Character_Utilities is
    end Is_Special;
 
    procedure Value_Of
-     (The_Character : in     Character;
+     (The_Character :     Character;
       Result        :    out Digit;
       Booch_Status  :    out Locus.Value_Of)
    is
@@ -155,7 +155,7 @@ package body Booch_Light.Character_Utilities is
    end Value_Of;
 
    function Image_Of
-     (The_Digit : in Digit)
+     (The_Digit : Digit)
       return Character
    is
    begin
@@ -167,7 +167,7 @@ package body Booch_Light.Character_Utilities is
    end Image_Of;
 
    procedure Index_Of
-     (The_Character : in     Character;
+     (The_Character :     Character;
       Result        :    out Letter;
       Booch_Status  :    out Locus.Index_Of)
    is
@@ -189,7 +189,7 @@ package body Booch_Light.Character_Utilities is
    end Index_Of;
 
    function Uppercase_Of
-     (The_Letter : in Letter)
+     (The_Letter : Letter)
       return Character
    is
    begin
@@ -197,7 +197,7 @@ package body Booch_Light.Character_Utilities is
    end Uppercase_Of;
 
    function Lowercase_Of
-     (The_Letter : in Letter)
+     (The_Letter : Letter)
       return Character
    is
    begin
@@ -205,9 +205,9 @@ package body Booch_Light.Character_Utilities is
    end Lowercase_Of;
 
    function Is_Equal
-     (Left           : in Character;
-      Right          : in Character;
-      Case_Sensitive : in Boolean := True)
+     (Left           : Character;
+      Right          : Character;
+      Case_Sensitive : Boolean := True)
       return Boolean
    is
    begin
@@ -219,9 +219,9 @@ package body Booch_Light.Character_Utilities is
    end Is_Equal;
 
    function Is_Less_Than
-     (Left           : in Character;
-      Right          : in Character;
-      Case_Sensitive : in Boolean := True)
+     (Left           : Character;
+      Right          : Character;
+      Case_Sensitive : Boolean := True)
       return Boolean
    is
    begin
@@ -233,9 +233,9 @@ package body Booch_Light.Character_Utilities is
    end Is_Less_Than;
 
    function Is_Greater_Than
-     (Left           : in Character;
-      Right          : in Character;
-      Case_Sensitive : in Boolean := True)
+     (Left           : Character;
+      Right          : Character;
+      Case_Sensitive : Boolean := True)
       return Boolean
    is
    begin

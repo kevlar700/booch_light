@@ -8,9 +8,9 @@
 
 generic
    type Item is private;
-   The_Size : in Positive;
+   The_Size : Positive;
 
-package Booch_Light.Tree_Binary_Single_Bounded_Managed is
+package Booch_Light.Tree_Binary_Double_Bounded_Managed is
 
    package Locus is
 
@@ -18,19 +18,23 @@ package Booch_Light.Tree_Binary_Single_Bounded_Managed is
           Static_Predicate => Copy in Exception_Overflow | OK;
 
       subtype Construct is Status_Code with
-          Static_Predicate => Construct in Exception_Overflow | OK;
+          Static_Predicate =>
+           Construct in Exception_Overflow | Not_At_Root | OK;
 
       subtype Set_Item is Status_Code with
           Static_Predicate => Set_Item in Tree_Is_Null | OK;
 
       subtype Swap_Child is Status_Code with
-          Static_Predicate => Swap_Child in Tree_Is_Null | OK;
+          Static_Predicate => Swap_Child in Not_At_Root | Tree_Is_Null | OK;
 
       subtype Item_Of is Status_Code with
           Static_Predicate => Item_Of in Tree_Is_Null | OK;
 
       subtype Child_Of is Status_Code with
           Static_Predicate => Child_Of in Tree_Is_Null | OK;
+
+      subtype Parent_Of is Status_Code with
+          Static_Predicate => Parent_Of in Tree_Is_Null | OK;
 
    end Locus;
 
@@ -43,55 +47,63 @@ package Booch_Light.Tree_Binary_Single_Bounded_Managed is
    Null_Tree : constant Tree;
 
    procedure Copy
-     (From_The_Tree : in     Tree;
+     (From_The_Tree :        Tree;
       To_The_Tree   : in out Tree;
       Booch_Status  :    out Locus.Copy);
 
    procedure Clear (The_Tree : in out Tree);
 
    procedure Construct
-     (The_Item     : in     Item;
+     (The_Item     :        Item;
       And_The_Tree : in out Tree;
-      On_The_Child : in     Child;
+      On_The_Child :        Child;
       Booch_Status :    out Locus.Construct);
 
    procedure Set_Item
      (Of_The_Tree  : in out Tree;
-      To_The_Item  : in     Item;
+      To_The_Item  :        Item;
       Booch_Status :    out Locus.Set_Item);
 
    procedure Swap_Child
-     (The_Child    : in     Child;
+     (The_Child    :        Child;
       Of_The_Tree  : in out Tree;
       And_The_Tree : in out Tree;
       Booch_Status :    out Locus.Swap_Child);
 
    function Is_Equal
-     (Left  : in Tree;
-      Right : in Tree)
+     (Left  : Tree;
+      Right : Tree)
       return Boolean;
 
    function Is_Null
-     (The_Tree : in Tree)
+     (The_Tree : Tree)
       return Boolean;
 
    procedure Item_Of
-     (The_Tree     : in     Tree;
-      Result       :    out Item;
-      Booch_Status :    out Locus.Item_Of);
+     (The_Tree     :     Tree;
+      Result       : out Item;
+      Booch_Status : out Locus.Item_Of);
 
    procedure Child_Of
-     (The_Tree     : in     Tree;
-      The_Child    : in     Child;
-      Result       :    out Tree;
-      Booch_Status :    out Locus.Child_Of);
+     (The_Tree     :     Tree;
+      The_Child    :     Child;
+      Result       : out Tree;
+      Booch_Status : out Locus.Child_Of);
+
+   procedure Parent_Of
+     (The_Tree     :     Tree;
+      Result       : out Tree;
+      Booch_Status : out Locus.Parent_Of);
 
 private
+
    type Tree is record
       The_Head : Natural := 0;
    end record;
+
    Null_Tree : constant Tree := Tree'(The_Head => 0);
-end Booch_Light.Tree_Binary_Single_Bounded_Managed;
+
+end Booch_Light.Tree_Binary_Double_Bounded_Managed;
 
 --              Original Booch Components (Ada 83 version)
 --  License: MIT

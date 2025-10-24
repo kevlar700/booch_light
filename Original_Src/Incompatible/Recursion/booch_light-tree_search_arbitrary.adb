@@ -6,48 +6,45 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
-package body Booch_Light.Tree_Search_Binary is
+package body Booch_Light.Tree_Search_Arbitrary is
 
-   procedure Traverse_Pre_Order (The_Tree : in Tree) is
+   procedure Traverse_Pre_Order (The_Tree : Tree) is
       Continue : Boolean;
    begin
-      if not Is_Null (The_Tree) then
+      if not Is_Null (The_Tree)
+      then
          Process (The_Tree, Continue);
-         if not Continue then
+         if not Continue
+         then
             return;
          end if;
-         Traverse_Pre_Order (Child_Of (The_Tree, Left_Child));
-         Traverse_Pre_Order (Child_Of (The_Tree, Right_Child));
+         for Index in 1 .. Number_Of_Children_In (The_Tree) loop
+            Traverse_Pre_Order (Child_Of
+                 (The_Tree,
+                  The_Child => Index));
+         end loop;
       end if;
    end Traverse_Pre_Order;
 
-   procedure Traverse_In_Order (The_Tree : in Tree) is
+   procedure Traverse_Post_Order (The_Tree : Tree) is
       Continue : Boolean;
    begin
-      if not Is_Null (The_Tree) then
-         Traverse_In_Order (Child_Of (The_Tree, Left_Child));
+      if not Is_Null (The_Tree)
+      then
+         for Index in 1 .. Number_Of_Children_In (The_Tree) loop
+            Traverse_Post_Order (Child_Of
+                 (The_Tree,
+                  The_Child => Index));
+         end loop;
          Process (The_Tree, Continue);
-         if not Continue then
-            return;
-         end if;
-         Traverse_In_Order (Child_Of (The_Tree, Right_Child));
-      end if;
-   end Traverse_In_Order;
-
-   procedure Traverse_Post_Order (The_Tree : in Tree) is
-      Continue : Boolean;
-   begin
-      if not Is_Null (The_Tree) then
-         Traverse_Post_Order (Child_Of (The_Tree, Left_Child));
-         Traverse_Post_Order (Child_Of (The_Tree, Right_Child));
-         Process (The_Tree, Continue);
-         if not Continue then
+         if not Continue
+         then
             return;
          end if;
       end if;
    end Traverse_Post_Order;
 
-end Booch_Light.Tree_Search_Binary;
+end Booch_Light.Tree_Search_Arbitrary;
 
 --              Original Booch Components (Ada 83 version)
 --  License: MIT

@@ -10,12 +10,13 @@ with Booch_Light.Alogs;
 package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
    procedure Copy
-     (From_The_String : in     B_String;
+     (From_The_String :        B_String;
       To_The_String   : in out B_String;
       Booch_Status    :    out Locus.Copy)
    is
    begin
-      if From_The_String.The_Length > To_The_String.The_Size then
+      if From_The_String.The_Length > To_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "75D5925866B65D41",
             Message => "Exception_Overflow: Copy failed");
@@ -32,12 +33,13 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Copy;
 
    procedure Copy
-     (From_The_Substring : in     Substring;
+     (From_The_Substring :        Substring;
       To_The_String      : in out B_String;
       Booch_Status       :    out Locus.Copy)
    is
    begin
-      if From_The_Substring'Length > To_The_String.The_Size then
+      if From_The_Substring'Length > To_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "7E47195BF0F8D2E5",
             Message => "Exception_Overflow: Copy failed");
@@ -59,7 +61,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Clear;
 
    procedure Prepend
-     (The_String    : in     B_String;
+     (The_String    :        B_String;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Prepend)
    is
@@ -67,7 +69,8 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         To_The_String.The_Length + The_String.The_Length;
    begin
 
-      if New_Length > To_The_String.The_Size then
+      if New_Length > To_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "389B534B43F2203F",
             Message => "Exception_Overflow: Prepend failed");
@@ -86,7 +89,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Prepend;
 
    procedure Prepend
-     (The_Substring : in     Substring;
+     (The_Substring :        Substring;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Prepend)
    is
@@ -94,7 +97,8 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         To_The_String.The_Length + The_Substring'Length;
    begin
 
-      if New_Length > To_The_String.The_Size then
+      if New_Length > To_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "B7A9470F4539AFB4",
             Message => "Exception_Overflow: Prepend failed");
@@ -112,7 +116,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Prepend;
 
    procedure Append
-     (The_String    : in     B_String;
+     (The_String    :        B_String;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Append)
    is
@@ -120,7 +124,8 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         To_The_String.The_Length + The_String.The_Length;
    begin
 
-      if New_Length > To_The_String.The_Size then
+      if New_Length > To_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "69E42C6B74CD4407",
             Message => "Exception_Overflow: Append failed");
@@ -137,7 +142,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Append;
 
    procedure Append
-     (The_Substring : in     Substring;
+     (The_Substring :        Substring;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Append)
    is
@@ -145,7 +150,8 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
         To_The_String.The_Length + The_Substring'Length;
    begin
 
-      if New_Length > To_The_String.The_Size then
+      if New_Length > To_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "0FEDA7F4307155F3",
             Message => "Exception_Overflow: Append failed");
@@ -163,9 +169,9 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Append;
 
    procedure Insert
-     (The_String      : in     B_String;
+     (The_String      :        B_String;
       In_The_String   : in out B_String;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Booch_Status    :    out Locus.Insert)
    is
       New_Length   : constant Natural :=
@@ -173,13 +179,15 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       End_Position : constant Natural :=
         At_The_Position + The_String.The_Length;
    begin
-      if At_The_Position > In_The_String.The_Length then
+      if At_The_Position > In_The_String.The_Length
+      then
          Alogs.Status_Exception
            (Log_ID  => "A2388EC2BBA7F90E",
             Message => "Position_Error: Insert failed");
          Booch_Status := Position_Error;
          return;
-      elsif New_Length > In_The_String.The_Size then
+      elsif New_Length > In_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "7DC94504E4635959",
             Message => "Exception_Overflow: Insert failed");
@@ -199,9 +207,9 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Insert;
 
    procedure Insert
-     (The_Substring   : in     Substring;
+     (The_Substring   :        Substring;
       In_The_String   : in out B_String;
-      At_The_Position : in     Positive;
+      At_The_Position :        Positive;
       Booch_Status    :    out Locus.Insert)
    is
       New_Length   : constant Natural :=
@@ -209,14 +217,16 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       End_Position : constant Natural :=
         At_The_Position + The_Substring'Length;
    begin
-      if At_The_Position > In_The_String.The_Length then
+      if At_The_Position > In_The_String.The_Length
+      then
          Alogs.Status_Exception
            (Log_ID  => "5D83E383FF0AE010",
             Message => "Position_Error: Insert failed");
          Booch_Status := Position_Error;
          return;
 
-      elsif New_Length > In_The_String.The_Size then
+      elsif New_Length > In_The_String.The_Size
+      then
          Alogs.Status_Exception
            (Log_ID  => "EBB53A430C9E2121",
             Message => "Exception_Overflow: Insert failed");
@@ -237,8 +247,8 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
    procedure Delete
      (In_The_String     : in out B_String;
-      From_The_Position : in     Positive;
-      To_The_Position   : in     Positive;
+      From_The_Position :        Positive;
+      To_The_Position   :        Positive;
       Booch_Status      :    out Locus.Delete)
    is
       New_Length : Natural;
@@ -267,8 +277,8 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
    procedure Replace
      (In_The_String   : in out B_String;
-      At_The_Position : in     Positive;
-      With_The_String : in     B_String;
+      At_The_Position :        Positive;
+      With_The_String :        B_String;
       Booch_Status    :    out Locus.Replace)
    is
       End_Position : constant Natural :=
@@ -293,8 +303,8 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
    procedure Replace
      (In_The_String      : in out B_String;
-      At_The_Position    : in     Positive;
-      With_The_Substring : in     Substring;
+      At_The_Position    :        Positive;
+      With_The_Substring :        Substring;
       Booch_Status       :    out Locus.Replace)
    is
       End_Position : constant Natural :=
@@ -319,12 +329,13 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
    procedure Set_Item
      (In_The_String   : in out B_String;
-      At_The_Position : in     Positive;
-      With_The_Item   : in     Item;
+      At_The_Position :        Positive;
+      With_The_Item   :        Item;
       Booch_Status    :    out Locus.Set_Item)
    is
    begin
-      if At_The_Position > In_The_String.The_Length then
+      if At_The_Position > In_The_String.The_Length
+      then
          Alogs.Status_Exception
            (Log_ID  => "40D9030378204C66",
             Message => "Position_Error: Replace failed");
@@ -339,16 +350,18 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Set_Item;
 
    function Is_Equal
-     (Left  : in B_String;
-      Right : in B_String)
+     (Left  : B_String;
+      Right : B_String)
       return Boolean
    is
    begin
-      if Left.The_Length /= Right.The_Length then
+      if Left.The_Length /= Right.The_Length
+      then
          return False;
       else
          for Index in 1 .. Left.The_Length loop
-            if Left.The_Items (Index) /= Right.The_Items (Index) then
+            if Left.The_Items (Index) /= Right.The_Items (Index)
+            then
                return False;
             end if;
          end loop;
@@ -357,16 +370,18 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Equal;
 
    function Is_Equal
-     (Left  : in Substring;
-      Right : in B_String)
+     (Left  : Substring;
+      Right : B_String)
       return Boolean
    is
    begin
-      if Left'Length /= Right.The_Length then
+      if Left'Length /= Right.The_Length
+      then
          return False;
       else
          for Index in 1 .. Left'Length loop
-            if Left (Left'First + Index - 1) /= Right.The_Items (Index) then
+            if Left (Left'First + Index - 1) /= Right.The_Items (Index)
+            then
                return False;
             end if;
          end loop;
@@ -375,16 +390,18 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Equal;
 
    function Is_Equal
-     (Left  : in B_String;
-      Right : in Substring)
+     (Left  : B_String;
+      Right : Substring)
       return Boolean
    is
    begin
-      if Left.The_Length /= Right'Length then
+      if Left.The_Length /= Right'Length
+      then
          return False;
       else
          for Index in 1 .. Left.The_Length loop
-            if Left.The_Items (Index) /= Right (Right'First + Index - 1) then
+            if Left.The_Items (Index) /= Right (Right'First + Index - 1)
+            then
                return False;
             end if;
          end loop;
@@ -393,17 +410,20 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Equal;
 
    function Is_Less_Than
-     (Left  : in B_String;
-      Right : in B_String)
+     (Left  : B_String;
+      Right : B_String)
       return Boolean
    is
    begin
       for Index in 1 .. Left.The_Length loop
-         if Index > Right.The_Length then
+         if Index > Right.The_Length
+         then
             return False;
-         elsif Left.The_Items (Index) < Right.The_Items (Index) then
+         elsif Left.The_Items (Index) < Right.The_Items (Index)
+         then
             return True;
-         elsif Right.The_Items (Index) < Left.The_Items (Index) then
+         elsif Right.The_Items (Index) < Left.The_Items (Index)
+         then
             return False;
          end if;
       end loop;
@@ -411,17 +431,20 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Less_Than;
 
    function Is_Less_Than
-     (Left  : in Substring;
-      Right : in B_String)
+     (Left  : Substring;
+      Right : B_String)
       return Boolean
    is
    begin
       for Index in 1 .. Left'Length loop
-         if Index > Right.The_Length then
+         if Index > Right.The_Length
+         then
             return False;
-         elsif Left (Left'First + Index - 1) < Right.The_Items (Index) then
+         elsif Left (Left'First + Index - 1) < Right.The_Items (Index)
+         then
             return True;
-         elsif Right.The_Items (Index) < Left (Left'First + Index - 1) then
+         elsif Right.The_Items (Index) < Left (Left'First + Index - 1)
+         then
             return False;
          end if;
       end loop;
@@ -429,17 +452,20 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Less_Than;
 
    function Is_Less_Than
-     (Left  : in B_String;
-      Right : in Substring)
+     (Left  : B_String;
+      Right : Substring)
       return Boolean
    is
    begin
       for Index in 1 .. Left.The_Length loop
-         if Index > Right'Length then
+         if Index > Right'Length
+         then
             return False;
-         elsif Left.The_Items (Index) < Right (Right'First + Index - 1) then
+         elsif Left.The_Items (Index) < Right (Right'First + Index - 1)
+         then
             return True;
-         elsif Right (Right'First + Index - 1) < Left.The_Items (Index) then
+         elsif Right (Right'First + Index - 1) < Left.The_Items (Index)
+         then
             return False;
          end if;
       end loop;
@@ -447,17 +473,20 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Less_Than;
 
    function Is_Greater_Than
-     (Left  : in B_String;
-      Right : in B_String)
+     (Left  : B_String;
+      Right : B_String)
       return Boolean
    is
    begin
       for Index in 1 .. Left.The_Length loop
-         if Index > Right.The_Length then
+         if Index > Right.The_Length
+         then
             return True;
-         elsif Left.The_Items (Index) < Right.The_Items (Index) then
+         elsif Left.The_Items (Index) < Right.The_Items (Index)
+         then
             return False;
-         elsif Right.The_Items (Index) < Left.The_Items (Index) then
+         elsif Right.The_Items (Index) < Left.The_Items (Index)
+         then
             return True;
          end if;
       end loop;
@@ -465,17 +494,20 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Greater_Than;
 
    function Is_Greater_Than
-     (Left  : in Substring;
-      Right : in B_String)
+     (Left  : Substring;
+      Right : B_String)
       return Boolean
    is
    begin
       for Index in 1 .. Left'Length loop
-         if Index > Right.The_Length then
+         if Index > Right.The_Length
+         then
             return True;
-         elsif Left (Left'First + Index - 1) < Right.The_Items (Index) then
+         elsif Left (Left'First + Index - 1) < Right.The_Items (Index)
+         then
             return False;
-         elsif Right.The_Items (Index) < Left (Left'First + Index - 1) then
+         elsif Right.The_Items (Index) < Left (Left'First + Index - 1)
+         then
             return True;
          end if;
       end loop;
@@ -483,17 +515,20 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Greater_Than;
 
    function Is_Greater_Than
-     (Left  : in B_String;
-      Right : in Substring)
+     (Left  : B_String;
+      Right : Substring)
       return Boolean
    is
    begin
       for Index in 1 .. Left.The_Length loop
-         if Index > Right'Length then
+         if Index > Right'Length
+         then
             return True;
-         elsif Left.The_Items (Index) < Right (Right'First + Index - 1) then
+         elsif Left.The_Items (Index) < Right (Right'First + Index - 1)
+         then
             return False;
-         elsif Right (Right'First + Index - 1) < Left.The_Items (Index) then
+         elsif Right (Right'First + Index - 1) < Left.The_Items (Index)
+         then
             return True;
          end if;
       end loop;
@@ -501,7 +536,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Greater_Than;
 
    function Length_Of
-     (The_String : in B_String)
+     (The_String : B_String)
       return Natural
    is
    begin
@@ -509,7 +544,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Length_Of;
 
    function Is_Null
-     (The_String : in B_String)
+     (The_String : B_String)
       return Boolean
    is
    begin
@@ -517,13 +552,14 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Is_Null;
 
    procedure Item_Of
-     (The_String      : in     B_String;
-      At_The_Position : in     Positive;
-      Result          :    out Item;
-      Booch_Status    :    out Locus.Item_Of)
+     (The_String      :     B_String;
+      At_The_Position :     Positive;
+      Result          : out Item;
+      Booch_Status    : out Locus.Item_Of)
    is
    begin
-      if At_The_Position > The_String.The_Length then
+      if At_The_Position > The_String.The_Length
+      then
          Alogs.Log
            (Log_ID  => "3A0A9ABF65A9B4C4",
             Message => "Position_Error: Item_Of failed");
@@ -537,7 +573,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Item_Of;
 
    function Substring_Of
-     (The_String : in B_String)
+     (The_String : B_String)
       return Substring
    is
    begin
@@ -545,11 +581,11 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    end Substring_Of;
 
    procedure Substring_Of
-     (The_String        : in     B_String;
-      From_The_Position : in     Positive;
-      To_The_Position   : in     Positive;
-      Result            :    out Substring;
-      Booch_Status      :    out Locus.Substring_Of)
+     (The_String        :     B_String;
+      From_The_Position :     Positive;
+      To_The_Position   :     Positive;
+      Result            : out Substring;
+      Booch_Status      : out Locus.Substring_Of)
    is
    begin
       if (From_The_Position > The_String.The_Length)
@@ -568,7 +604,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
    end Substring_Of;
 
-   procedure Iterate (Over_The_String : in B_String) is
+   procedure Iterate (Over_The_String : B_String) is
       Continue : Boolean;
    begin
       for The_Iterator in 1 .. Over_The_String.The_Length loop
