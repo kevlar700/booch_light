@@ -2,7 +2,9 @@
 
 Grady Booch from Rational Software released Ada 83 source code along with a book SOFTWARE COMPONENTS WITH Ada in 1987. His original code still compiles with the latest Gnat compilers just by changing the extension of his files to e.g. .ads and serves as a testament to Adas stability.
 
-Grady Booch has kindly agreed for me to release his code under a more permissive MIT license.
+Grady Booch has kindly agreed for me to release his code under an MIT license.
+
+Here's to his loving wife, Jan and my loving wife, Mary.
 
 His re-usable components are fully documented in the above book but include Lists, Maps, Graphs, Strings of items, Queues and even Calendar utilities and sorting algorithms etc..
 
