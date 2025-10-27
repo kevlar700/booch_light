@@ -1,6 +1,6 @@
 name = "booch_light"
-description = "Booch components compatible with any runtime"
-version = "0.1.0-dev"
+description = "Booch components for constrained systems"
+version = "1.0.0-alpha"
 
 authors = ["Kevin Chadwick"]
 maintainers = ["Kevin Chadwick <kc-ada@elansys.co>"]
