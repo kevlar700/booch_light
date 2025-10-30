@@ -71,8 +71,8 @@ package Booch_Light.Character_Utilities is
 
    procedure Value_Of
      (The_Character :     Character;
-      Result        :    out Digit;
-      Booch_Status  :    out Locus.Value_Of);
+      Result        : out Digit;
+      Booch_Status  : out Locus.Value_Of);
 
    function Image_Of
      (The_Digit : Digit)
@@ -80,8 +80,8 @@ package Booch_Light.Character_Utilities is
 
    procedure Index_Of
      (The_Character :     Character;
-      Result        :    out Letter;
-      Booch_Status  :    out Locus.Index_Of);
+      Result        : out Letter;
+      Booch_Status  : out Locus.Index_Of);
 
    function Uppercase_Of
      (The_Letter : Letter)

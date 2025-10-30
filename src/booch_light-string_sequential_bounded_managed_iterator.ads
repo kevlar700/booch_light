@@ -51,71 +51,71 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    type B_String (The_Size : Positive) is limited private;
 
    procedure Copy
-     (From_The_String :     B_String;
+     (From_The_String :        B_String;
       To_The_String   : in out B_String;
       Booch_Status    :    out Locus.Copy);
 
    procedure Copy
-     (From_The_Substring :     Substring;
+     (From_The_Substring :        Substring;
       To_The_String      : in out B_String;
       Booch_Status       :    out Locus.Copy);
 
    procedure Clear (The_String : in out B_String);
 
    procedure Prepend
-     (The_String    :     B_String;
+     (The_String    :        B_String;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Prepend);
 
    procedure Prepend
-     (The_Substring :     Substring;
+     (The_Substring :        Substring;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Prepend);
 
    procedure Append
-     (The_String    :     B_String;
+     (The_String    :        B_String;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Append);
 
    procedure Append
-     (The_Substring :     Substring;
+     (The_Substring :        Substring;
       To_The_String : in out B_String;
       Booch_Status  :    out Locus.Append);
 
    procedure Insert
-     (The_String      :     B_String;
+     (The_String      :        B_String;
       In_The_String   : in out B_String;
       At_The_Position : in     Positive;
       Booch_Status    :    out Locus.Insert);
 
    procedure Insert
-     (The_Substring   :     Substring;
+     (The_Substring   :        Substring;
       In_The_String   : in out B_String;
-      At_The_Position :     Positive;
+      At_The_Position :        Positive;
       Booch_Status    :    out Locus.Insert);
 
    procedure Delete
      (In_The_String     : in out B_String;
-      From_The_Position :     Positive;
-      To_The_Position   :     Positive;
+      From_The_Position :        Positive;
+      To_The_Position   :        Positive;
       Booch_Status      :    out Locus.Delete);
 
    procedure Replace
      (In_The_String   : in out B_String;
-      At_The_Position :     Positive;
-      With_The_String :     B_String;
+      At_The_Position :        Positive;
+      With_The_String :        B_String;
       Booch_Status    :    out Locus.Replace);
 
    procedure Replace
      (In_The_String      : in out B_String;
-      At_The_Position    :     Positive;
-      With_The_Substring :     Substring;
+      At_The_Position    :        Positive;
+      With_The_Substring :        Substring;
       Booch_Status       :    out Locus.Replace);
 
    procedure Set_Item
      (In_The_String   : in out B_String;
-      At_The_Position :     Positive;
-      With_The_Item   :     Item;
+      At_The_Position :        Positive;
+      With_The_Item   :        Item;
       Booch_Status    :    out Locus.Set_Item);
 
    function Is_Equal
@@ -174,8 +174,8 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    procedure Item_Of
      (The_String      :     B_String;
       At_The_Position :     Positive;
-      Result          :    out Item;
-      Booch_Status    :    out Locus.Item_Of);
+      Result          : out Item;
+      Booch_Status    : out Locus.Item_Of);
 
    function Substring_Of
      (The_String : B_String)
@@ -185,13 +185,13 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
      (The_String        :     B_String;
       From_The_Position :     Positive;
       To_The_Position   :     Positive;
-      Result            :    out Substring;
-      Booch_Status      :    out Locus.Substring_Of);
+      Result            : out Substring;
+      Booch_Status      : out Locus.Substring_Of);
 
    generic
       with procedure Process
         (The_Item :     Item;
-         Continue :    out Boolean);
+         Continue : out Boolean);
    procedure Iterate (Over_The_String : B_String);
 
 private
