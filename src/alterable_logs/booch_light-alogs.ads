@@ -1,14 +1,19 @@
 with Elogs;
+with Elogs_Config;
 
 package Booch_Light.Alogs is
 
    procedure Log
      (Log_ID  : Elogs.Log_ID_Type;
-      Message : String);
+      Message : String) with
+     Pre => Message'Length < Elogs.Max_Message_Length;
 
    procedure Status_Exception
      (Log_ID  : Elogs.Log_ID_Type;
-      Message : String);
+      Message : String) with
+     Pre =>
+      Message'Length <
+      (Elogs.Max_Message_Length - Elogs.Exceptive_Prepend'Length);
 
 end Booch_Light.Alogs;
 

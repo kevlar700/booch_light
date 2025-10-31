@@ -8,6 +8,7 @@
 
 generic
    type Item is private;
+   Item_Upon_Failure : Item;
    type Substring is array (Positive range <>) of Item;
    with function "<"
      (Left  : Item;
@@ -44,79 +45,127 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
           Static_Predicate => Item_Of in Position_Error | OK;
 
       subtype Substring_Of is Status_Code with
-          Static_Predicate => Substring_Of in Position_Error | OK;
+          Static_Predicate => Substring_Of in Length_Mismatch | OK;
+
+      subtype Substring_Of_2 is Status_Code with
+          Static_Predicate =>
+           Substring_Of_2 in Position_Error | Length_Mismatch | OK;
 
    end Locus;
 
    type B_String (The_Size : Positive) is limited private;
 
+   --  Copies From_The_String to the beginning of To_The_String and sets their
+   --  lengths to be equal so long as To_The_String maximum size can accomodate
    procedure Copy
      (From_The_String :        B_String;
       To_The_String   : in out B_String;
-      Booch_Status    :    out Locus.Copy);
+      Booch_Status    :    out Locus.Copy) with
+     Pre => Length_Of (From_The_String) <= Length_Of (To_The_String);
 
    procedure Copy
      (From_The_Substring :        Substring;
       To_The_String      : in out B_String;
-      Booch_Status       :    out Locus.Copy);
+      Booch_Status       :    out Locus.Copy) with
+     Pre => From_The_Substring'Length <= Length_Of (To_The_String);
 
+   --  Resets The_String to have 0 length
    procedure Clear (The_String : in out B_String);
 
+   --  It shouldn't really be an issue with Ada SPARK but sometimes we want
+   --  to ensure data is no longer in memory. This procedure Clears (Resets
+   --  The_String to have 0 length) and Fills the String to it's currently
+   --  written length with Item_Upon_Failure
+   procedure Zero (The_String : in out B_String);
+
    procedure Prepend
      (The_String    :        B_String;
       To_The_String : in out B_String;
-      Booch_Status  :    out Locus.Prepend);
+      Booch_Status  :    out Locus.Prepend) with
+     Pre =>
+      (Length_Of (To_The_String) + Length_Of (The_String)) <=
+      To_The_String.The_Size;
 
    procedure Prepend
      (The_Substring :        Substring;
       To_The_String : in out B_String;
-      Booch_Status  :    out Locus.Prepend);
+      Booch_Status  :    out Locus.Prepend) with
+     Pre =>
+      (Length_Of (To_The_String) + The_Substring'Length) <=
+      To_The_String.The_Size;
 
    procedure Append
      (The_String    :        B_String;
       To_The_String : in out B_String;
-      Booch_Status  :    out Locus.Append);
+      Booch_Status  :    out Locus.Append) with
+     Pre =>
+      (Length_Of (To_The_String) + Length_Of (The_String)) <=
+      To_The_String.The_Size;
 
    procedure Append
      (The_Substring :        Substring;
       To_The_String : in out B_String;
-      Booch_Status  :    out Locus.Append);
+      Booch_Status  :    out Locus.Append) with
+     Pre =>
+      (Length_Of (To_The_String) + The_Substring'Length) <=
+      To_The_String.The_Size;
 
    procedure Insert
      (The_String      :        B_String;
       In_The_String   : in out B_String;
       At_The_Position : in     Positive;
-      Booch_Status    :    out Locus.Insert);
+      Booch_Status    :    out Locus.Insert) with
+     Pre =>
+      At_The_Position <= Length_Of (In_The_String)
+      or else Length_Of (In_The_String) + Length_Of (The_String) <=
+        In_The_String.The_Size;
 
    procedure Insert
      (The_Substring   :        Substring;
       In_The_String   : in out B_String;
       At_The_Position :        Positive;
-      Booch_Status    :    out Locus.Insert);
+      Booch_Status    :    out Locus.Insert) with
+     Pre =>
+      At_The_Position <= Length_Of (In_The_String)
+      or else Length_Of (In_The_String) + The_Substring'Length <=
+        In_The_String.The_Size;
 
    procedure Delete
      (In_The_String     : in out B_String;
       From_The_Position :        Positive;
       To_The_Position   :        Positive;
-      Booch_Status      :    out Locus.Delete);
+      Booch_Status      :    out Locus.Delete) with
+     Pre =>
+      From_The_Position <= Length_Of (In_The_String)
+      or else To_The_Position <= Length_Of (In_The_String)
+      or else From_The_Position <= To_The_Position;
 
    procedure Replace
      (In_The_String   : in out B_String;
       At_The_Position :        Positive;
       With_The_String :        B_String;
-      Booch_Status    :    out Locus.Replace);
+      Booch_Status    :    out Locus.Replace) with
+     Pre =>
+      At_The_Position <= Length_Of (In_The_String)
+      or else (At_The_Position + (Length_Of (With_The_String) - 1)) <=
+        Length_Of (In_The_String);
 
    procedure Replace
      (In_The_String      : in out B_String;
       At_The_Position    :        Positive;
       With_The_Substring :        Substring;
-      Booch_Status       :    out Locus.Replace);
+      Booch_Status       :    out Locus.Replace) with
+     Pre =>
+      At_The_Position <= Length_Of (In_The_String)
+      or else (At_The_Position + With_The_Substring'Length - 1) <=
+        Length_Of (In_The_String);
 
    procedure Set_Item
      (In_The_String   : in out B_String;
       At_The_Position :        Positive;
       With_The_Item   :        Item;
-      Booch_Status    :    out Locus.Set_Item);
+      Booch_Status    :    out Locus.Set_Item) with
+     Pre => At_The_Position <= Length_Of (In_The_String);
 
    function Is_Equal
      (Left  : B_String;
@@ -175,18 +224,26 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
      (The_String      :     B_String;
       At_The_Position :     Positive;
       Result          : out Item;
-      Booch_Status    : out Locus.Item_Of);
+      Booch_Status    : out Locus.Item_Of) with
+     Pre => At_The_Position <= Length_Of (The_String);
 
-   function Substring_Of
-     (The_String : B_String)
-      return Substring;
+   procedure Substring_Of
+     (The_String   :     B_String;
+      Result       : out Substring;
+      Booch_Status : out Locus.Substring_Of) with
+     Pre => Length_Of (The_String) = Result'Length;
 
    procedure Substring_Of
      (The_String        :     B_String;
       From_The_Position :     Positive;
       To_The_Position   :     Positive;
       Result            : out Substring;
-      Booch_Status      : out Locus.Substring_Of);
+      Booch_Status      : out Locus.Substring_Of_2) with
+     Pre =>
+      (From_The_Position <= Length_Of (The_String)
+       or else To_The_Position <= Length_Of (The_String)
+       or else From_The_Position <= To_The_Position)
+      and then (To_The_Position - From_The_Position) = Result'Length;
 
    generic
       with procedure Process
@@ -194,11 +251,20 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
          Continue : out Boolean);
    procedure Iterate (Over_The_String : B_String);
 
+--  function B_String_Items_Length
+--    (The_String : B_String)
+--     return Integer with
+--    Ghost => True;
+
 private
    type B_String (The_Size : Positive) is record
       The_Length : Natural := 0;
       The_Items  : Substring (1 .. The_Size);
-   end record;
+   end record with
+     Dynamic_Predicate =>
+      B_String.The_Items'Length = B_String.The_Size and
+      B_String.The_Length <= B_String.The_Size;
+
 end Booch_Light.String_Sequential_Bounded_Managed_Iterator;
 
 --              Original Booch Components (Ada 83 version)

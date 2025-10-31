@@ -5,7 +5,10 @@
 --  The book SOFTWARE COMPONENTS WITH Ada Structures, Tools, and_Subsystems,
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
+with Booch_Light;
 with Booch_Light.Alogs;
+with Elogs;
+with Interfaces; use Interfaces;
 
 package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
@@ -59,6 +62,13 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
    begin
       The_String.The_Length := 0;
    end Clear;
+
+   procedure Zero (The_String : in out B_String) is
+   begin
+      The_String.The_Items (1 .. The_String.The_Length) :=
+        (others => Item_Upon_Failure);
+      Clear (The_String);
+   end Zero;
 
    procedure Prepend
      (The_String    :        B_String;
@@ -564,6 +574,7 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
            (Log_ID  => "3A0A9ABF65A9B4C4",
             Message => "Position_Error: Item_Of failed");
          Booch_Status := Position_Error;
+         Result       := Item_Upon_Failure;
          return;
       end if;
 
@@ -572,12 +583,24 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
 
    end Item_Of;
 
-   function Substring_Of
-     (The_String : B_String)
-      return Substring
+   procedure Substring_Of
+     (The_String   :     B_String;
+      Result       : out Substring;
+      Booch_Status : out Locus.Substring_Of)
    is
    begin
-      return The_String.The_Items (1 .. The_String.The_Length);
+      if (Length_Of (The_String) /= Result'Length)
+      then
+         Alogs.Log
+           (Log_ID  => "F7890CF4993395D7",
+            Message => "Length_Mismatch: Substring_Of failed");
+         Booch_Status := Length_Mismatch;
+         Result       := (others => Item_Upon_Failure);
+         return;
+      end if;
+
+      Result       := The_String.The_Items (1 .. The_String.The_Length);
+      Booch_Status := OK;
    end Substring_Of;
 
    procedure Substring_Of
@@ -585,17 +608,29 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       From_The_Position :     Positive;
       To_The_Position   :     Positive;
       Result            : out Substring;
-      Booch_Status      : out Locus.Substring_Of)
+      Booch_Status      : out Locus.Substring_Of_2)
    is
+      Log_ID : constant Elogs.Log_ID_Type := "80A2DAC7FEFC0394";
    begin
       if (From_The_Position > The_String.The_Length)
         or else (To_The_Position > The_String.The_Length)
         or else (From_The_Position > To_The_Position)
       then
          Alogs.Log
-           (Log_ID  => "80A2DAC7FEFC0394",
+           (Log_ID  => Log_ID,
             Message => "Position_Error: Substring_Of failed");
          Booch_Status := Position_Error;
+         Result       := (others => Item_Upon_Failure);
+         return;
+      end if;
+
+      if (To_The_Position - From_The_Position) /= Result'Length
+      then
+         Alogs.Log
+           (Log_ID  => Log_ID,
+            Message => "Length_Mismatch: Substring_Of failed");
+         Booch_Status := Length_Mismatch;
+         Result       := (others => Item_Upon_Failure);
          return;
       end if;
 
@@ -612,6 +647,14 @@ package body Booch_Light.String_Sequential_Bounded_Managed_Iterator is
          exit when not Continue;
       end loop;
    end Iterate;
+
+   --  function B_String_Items_Length
+   --    (The_String : B_String)
+   --     return Integer
+   --  is
+   --  begin
+   --     return The_String.The_Items'Length;
+   --  end B_String_Items_Length;
 
 end Booch_Light.String_Sequential_Bounded_Managed_Iterator;
 

@@ -22,6 +22,7 @@ package Booch_Light is
       Item_Not_Found,
       Lexical_Error,
       List_Is_Null,
+      Length_Mismatch,
       Multiple_Binding,
       No_Storage_Available,
       Not_At_Head,
