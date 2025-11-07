@@ -8,7 +8,7 @@
 
 generic
    type Item is private;
-   Item_Upon_Failure : Item;
+   Item_Default : Item;
    type Substring is array (Positive range <>) of Item;
    with function "<"
      (Left  : Item;
@@ -44,12 +44,12 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       subtype Item_Of is Status_Code with
           Static_Predicate => Item_Of in Position_Error | OK;
 
-      subtype Substring_Of is Status_Code with
-          Static_Predicate => Substring_Of in Length_Mismatch | OK;
+      subtype Substring_From is Status_Code with
+          Static_Predicate => Substring_From in Length_Mismatch | OK;
 
-      subtype Substring_Of_2 is Status_Code with
+      subtype Substring_Of is Status_Code with
           Static_Predicate =>
-           Substring_Of_2 in Position_Error | Length_Mismatch | OK;
+           Substring_Of in Position_Error | Length_Mismatch | OK;
 
    end Locus;
 
@@ -227,10 +227,10 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       Booch_Status    : out Locus.Item_Of) with
      Pre => At_The_Position <= Length_Of (The_String);
 
-   procedure Substring_Of
+   procedure Substring_From
      (The_String   :     B_String;
       Result       : out Substring;
-      Booch_Status : out Locus.Substring_Of) with
+      Booch_Status : out Locus.Substring_From) with
      Pre => Length_Of (The_String) = Result'Length;
 
    procedure Substring_Of
@@ -238,7 +238,7 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       From_The_Position :     Positive;
       To_The_Position   :     Positive;
       Result            : out Substring;
-      Booch_Status      : out Locus.Substring_Of_2) with
+      Booch_Status      : out Locus.Substring_Of) with
      Pre =>
       (From_The_Position <= Length_Of (The_String)
        or else To_The_Position <= Length_Of (The_String)
