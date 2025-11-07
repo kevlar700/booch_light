@@ -6,7 +6,11 @@
 --  ISBN 0-8053-0609-9 by Grady Booch, fully describes the design and usage
 --  of this software.
 
+with Booch_Light_Config;
+
 package Booch_Light is
+
+   --Defense_In_Depth : constant Boolean := Booch_Light_Config.Defense_In_Depth;
 
    type Status_Code is
      (OK,
