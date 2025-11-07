@@ -1,6 +1,11 @@
 with Elogs;
 with Elogs_Config;
 
+--  This child package provides a convenient place to facilitate adding your
+--  own procedures into the logging system without modifying every elog call
+--  or maintaining a variation of the elog package itself. You will need to
+--  maintain your own changes. Suggestions of a better way of facilitating
+--  this are welcome.
 package Booch_Light.Alogs is
 
    procedure Log

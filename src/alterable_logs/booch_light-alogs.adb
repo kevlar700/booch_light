@@ -1,3 +1,4 @@
+with GNAT.IO;
 package body Booch_Light.Alogs is
 
    procedure Log
@@ -8,6 +9,8 @@ package body Booch_Light.Alogs is
       Elogs.Log
         (Log_ID  => Log_ID,
          Message => Message);
+      GNAT.IO.Put_Line (Log_ID & ": " & Message);
+
    end Log;
 
    procedure Status_Exception
