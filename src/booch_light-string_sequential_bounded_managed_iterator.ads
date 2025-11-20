@@ -227,6 +227,8 @@ package Booch_Light.String_Sequential_Bounded_Managed_Iterator is
       Booch_Status    : out Locus.Item_Of) with
      Pre => At_The_Position <= Length_Of (The_String);
 
+   -- Provides Result as bytes of The_String. Result must be the same length as
+   -- The_String and not it's size/capacity.
    procedure Substring_From
      (The_String   :     B_String;
       Result       : out Substring;

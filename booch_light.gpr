@@ -35,13 +35,17 @@ project Booch_Light is
       for Default_Switches ("ada") use ("--eol=unix",
                                         "--call-threshold=1",
                                         "--par-threshold=1",
+                                        "--no-compact",
                                         "--vertical-enum-types",
                                         "--vertical-named-aggregates",
-                                        "-W8",
-                                        "-c5",
-                                        "-c4",
+                                        "--vertical-array-Types",
+                                        "--vertical-case-Alternatves",
+                                        "--comments-fill",
+                                        "--comments-special",
+                                        -- "--wide-character-encoding=8",
                                         "--separate-loop-then",
-                                        "--separate-then");
+                                        "--separate-then",
+                                        "--jobs=1");
    end Pretty_Printer;
 
    package Binder is
